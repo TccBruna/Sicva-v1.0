@@ -1,0 +1,113 @@
+#body{
+	padding-top: 100px;
+}
+
+
+section{
+	padding-top: 25px;
+	padding-bottom: 15px;
+	min-height: 100vh;
+}
+section#contato{
+	min-height: 80vh;
+
+}
+footer{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background: url(../imgs/fundo.jpg);
+}
+.divslider{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background: url(../imgs/slider/slider.png);
+}
+
+.servicos-item * {
+ text-align: center;
+}
+.servicos-item h4{
+	margin-top: 40px;
+}
+.btn-servicos {
+	margin-top: 40px;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
+.fundo{
+	background: url(../imgs/fundo.jpg);
+}
+.portifolio_item{
+	background: white;
+}
+.portifolio_item h4{
+	text-align: center;
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+.portifolio_row{
+	margin-bottom: 20px;
+}
+.portifolio_row:last-child{
+	margin-bottom: 0px;
+}
+.image{
+    -webkit-filter:grayscale(100%);
+}
+.image:hover{
+    -webkit-filter:grayscale(0%);
+    transition: 1s;
+}
+.contato textarea{
+	height: 170px;
+}
+.contato .aviso{
+	padding: 15px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+

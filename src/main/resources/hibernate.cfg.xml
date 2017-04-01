@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sicva?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="br.com.sicva.model.Ubs"/>
+    <mapping class="br.com.sicva.model.Aplica"/>
+    <mapping class="br.com.sicva.model.Endereco"/>
+    <mapping class="br.com.sicva.model.Paciente"/>
+    <mapping class="br.com.sicva.model.Usuario"/>
+    <mapping class="br.com.sicva.model.Enfermeiro"/>
+    <mapping class="br.com.sicva.model.Vacina"/>
+    <mapping class="br.com.sicva.model.Fone"/>
+    <mapping class="br.com.sicva.model.Zona"/>
+    <mapping class="br.com.sicva.model.Bairro"/>
+    <mapping class="br.com.sicva.model.Vacinacao"/>
+  </session-factory>
+</hibernate-configuration>
