@@ -45,6 +45,10 @@
         <error-code>403</error-code>
         <location>/erro/AcessoNegado.xhtml</location>
     </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/erro/NaoEncontrada.xhtml</location>
+    </error-page>
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>

@@ -38,9 +38,7 @@ public class Usuario  implements java.io.Serializable {
     }
     
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="USUARIO_ID", unique=true, nullable=false)
     public Integer getUsuarioId() {
         return this.usuarioId;
@@ -51,7 +49,7 @@ public class Usuario  implements java.io.Serializable {
     }
 
     
-    @Column(name="USUARIO_SENHA", unique=true, nullable=false, length=60)
+    @Column(name="USUARIO_SENHA", nullable=false, length=60)
     public String getUsuarioSenha() {
         return this.usuarioSenha;
     }

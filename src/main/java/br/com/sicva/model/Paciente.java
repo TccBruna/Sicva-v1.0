@@ -28,7 +28,7 @@ public class Paciente  implements java.io.Serializable {
 
 
      private Integer pacId;
-     private Bairro bairro;
+     private Endereco endereco;
      private String pacCpf;
      private String pacNomeResp;
      private Date pacDtnasc;
@@ -39,8 +39,8 @@ public class Paciente  implements java.io.Serializable {
     }
 
 	
-    public Paciente(Bairro bairro, String pacCpf, String pacNomeResp, Date pacDtnasc, String pacNome) {
-        this.bairro = bairro;
+    public Paciente(Endereco endereco, String pacCpf, String pacNomeResp, Date pacDtnasc, String pacNome) {
+        this.endereco = endereco;
         this.pacCpf = pacCpf;
         this.pacNomeResp = pacNomeResp;
         this.pacDtnasc = pacDtnasc;
@@ -60,14 +60,14 @@ public class Paciente  implements java.io.Serializable {
         this.pacId = pacId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="PAC_BAIRRO_ID", nullable=false)
-    public Bairro getBairro() {
-        return this.bairro;
+    @ManyToOne()
+    @JoinColumn(name="PAC_ENDERECO_ID", nullable=false)
+    public Endereco getEndereco() {
+        return this.endereco;
     }
     
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     

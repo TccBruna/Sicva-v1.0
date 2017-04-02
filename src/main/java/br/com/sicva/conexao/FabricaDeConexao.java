@@ -8,6 +8,7 @@ package br.com.sicva.conexao;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -17,16 +18,15 @@ import org.hibernate.cfg.Configuration;
  */
 public class FabricaDeConexao {
 
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static  SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
         try {
-              Configuration configuration = new Configuration();
-              return configuration.configure()
-                                  .buildSessionFactory(
-                                       new StandardServiceRegistryBuilder()  
-                                          .applySettings(configuration.getProperties())
-                                          .build());
+            Configuration configuracao = new Configuration().configure();
+            ServiceRegistry registro = new StandardServiceRegistryBuilder()
+                    .applySettings(configuracao.getProperties()).build();
+            SessionFactory fabrica = configuracao.buildSessionFactory(registro);
+            return fabrica;
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);

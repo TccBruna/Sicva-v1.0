@@ -2,11 +2,15 @@ package br.com.sicva.model;
 // Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
 
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,7 +25,7 @@ public class Bairro  implements java.io.Serializable {
 
      private Integer bairroId;
      private String bairroNome;
-     
+     private Zona zona;
 
     public Bairro() {
     }
@@ -31,10 +35,12 @@ public class Bairro  implements java.io.Serializable {
         this.bairroNome = bairroNome;
     }
     
+     public Bairro(String bairroNome, Zona zona) {
+        this.bairroNome = bairroNome;
+        this.zona = zona;
+    }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)
     @Column(name="BAIRRO_ID", unique=true, nullable=false)
     public Integer getBairroId() {
         return this.bairroId;
@@ -53,6 +59,47 @@ public class Bairro  implements java.io.Serializable {
     public void setBairroNome(String bairroNome) {
         this.bairroNome = bairroNome;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="BAIRRO_ZONA_ID", nullable=false)
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.bairroId);
+        hash = 53 * hash + Objects.hashCode(this.bairroNome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bairro other = (Bairro) obj;
+        if (!Objects.equals(this.bairroNome, other.bairroNome)) {
+            return false;
+        }
+        if (!Objects.equals(this.bairroId, other.bairroId)) {
+            return false;
+        }
+        return true;
+    }
+
+       
 
 }
 

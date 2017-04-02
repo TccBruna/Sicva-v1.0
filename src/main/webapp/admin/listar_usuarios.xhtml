@@ -1,0 +1,76 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titulo">Listar Usuario</ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="menu_admin.xhtml" /> 
+    </ui:define>
+
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row"> 
+                <div class="col-xs-12">                
+                    <div class="page-header"> <h1>Listar Usuários  <small>descrição</small> </h1></div> 
+                    <h:form id="frmUsuario">
+                        <p:dataTable   var="user" value="#{usuarioControle.listarTodos}"
+                                       emptyMessage="Nenhum registro encontrado..."
+                                       widgetVar="UsuariosTable"  
+                                       styleClass="table table-striped" 
+                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                       rowKey="#{user.usuarioId}" selectionMode="single"                               
+                                       paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
+
+                            <f:facet name="header"> 
+                                <p:outputPanel> 
+                                    <div style="text-align: left; float: left">                                   
+                                        <h:outputLabel value="Localizar: " /> 
+                                        <p:inputText id="globalFilter" onkeyup="PF('UsuariosTable').filter();" style="width:150px" /> 
+                                    </div>
+                                    <div style="text-align: right; float: right">                                   
+                                        <p:commandButton value="Novo" icon="ui-icon-document" action="cadastro_usuario?faces-redirect=true" title="Novo cliente">                                                   
+                                        </p:commandButton>
+                                    </div>                               
+                                </p:outputPanel> 
+                            </f:facet>    
+                            <p:column headerText="Nome" filterBy="#{user.usuarioNome}" filterStyle="display: none">
+                                <h:outputText value="#{user.usuarioNome}" />
+                            </p:column>
+
+                            <p:column headerText="Cpf" filterBy="#{user.usuarioCpf}" filterStyle="display: none">
+                                <h:outputText value="#{user.usuarioCpf}" />
+                            </p:column>                      
+
+                            <f:facet name="footer">
+                                <div style="text-align: left; float: left">
+                                    <p:ajaxStatus id="ajaxStatusPanel"> 
+                                        <f:facet name="start"> 
+                                            <div style="background-color: white; color: black; vertical-align: middle">
+                                                Carregando...
+                                            </div>
+                                        </f:facet>
+                                        <f:facet name="complete"> 
+                                            <h:outputText value="" /> 
+                                        </f:facet> 
+                                    </p:ajaxStatus>
+                                </div>
+                                <div style="color:blue ;text-align: right; float: right">                                   
+                                    <h:outputLabel value="Quantidade: " />
+                                    <h:outputText value=""/>
+                                </div>                                                      
+                            </f:facet>                                                 
+
+                        </p:dataTable>
+                    </h:form>
+                </div>  
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

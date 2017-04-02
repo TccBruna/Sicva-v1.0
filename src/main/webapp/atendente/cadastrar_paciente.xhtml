@@ -1,0 +1,172 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titulo">Cadastrar Pacientes</ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="menu_atendente.xhtml"/>
+    </ui:define>
+
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row">  
+                <div class="col-sm-12">
+                    <div class="page-header"> <h1>Dados do paciente  <small>descrição</small> </h1></div> 
+                    <p:messages id="messages"  autoUpdate="true" closable="true" /> 
+
+                    <p:ajaxStatus onstart="$('#myModal').modal('show')" onsuccess="$('#myModal').modal('hide')" />
+                    <div id="myModal" class="modal fade" style="padding-top: 100px;" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="text-center">
+                                    <div><img src="../resources/imgs/search.gif" class="img-responsive"/></div>
+                                    <h4>Pesquisando....</h4> 
+                                </div>   
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-8">
+                        <h:form   class="form-horizontal" pt:role="form"> 
+                            <div class="form-group">                            
+                                <h:outputLabel for="inptCpf" class="control-label col-sm-3" value="Cpf Do Paciente" />                            
+                                <div class="col-sm-5">                            
+                                    <p:inputMask mask="999.999.999-99" value="#{pacienteControle.pacientePesquisado}" 
+                                                 styleClass="form-control" id="inptCpf"
+                                                 pt:placeholder="Digite o numero do registro"                                    
+                                                 required="true"  converterMessage="Por favor inserir somente numeros"
+                                                 requiredMessage="Digite o numero do cpf.">                                   
+                                    </p:inputMask>                            
+                                </div>
+                                <div class="col-sm-2">
+                                    <h:commandButton styleClass="btn btn-default " value="Pesquisar"   
+                                                     actionListener="#{pacienteControle.pesquisar}" >
+                                    </h:commandButton> 
+                                </div>
+                            </div> 
+                        </h:form>
+                    </div>
+                    <div class="col-sm-4">
+                        <h:form>
+                            <h:commandButton styleClass="btn btn-default " value="Novo"   
+                                             actionListener="#{pacienteControle.novo}" >
+                            </h:commandButton> 
+                        </h:form>
+                    </div>
+                </div>
+                <h:form id="formCadPaciente"  class="form-horizontal" pt:role="form">                    
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="CPF"/>
+                            <div class="col-sm-6">
+                                <p:inputMask mask="999.999.999-99" styleClass="form-control"  required="true"
+                                             value="#{pacienteControle.paciente.pacCpf}"
+                                             disabled="#{pacienteControle.campoCpf}"/>
+                                             
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Nome"/>
+                            <div class="col-sm-9">
+                                <h:inputText class="form-control"  required="true" 
+                                             value="#{pacienteControle.paciente.pacNome}" />
+                                             
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Data de Nascimento"/>
+                            <div class="col-sm-6">
+                                <p:inputMask mask="99/99/9999" styleClass="form-control"   required="true" 
+                                             value="#{pacienteControle.paciente.pacDtnasc}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:inputMask>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Nome do Responsavel"/>
+                            <div class="col-sm-6">
+                                <h:inputText class="form-control"  required="true" 
+                                             value="#{pacienteControle.paciente.pacNomeResp}" 
+                                             />
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Telefone Fixo"/>
+                            <div class="col-sm-6">
+                                <p:inputMask mask="(99) 99999-9999" styleClass="form-control"  required="true" 
+                                             value="#{pacienteControle.fone.foneNumero1}" />
+                                             
+                            </div>
+                        </div>
+
+                    </div> 
+                    <div class="col-sm-6"> 
+                        
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Celular"/>
+                            <div class="col-sm-6">
+                                <p:inputMask mask="(99) 99999-9999" styleClass="form-control"  required="true" 
+                                             value="#{pacienteControle.fone.foneNumero2}"/>
+                                             
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Bairro"/>
+                            <div class="col-sm-6">
+                                <h:selectOneMenu value="#{pacienteControle.endereco.bairro}"  required="true"
+                                                 requiredMessage="Selecione um Bairro" styleClass="form-control"  id="SelectBairro" >
+                                    <f:selectItem itemLabel="Selecione o Bairro" />
+                                    <f:selectItems  value="#{pacienteControle.bairros}" />
+                                    <f:converter converterId="bairroConverter" />                                    
+                                </h:selectOneMenu>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Rua"/>
+                            <div class="col-sm-9">
+                                <h:inputText class="form-control" required="true" 
+                                             value="#{pacienteControle.endereco.endRua}"  />
+                                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Cep"/>
+                            <div class="col-sm-4">
+                                <p:inputMask mask="99.999-999" styleClass="form-control"  required="true" 
+                                             value="#{pacienteControle.endereco.endCep}"  />
+                                             
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel class="control-label col-sm-3" value="Complemento"/>
+                            <div class="col-sm-4">
+                                <h:inputText class="form-control"  required="true" 
+                                             value="#{pacienteControle.endereco.endComplemento}"  />
+                                             
+                            </div>
+                        </div>                                                   
+
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group ">                            
+                            <div class="col-sm-3 col-sm-offset-8">
+                                <h:commandButton id="btnSalvar"  actionListener="#{pacienteControle.salvar}"                                                 
+                                                 class="btn btn-success btn-block" value="Concluir">
+
+                                </h:commandButton>
+                            </div>
+
+                        </div>        
+                    </div>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

@@ -25,7 +25,7 @@ public class Ubs  implements java.io.Serializable {
 
 
      private Integer ubsId;
-     private Bairro bairro;
+     private Endereco endereco;
      private String ubsNome;
      private String ubsFone;
      
@@ -34,8 +34,8 @@ public class Ubs  implements java.io.Serializable {
     }
 
 	
-    public Ubs(Bairro bairro, String ubsNome, String ubsFone) {
-        this.bairro = bairro;
+    public Ubs(Endereco endereco, String ubsNome, String ubsFone) {
+        this.endereco = endereco;
         this.ubsNome = ubsNome;
         this.ubsFone = ubsFone;
     }
@@ -54,13 +54,13 @@ public class Ubs  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="UBS_BAIRRO_ID", nullable=false)
-    public Bairro getBairro() {
-        return this.bairro;
+    @JoinColumn(name="UBS_ENDERECO_ID", nullable=false)
+    public Endereco getEndereco() {
+        return this.endereco;
     }
     
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     
