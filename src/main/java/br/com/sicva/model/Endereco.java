@@ -56,7 +56,7 @@ public class Endereco  implements java.io.Serializable {
         this.endId = endId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne
     @JoinColumn(name="END_BAIRRO_ID", nullable=false)
     public Bairro getBairro() {
         return this.bairro;

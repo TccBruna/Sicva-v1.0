@@ -3,6 +3,7 @@ package br.com.sicva.model;
 
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,10 +49,8 @@ public class Paciente  implements java.io.Serializable {
     }
     
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
-    @Column(name="PAC_ID", unique=true, nullable=false)
+    @Id @GeneratedValue(strategy=IDENTITY)
+     @Column(name="PAC_ID", unique=true, nullable=false)
     public Integer getPacId() {
         return this.pacId;
     }
@@ -60,7 +59,7 @@ public class Paciente  implements java.io.Serializable {
         this.pacId = pacId;
     }
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name="PAC_ENDERECO_ID", nullable=false)
     public Endereco getEndereco() {
         return this.endereco;

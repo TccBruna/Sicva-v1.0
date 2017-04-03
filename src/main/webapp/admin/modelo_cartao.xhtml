@@ -1,0 +1,63 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="titulo">Modelo de Cartão de Vacina</ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="menu_admin.xhtml" />
+    </ui:define> 
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header"><h1>Gerenciar Modelo de Cartão de Vacina</h1></div>
+                     
+                    <h:form id="formCadCarteira">
+                        <p:dataTable styleClass="table table-striped" value="#{vacinacaoControle.listarModelo}" var="itens" emptyMessage="Nenhum registro encontrado..."
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                                     {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     widgetVar="ItensTable"  
+                                     rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
+                                     paginator="true" rows="10" rowsPerPageTemplate="5,10,15" 
+                                     sortBy="#{itens.vacinacaoFaixaEteria}" >
+                            <f:facet name="header">
+                                Calendario de vacina
+                            </f:facet>          
+
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column rowspan="3" headerText="Faixa Etaria" />
+                                    <p:column colspan="2" headerText="Vacinas" />
+                                    <p:column rowspan="3" headerText="Opção" />
+                                </p:row>            
+                                <p:row>
+                                    <p:column headerText="Nome da vacina" />                                    
+                                    <p:column headerText="Dose" />                                   
+                                </p:row>
+                            </p:columnGroup>
+                                          
+                            <p:column  groupRow="true">
+                                <h:outputText value="#{itens.vacinacaoFaixaEteria}" />
+                            </p:column>  
+
+                            <p:column  >
+                                <h:outputText value="#{itens.vacina.vacinaNome}" />
+                            </p:column>
+                            
+                            <p:column>
+                                <p:commandButton value="Alterar"></p:commandButton>
+                            </p:column>                
+
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div> 
+        </div>
+    </ui:define>
+
+</ui:composition>

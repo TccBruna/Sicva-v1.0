@@ -18,9 +18,16 @@
                 </div>
                 <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
                     <ul class="nav navbar-nav navbar-right ">
-                        <li><a class="scrollSuave" href="index.xhtml">Início</a></li>
-                        <li><a class="scrollSuave" href="cadastrar_paciente.xhtml">Cadastro Simples</a></li>
-                        <li><a class="scrollSuave" href="cadastrar_pacientes.xhtml">Cadastrar passo a passo</a></li>             
+                        <li><a class="scrollSuave" href="index.xhtml">Início</a></li>                        
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">Pacientes <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cadastrar_paciente.xhtml">Cadastrar Paciente</a></li>
+                            <li><a href="alterar_paciente.xhtml">Alterar Paciente</a></li>
+                                                        
+                        </ul>
+                    </li>
                         <li><form method="post" class="navbar-form navbar-right"
                                   action="../j_spring_security_logout">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

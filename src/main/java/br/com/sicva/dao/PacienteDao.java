@@ -7,7 +7,6 @@ package br.com.sicva.dao;
 
 import br.com.sicva.conexao.FabricaDeConexao;
 import br.com.sicva.model.Paciente;
-import br.com.sicva.util.Mensagens;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -30,8 +29,7 @@ public class PacienteDao {
             tx = session.beginTransaction();            
             session.save(paciente);            
             tx.commit();
-            session.close();
-            new Mensagens().MensagensSucesso("Salvo com sucesso", "Usuário foi salvo");
+            session.close();            
             return true;
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
@@ -47,12 +45,27 @@ public class PacienteDao {
             tx = session.beginTransaction();            
             session.update(paciente);           
             tx.commit();
-            session.close();
-            new Mensagens().MensagensSucesso("Alterado com sucesso", "Usuário foi Alterado");
+            session.close();            
             return true;
         } catch (Exception e) {
             System.out.println("Erro no Banco!" + e.getMessage());
             tx.rollback();
+            return false;
+        }
+    }
+    
+     public boolean deletarPaciente(Paciente paciente) {
+        try {
+            session = new FabricaDeConexao().getSessionFactory().openSession();
+            tx = session.beginTransaction();            
+            session.delete(paciente);            
+            tx.commit();
+            session.close();            
+            return true;
+        } catch (Exception e) {
+            System.out.println("erro aqui" + e.getMessage());
+            tx.rollback(); 
+            session.close();
             return false;
         }
     }

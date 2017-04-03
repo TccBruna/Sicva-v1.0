@@ -45,9 +45,7 @@ public class Vacinacao  implements java.io.Serializable {
        this.vacinacaoFaixaEteria = vacinacaoFaixaEteria;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)   
     @Column(name="VACINACAO_ID", unique=true, nullable=false)
     public Integer getVacinacaoId() {
         return this.vacinacaoId;
@@ -68,7 +66,7 @@ public class Vacinacao  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="VACINACAO_UBS_ID", nullable=false)
+    @JoinColumn(name="VACINACAO_UBS_ID")
     public Ubs getUbs() {
         return this.ubs;
     }
@@ -77,7 +75,7 @@ public class Vacinacao  implements java.io.Serializable {
         this.ubs = ubs;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne
     @JoinColumn(name="VACINACAO_VACINA_ID", nullable=false)
     public Vacina getVacina() {
         return this.vacina;
@@ -88,7 +86,7 @@ public class Vacinacao  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="VACINACAO_PROX_DT", nullable=false, length=10)
+    @Column(name="VACINACAO_PROX_DT", length=10)
     public Date getVacinacaoProxDt() {
         return this.vacinacaoProxDt;
     }

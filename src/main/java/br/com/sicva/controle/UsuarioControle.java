@@ -31,6 +31,9 @@ public class UsuarioControle {
             usuarioDao = new UsuarioDao();
             if (usuarioDao.salvarUsuario(usuario)) {
                 usuario = new Usuario();
+                new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
+            }else{
+                new Mensagens().MensagensErro("Não foi possivel salvar os dados", null);
             }
         } catch (Exception e) {
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);
@@ -44,6 +47,9 @@ public class UsuarioControle {
             usuarioDao = new UsuarioDao();
             if (usuarioDao.alterarUsuario(usuario)) {
                 usuario = new Usuario();
+                new Mensagens().MensagensSucesso("Dados alterados com sucesso", null);
+            }else{
+                new Mensagens().MensagensErro("Não foi possivel alterar os dados", null);
             }
         } catch (Exception e) {
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);

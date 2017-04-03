@@ -6,7 +6,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="titulo">Cadastrar Pacientes</ui:define>
+    <ui:define name="titulo">Alterar Pacientes</ui:define>
 
     <ui:define name="menu">
         <ui:include src="menu_atendente.xhtml"/>
@@ -16,28 +16,61 @@
         <div class="container">
             <div class="row">  
                 <div class="col-sm-12">
-                    <div class="page-header"> <h1>Cadastro de paciente  <small>descrição</small> </h1></div>                
-                    <div class="col-sm-offset-1">
-                        <p:messages id="messages"  autoUpdate="true" />
+                    <div class="page-header"> <h1>Alterar Pacientes  <small>descrição</small> </h1></div> 
+                    <p:messages id="messages"  autoUpdate="true" closable="true" /> 
+
+                    <p:ajaxStatus onstart="$('#myModal').modal('show')" onsuccess="$('#myModal').modal('hide')" />
+                    <div id="myModal" class="modal fade" style="padding-top: 100px;" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="text-center">
+                                    <div><img src="../resources/imgs/search.gif" class="img-responsive"/></div>
+                                    <h4>Pesquisando....</h4> 
+                                </div>   
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-8">
+                        <h:form   class="form-horizontal" pt:role="form"> 
+                            <div class="form-group">                            
+                                <h:outputLabel for="inptCpf" class="control-label col-sm-3" value="Cpf Do Paciente" />                            
+                                <div class="col-sm-5">                            
+                                    <p:inputMask mask="999.999.999-99" value="#{pacienteControle.pacientePesquisado}" 
+                                                 styleClass="form-control" id="inptCpf"
+                                                 pt:placeholder="Digite o numero do registro"                                    
+                                                 required="true"  converterMessage="Por favor inserir somente numeros"
+                                                 requiredMessage="Digite o numero do cpf.">                                   
+                                    </p:inputMask>                            
+                                </div>
+                                <div class="col-sm-2">
+                                    <h:commandButton styleClass="btn btn-default " value="Pesquisar"   
+                                                     actionListener="#{pacienteControle.pesquisar}" >
+                                    </h:commandButton> 
+                                </div>
+                            </div> 
+                        </h:form>
                     </div>
-                    <h:form id="formCadPaciente"  class="form-horizontal" pt:role="form">              
-                    <div class="col-md-6">                        
+                    
+                </div>
+                <h:form id="formCadPaciente"  class="form-horizontal" pt:role="form">                    
+                    <div class="col-md-6">
+                        
                         <div class="form-group">
                             <h:outputLabel class="control-label col-sm-3" value="CPF"/>
                             <div class="col-sm-6">
                                 <p:inputMask mask="999.999.999-99" styleClass="form-control"  required="true"
                                              value="#{pacienteControle.paciente.pacCpf}"                                             
-                                             requiredMessage="Preencha o campo do Cpf"/>
+                                             requiredMessage="Preencha o campo do Cpf" readonly="true"/>
                                              
                             </div>
                         </div>
                         <div class="form-group">
                             <h:outputLabel class="control-label col-sm-3" value="Nome"/>
                             <div class="col-sm-9">
-                                <h:inputText class="form-control has-error"  required="true" 
+                                <h:inputText class="form-control"  required="true" 
                                              requiredMessage="Preencha o campo do nome do paciente"
-                                             value="#{pacienteControle.paciente.pacNome}" >                                    
-                                </h:inputText>                                
+                                             value="#{pacienteControle.paciente.pacNome}" />
+                                             
                             </div>
                         </div>
                         <div class="form-group">
@@ -123,7 +156,7 @@
                     <div class="col-sm-12">
                         <div class="form-group ">                            
                             <div class="col-sm-3 col-sm-offset-8">
-                                <h:commandButton id="btnSalvar"  actionListener="#{pacienteControle.salvar}"                                                 
+                                <h:commandButton id="btnSalvar"  actionListener="#{pacienteControle.alterar}"                                                 
                                                  class="btn btn-success btn-block" value="Concluir">
 
                                 </h:commandButton>
@@ -132,7 +165,6 @@
                         </div>        
                     </div>
                 </h:form>
-             </div>
             </div>
         </div>
 

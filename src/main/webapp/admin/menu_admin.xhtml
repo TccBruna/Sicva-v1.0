@@ -27,7 +27,15 @@
                             <li><a href="alterar_usuario.xhtml">Alterar</a></li>
                             <li><a href="listar_usuarios.xhtml">Listar Todos</a></li>                            
                         </ul>
-                    </li>                       
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">Enfermeiro<span class="caret"></span></a>
+                        <ul class="dropdown-menu text-center">
+                            <li><a href="cadastrar_enfermeiro.xhtml">Cadastrar Erfermeiro</a></li>
+                            <li><a href="#">Alterar</a></li>                                                      
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
                            aria-haspopup="true" aria-expanded="false">Vacinas <span class="caret"></span></a>
@@ -37,7 +45,14 @@
                                                         
                         </ul>
                     </li>
-                    <li><a class="scrollSuave" href="../enfermeiro/registro_vacina.xhtml">Cartão de Vacina</a></li> 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                           aria-haspopup="true" aria-expanded="false">Cartão de Vacina<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="modelo_cartao.xhtml">Calendário de Vacina</a></li>                                                                                
+                        </ul>
+                    </li>
+                     
                     <li><form method="post" class="navbar-form navbar-right"
                               action="../j_spring_security_logout">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
