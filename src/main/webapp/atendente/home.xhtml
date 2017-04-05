@@ -1,0 +1,22 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titulo">Página principal do Atendente</ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="menu_atendente.xhtml" />
+    </ui:define>
+   
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
