@@ -19,8 +19,7 @@ import javax.persistence.Table;
 public class Vacina  implements java.io.Serializable {
 
 
-     private Integer vacinaId;
-     private String vacinaLote;
+     private Integer vacinaId;     
      private String vacinaNome;
     
 
@@ -28,15 +27,11 @@ public class Vacina  implements java.io.Serializable {
     }
 
 	
-    public Vacina(String vacinaLote, String vacinaNome) {
-        this.vacinaLote = vacinaLote;
+    public Vacina( String vacinaNome) {        
         this.vacinaNome = vacinaNome;
-    }
+    }   
    
-   
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="VACINA_ID", unique=true, nullable=false)
     public Integer getVacinaId() {
         return this.vacinaId;
@@ -45,17 +40,6 @@ public class Vacina  implements java.io.Serializable {
     public void setVacinaId(Integer vacinaId) {
         this.vacinaId = vacinaId;
     }
-
-    
-    @Column(name="VACINA_LOTE", nullable=false, length=30)
-    public String getVacinaLote() {
-        return this.vacinaLote;
-    }
-    
-    public void setVacinaLote(String vacinaLote) {
-        this.vacinaLote = vacinaLote;
-    }
-
     
     @Column(name="VACINA_NOME", nullable=false, length=50)
     public String getVacinaNome() {

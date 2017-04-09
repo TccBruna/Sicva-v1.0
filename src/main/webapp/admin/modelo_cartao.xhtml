@@ -18,13 +18,13 @@
                     <div class="page-header"><h1>Gerenciar Modelo de Cartão de Vacina</h1></div>
                      
                     <h:form id="formCadCarteira">
-                        <p:dataTable styleClass="table table-striped" value="#{vacinacaoControle.listarModelo}" var="itens" emptyMessage="Nenhum registro encontrado..."
+                        <p:dataTable styleClass="table table-striped" value="#{vacinacaoControle.vacinacaos}" var="itens" emptyMessage="Nenhum registro encontrado..."
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
                                      {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      widgetVar="ItensTable"  
                                      rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
-                                     paginator="true" rows="10" rowsPerPageTemplate="5,10,15" 
-                                     sortBy="#{itens.vacinacaoFaixaEteria}" >
+                                     paginator="true" rows="10" rowsPerPageTemplate="10,15,20,30,40" 
+                                     sortBy="${itens.vacinacaoId}" >
                             <f:facet name="header">
                                 Calendario de vacina
                             </f:facet>          
@@ -32,12 +32,12 @@
                             <p:columnGroup type="header">
                                 <p:row>
                                     <p:column rowspan="3" headerText="Faixa Etaria" />
-                                    <p:column colspan="2" headerText="Vacinas" />
-                                    <p:column rowspan="3" headerText="Opção" />
+                                    <p:column colspan="3" headerText="Vacinas" />                                    
                                 </p:row>            
                                 <p:row>
                                     <p:column headerText="Nome da vacina" />                                    
-                                    <p:column headerText="Dose" />                                   
+                                    <p:column headerText="Dose" />
+                                    <p:column headerText="status" />
                                 </p:row>
                             </p:columnGroup>
                                           
@@ -50,8 +50,11 @@
                             </p:column>
                             
                             <p:column>
-                                <p:commandButton value="Alterar"></p:commandButton>
-                            </p:column>                
+                                
+                            </p:column>  
+                            <p:column>
+                                <h:outputText value="#{itens.vacinacaoStatus}" /> 
+                            </p:column>  
 
                         </p:dataTable>
                     </h:form>

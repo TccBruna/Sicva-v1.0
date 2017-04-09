@@ -30,15 +30,17 @@ public class Aplica  implements java.io.Serializable {
      private Vacinacao vacinacao;
      private String aplicaDosagem;
      private Date aplicaData;
+     private String AplicaVacinaLote;
 
     public Aplica() {
     }
 
-    public Aplica(Enfermeiro enfermeiro, String aplicaDosagem, Date aplicaData,Vacinacao vacinacao) {
+    public Aplica(Enfermeiro enfermeiro, String aplicaDosagem, Date aplicaData,Vacinacao vacinacao,String AplicaVacinaLote) {
        this.enfermeiro = enfermeiro;
        this.aplicaDosagem = aplicaDosagem;
        this.aplicaData = aplicaData;
        this.vacinacao = vacinacao;
+       this.AplicaVacinaLote = AplicaVacinaLote;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -92,8 +94,13 @@ public class Aplica  implements java.io.Serializable {
         this.aplicaData = aplicaData;
     }
 
+    public String getAplicaVacinaLote() {
+        return AplicaVacinaLote;
+    }
 
-
+    public void setAplicaVacinaLote(String AplicaVacinaLote) {
+        this.AplicaVacinaLote = AplicaVacinaLote;
+    }
 
 }
 

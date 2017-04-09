@@ -17,11 +17,19 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class VacinacaoControle {
-    private VacinacaoDao vacinacaoDao;
-    
-    public List<Vacinacao> getListarModelo(){
-        vacinacaoDao = new VacinacaoDao();
-        return vacinacaoDao.listarModelo();
+public class VacinacaoControle {    
+    private List<Vacinacao> vacinacaos;
+    public VacinacaoControle(){
+        VacinacaoDao vacinacaoDao = new VacinacaoDao();        
+        vacinacaos =  vacinacaoDao.listarModelo();        
     }
+
+    public List<Vacinacao> getVacinacaos() {
+        return vacinacaos;
+    }
+
+    public void setVacinacaos(List<Vacinacao> vacinacaos) {
+        this.vacinacaos = vacinacaos;
+    }   
+    
 }

@@ -57,8 +57,8 @@ public class VacinacaoDao {
     
     public List<Vacinacao> listarModelo() {
         session = new FabricaDeConexao().getSessionFactory().openSession();
-        Query query = session.createSQLQuery("select*from vacinacao right join vacina "
-                + "on vacina_id = vacinacao_vacina_id").addEntity(Vacinacao.class);
+        Query query = session.createSQLQuery("select*from vacinacao inner join vacina "
+                + "on vacina_id = vacinacao_vacina_id order by VACINACAO_FAIXA_ETERIA").addEntity(Vacinacao.class);
         listaVacinacao = query.list();
         listaVacinacao = session.createCriteria(Vacinacao.class).list();
         session.close();
