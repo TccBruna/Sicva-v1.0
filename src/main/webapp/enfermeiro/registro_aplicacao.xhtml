@@ -1,0 +1,71 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="titulo">Cartão Pacientes</ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="menu_enfermeiro.xhtml"/>
+    </ui:define>
+
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row">  
+                <div class="col-sm-12">
+                    <div class="page-header"><h1>Registrar Aplicação de  Vacina</h1></div>
+                    <div class="col-sm-6">
+                        <p:messages autoUpdate="true" />
+                        <h:form class="form form-horizontal" pt:role="form" >
+                            <div class="form-group">
+                                <p:outputLabel value="Enfermeiro" styleClass="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <h:inputText class="form-control" disabled="true" value="Enfermeiro Logado"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p:outputLabel value="Paciente" styleClass="col-sm-3" />
+                                <div class="col-sm-6">
+                                    <h:inputText class="form-control" value="#{vacinacaoControle.vacinacao.paciente.pacNome}" disabled="true"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p:outputLabel value="Dose" styleClass="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <h:selectOneMenu   class="form-control" required="true" value="#{vacinacaoControle.aplica.aplicaDosagem}"
+                                                       requiredMessage="Por Favor Selecione uma Dose">
+                                        <f:selectItem itemLabel="Selecione uma dose"/>
+                                        <f:selectItem itemLabel="1° Dose" itemValue="1"/>
+                                        <f:selectItem itemLabel="2° Dose" itemValue="2"/>
+                                        <f:selectItem itemLabel="3° Dose" itemValue="3"/>
+                                        <f:selectItem itemLabel="Reforço" itemValue="4"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p:outputLabel value="Lote" styleClass="col-sm-3"/>
+                                <div class="col-sm-6">
+                                    <p:inputText  styleClass="form-control" required="true"
+                                                  value="#{vacinacaoControle.aplica.aplicaVacinaLote}"
+                                                  pt:placeholder="Informe o lote" 
+                                                  requiredMessage="Por favor informe o lote"/>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <h:commandButton class="btn btn-default btn-block " action="#{vacinacaoControle.realizarAplicacao}" value="Salvar"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>   
+                </div>               
+            </div>
+        </div>      
+
+    </ui:define>
+
+</ui:composition>

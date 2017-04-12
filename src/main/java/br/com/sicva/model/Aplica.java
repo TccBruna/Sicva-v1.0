@@ -93,7 +93,8 @@ public class Aplica  implements java.io.Serializable {
     public void setAplicaData(Date aplicaData) {
         this.aplicaData = aplicaData;
     }
-
+    
+    @Column(name="APLICA_VACINA_LOTE", nullable=false, length=15)
     public String getAplicaVacinaLote() {
         return AplicaVacinaLote;
     }

@@ -9,10 +9,12 @@ import br.com.sicva.dao.BairroDao;
 import br.com.sicva.dao.EnderecoDao;
 import br.com.sicva.dao.FoneDao;
 import br.com.sicva.dao.PacienteDao;
+import br.com.sicva.dao.VacinacaoDao;
 import br.com.sicva.model.Bairro;
 import br.com.sicva.model.Endereco;
 import br.com.sicva.model.Fone;
 import br.com.sicva.model.Paciente;
+import br.com.sicva.util.IdadeUtil;
 import br.com.sicva.util.Mensagens;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,6 @@ public class PacienteControle {
     private FoneDao foneDao;
     private Endereco endereco;
     private EnderecoDao enderecoDao;
-    
 
     public void pesquisar() {
         pacienteDao = new PacienteDao();
@@ -45,8 +46,8 @@ public class PacienteControle {
                 endereco = new Endereco();
                 fone = new Fone();
                 new Mensagens().MensagensAviso("Nenhum Paciente não encontrado com CPF: " + pacientePesquisado, null);
-            } else {                
-                enderecoDao = new EnderecoDao();                
+            } else {
+                enderecoDao = new EnderecoDao();
                 endereco = enderecoDao.PesquisarEndereco(paciente.getPacId());
                 fone = new FoneDao().PesquisarFone(paciente.getPacId());
                 new Mensagens().MensagensSucesso("Paciente encontrado", null);
@@ -59,45 +60,52 @@ public class PacienteControle {
     public void salvar() {
         try {
             pacienteDao = new PacienteDao();
-           if( pacienteDao.PesquisarPaciente(paciente.getPacCpf()) == null){
-            enderecoDao = new EnderecoDao();
-            foneDao = new FoneDao();
-            endereco.setEndCep(endereco.getEndCep().replace(".", "").replace("-", ""));            
-            paciente.setEndereco(endereco);
-            fone.setPaciente(paciente);
-            if (enderecoDao.salvarEndereco(endereco)) {
-                if(pacienteDao.salvarPaciente(paciente)){
-                    if (foneDao.salvarFone(fone)) { 
-                        endereco = new Endereco();
-                        fone = new Fone();
-                        paciente = new Paciente();
-                        new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
-                    }pacienteDao.deletarPaciente(paciente);
-                }enderecoDao.deletarEndereco(endereco);
+            if (pacienteDao.PesquisarPaciente(paciente.getPacCpf()) == null) {
+                enderecoDao = new EnderecoDao();
+                foneDao = new FoneDao();
+                endereco.setEndCep(endereco.getEndCep().replace(".", "").replace("-", ""));
+                paciente.setEndereco(endereco);
+                fone.setPaciente(paciente);
+                if (enderecoDao.salvarEndereco(endereco)) {
+                    if (pacienteDao.salvarPaciente(paciente)) {
+                        if (foneDao.salvarFone(fone)) {
+                            IdadeUtil idade = new IdadeUtil();
+                            if (idade.calcularData(paciente.getPacDtnasc()) <= 4) {
+                                new VacinacaoDao().CallGerarCartão(paciente.getPacId());
+                                endereco = new Endereco();
+                                fone = new Fone();
+                                paciente = new Paciente();
+                                new Mensagens().MensagensSucesso("foi gerado um cartão", null);
+                            }
+                             new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
+                        }
+                        
+                    }
+                   
+                } else {
+                    new Mensagens().MensagensAviso("Não foi possivel salvar os dados", null);
+                }
             } else {
-                new Mensagens().MensagensAviso("Não foi possivel salvar os dados", null);
-            }
-           }else{
                 new Mensagens().MensagensAviso("Este CPF informado já está em uso, caso queira alterar os dados vá "
                         + "para a pagina de alteraçao de paciente", null);
-           }
+            }
         } catch (Exception e) {
-            System.out.println(""+e);
+            System.out.println("" + e);
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);
         }
     }
-    
+
     public void alterar() {
         try {
             pacienteDao = new PacienteDao();
             enderecoDao = new EnderecoDao();
             foneDao = new FoneDao();
-            endereco.setEndCep(endereco.getEndCep().replace(".", "").replace("-", ""));            
+            endereco.setEndCep(endereco.getEndCep().replace(".", "").replace("-", ""));
             paciente.setEndereco(endereco);
             fone.setPaciente(paciente);
             if (enderecoDao.alterarEndereco(endereco)) {
-                if(pacienteDao.alterarPaciente(paciente)){
-                    if (foneDao.alterarFone(fone)) { 
+                if (pacienteDao.alterarPaciente(paciente)) {
+                    if (foneDao.alterarFone(fone)) {
                         endereco = new Endereco();
                         fone = new Fone();
                         paciente = new Paciente();
@@ -108,7 +116,7 @@ public class PacienteControle {
                 new Mensagens().MensagensAviso("Não foi possivel salvar os dados", null);
             }
         } catch (Exception e) {
-            System.out.println(""+e);
+            System.out.println("" + e);
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);
         }
     }
