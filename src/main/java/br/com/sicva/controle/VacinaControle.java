@@ -8,6 +8,7 @@ package br.com.sicva.controle;
 import br.com.sicva.dao.VacinaDao;
 import br.com.sicva.model.Vacina;
 import br.com.sicva.util.Mensagens;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -76,5 +77,9 @@ public class VacinaControle {
         this.VacinaPesquisada = VacinaPesquisada;
     }   
     
+    public List<Vacina> getListarTodas(){
+        vacinaDao = new VacinaDao();
+        return vacinaDao.listarVacina();
+    }
             
 }

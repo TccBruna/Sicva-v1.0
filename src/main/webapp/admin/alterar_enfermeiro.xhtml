@@ -9,35 +9,39 @@
     <ui:define name="titulo">Alterar Enfermeiro</ui:define>
 
     <ui:define name="menu">
-       <ui:include src="menu_admin.xhtml" />
+        <ui:include src="menu_admin.xhtml" />
     </ui:define>
-   
+
     <ui:define name="corpo">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="page-header"><h1>Alterar Enfermeiro!</h1></div>                   
-                    <p:messages autoUpdate="true" showDetail="true" rendered="#{enfermeiroControle.showMsgErros}" />
+                    <p:messages autoUpdate="true" showDetail="true"  />
                     <h:form  class="form-horizontal" pt:role="form"> 
-                    <div class="form-group">                            
-                        <h:outputLabel for="inptCpfPesq" class="control-label col-sm-3" value="Coren" />                            
-                        <div class="col-sm-5">                            
-                            <p:inputText 
-                                         value="#{enfermeiroControle.corenPesquisado}" 
-                                         styleClass="form-control" id="inptCpfPesq"
-                                         pt:placeholder="Digite o coren"                                  
-                                         required="true"                                          
-                                         requiredMessage="Digite o Coren.">                                   
-                            </p:inputText>                            
-                        </div>
-                        <div class="col-sm-2">
-                            <h:commandButton  styleClass="btn btn-default " 
-                                              value="Pesquisar"   action="#{enfermeiroControle.pesquisar}" /> 
-                        </div>
-                    </div> 
-                </h:form>
+                        <div class="form-group">                            
+                            <h:outputLabel for="inptCpfPesq" class="control-label col-sm-3" value="Coren" />                            
+                            <div class="col-sm-5">    
+                                <div class="input-group">
+                                    <p:inputText 
+                                        value="#{enfermeiroControle.corenPesquisado}" 
+                                        styleClass="form-control" id="inptCpfPesq"
+                                        pt:placeholder="Digite o coren"                                  
+                                        required="true"                                          
+                                        requiredMessage="Digite o Coren.">                                   
+                                    </p:inputText> 
+                                    <span class="input-group-btn">
+                                        <h:commandLink  styleClass="btn btn-default " 
+                                                        action="#{enfermeiroControle.pesquisar}">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </h:commandLink> 
+                                    </span>
+                                </div>
+                            </div>
+                        </div> 
+                    </h:form>
                     <h:form  class="form-horizontal" pt:role="form">
-                        
+
                         <div class="form-group">
                             <h:outputLabel for="inputcpf" value="CPF"
                                            styleClass="col-sm-3 control-label" />
@@ -103,40 +107,25 @@
                                 <h:message id="m_confirm" for="confirmPassword" style="color:#D74937;" />
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <h:outputLabel for="inputCoren" value="Coren"
-                                           styleClass="col-sm-3 control-label" />
-                            <div class="col-sm-5">
-                                <h:inputText value="#{enfermeiroControle.enfermeiro.enfermeiroCoren}" class="form-control" id="inputCoren"
-                                             pt:placeholder="Digite aqui o Coren do enfermeiro" readonly="true"
-                                             required="true" validatorMessage="o Coren deve conter entre 2 e 30 caracteres."
-                                             requiredMessage="é necessário que você informe o Coren do enfermeiro.">
-                                    <f:validateLength minimum="2" maximum="30" />
-                                    <f:ajax event="blur" render="m_inputCoren" />
-                                </h:inputText>
-                                <h:message id="m_inputCoren" for="inputCoren"
-                                           style="color:#D74937;" />
-                            </div>
-                        </div>
-                        
+
+
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <h:commandButton   action="#{enfermeiroControle.alterar}" value="Salvar"
                                                    styleClass="btn btn-success  btn-block " >
-                                    
+
                                 </h:commandButton>
-                                
+
                             </div>
                         </div>
 
                     </h:form>
-                    
+
                 </div> 
-                
+
             </div>
         </div>
-        
+
     </ui:define>
 
 </ui:composition>

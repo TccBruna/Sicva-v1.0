@@ -9,53 +9,42 @@
     <ui:define name="titulo">Alterar Usuario</ui:define>
 
     <ui:define name="menu">
-       <ui:include src="menu_admin.xhtml" />
+        <ui:include src="menu_admin.xhtml" />
     </ui:define>
-   
+
     <ui:define name="corpo">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">                    
-               <div class="page-header"><h1>Alterar Usuarios!</h1></div>          
-                <p:messages autoUpdate="true" rendered="#{usuarioControle.showMsgErros}" />
-                <h:form  class="form-horizontal" pt:role="form"> 
-                    <div class="form-group">                            
-                        <h:outputLabel for="inptCpfPesq" class="control-label col-sm-3" value="CPF" />                            
-                        <div class="col-sm-5">                            
-                            <p:inputMask mask="999.999.999-99"
-                                         value="#{usuarioControle.cpfPesquisado}" 
-                                         styleClass="form-control" id="inptCpfPesq"
-                                         pt:placeholder="Digite o numero do CPF"                                  
-                                         required="true"                                          
-                                         requiredMessage="Digite o CPF.">                                   
-                            </p:inputMask>                            
-                        </div>
-                        <div class="col-sm-2">
-                            <h:commandButton  styleClass="btn btn-default " 
-                                              value="Pesquisar"   action="#{usuarioControle.pesquisar}" /> 
-                        </div>
-                    </div> 
-                </h:form>
-                </div>
-                <div class="col-md-8">                    
-                    <h:form  class="form-horizontal" pt:role="form">
-                        
-                        <div class="form-group">
-                            <h:outputLabel for="inputcpf" value="CPF"
-                                           styleClass="col-sm-3 control-label" />
-                            <div class="col-sm-6">
-                                <p:inputMask mask="999.999.999-99" value="#{usuarioControle.usuario.usuarioCpf}" styleClass="form-control"
-                                             id="inputcpf" required="true"
-                                             readonly="true"
-                                             pt:placeholder="Digite aqui seu CPF "
-                                             requiredMessage="é necessário que você informe seu CPF."
-                                             validatorMessage="usuário deve conter 14 caracteres.">
-                                    <f:validateLength minimum="14" />
-                                    <f:ajax event="blur" render="m_inputcpf" />
-                                </p:inputMask>
-                                <h:message id="m_inputcpf" for="inputcpf" style="color:#D74937;" />
-                            </div>
-                        </div>
+                    <div class="page-header"><h1>Alterar Usuarios!</h1></div> 
+                    <div class="col-sm-8">
+                     <p:messages autoUpdate="true"  />
+                        <h:form  class="form-horizontal" pt:role="form"> 
+                            <div class="form-group">                            
+                                <h:outputLabel for="inptCpfPesq" class="control-label col-sm-3" value="CPF" />                            
+                                <div class="col-sm-6">
+                                    <div class="input-group">                            
+                                        <p:inputMask mask="999.999.999-99"
+                                                     value="#{usuarioControle.cpfPesquisado}" 
+                                                     styleClass="form-control" id="inptCpfPesq"
+                                                     pt:placeholder="Digite o numero do CPF"                                  
+                                                     required="true"                                          
+                                                     requiredMessage="Digite o CPF.">                                   
+                                        </p:inputMask>                           
+                                        <span class="input-group-btn">
+                                            <h:commandLink  styleClass="btn btn-default " 
+                                                            action="#{usuarioControle.pesquisar}" >
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </h:commandLink>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> 
+                        </h:form>
+                    </div>
+                
+                <div class="col-sm-8">                    
+                    <h:form  class="form-horizontal" pt:role="form">                      
 
                         <div class="form-group">
                             <h:outputLabel for="inputnome" value="Nome"
@@ -106,23 +95,23 @@
                                 <h:message id="m_confirm" for="confirmPassword" style="color:#D74937;" />
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <h:commandButton   action="#{usuarioControle.alterar}" value="Alterar"
                                                    styleClass="btn btn-success  btn-block " >
-                                    
+
                                 </h:commandButton>
-                                
+
                             </div>
                         </div>
 
                     </h:form>
-                    
+                  </div>
                 </div>                 
             </div>
         </div>
-        
+
     </ui:define>
 
 </ui:composition>

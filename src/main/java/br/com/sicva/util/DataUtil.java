@@ -7,13 +7,15 @@ package br.com.sicva.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author Rodrigo
  */
-public class IdadeUtil {
-    public int calcularData(Date dataNascimento){        
+public class DataUtil {
+
+    public int calcularIdade(Date dataNascimento) {
         Calendar dtNasc = Calendar.getInstance();
         //cria um objeto calendar com a data atual
         Calendar dtAtual = Calendar.getInstance();
@@ -24,9 +26,11 @@ public class IdadeUtil {
         System.out.println(dtNasc.getTime());
         dtNasc.add(Calendar.YEAR, idade);
         System.out.println(dtNasc.getTime());
-        if(dtAtual.before(dtNasc)){
+        if (dtAtual.before(dtNasc)) {
             idade--;
         }
         return idade;
     }
+ 
+    
 }

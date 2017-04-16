@@ -1,5 +1,6 @@
 #body{
 	padding-top: 100px;
+        background: #ccccff ;
 }
 
 
@@ -15,13 +16,9 @@ section#contato{
 footer{
 	padding-top: 30px;
 	padding-bottom: 30px;
-	background: url(../imgs/fundo.jpg);
+	
 }
-.divslider{
-	padding-top: 15px;
-	padding-bottom: 15px;
-	background: url(../imgs/slider/slider.png);
-}
+
 
 .servicos-item * {
  text-align: center;
@@ -37,7 +34,7 @@ footer{
     margin: 0 auto;
 }
 .fundo{
-	background: url(../imgs/fundo.jpg);
+    background: #ccccff ;
 }
 .portifolio_item{
 	background: white;

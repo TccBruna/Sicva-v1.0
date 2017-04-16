@@ -14,117 +14,104 @@
     </ui:define>
 
     <ui:define name="corpo">
-
         <div class="container">
             <div class="row">  
                 <div class="col-sm-12">
-                    <div class="page-header"><h1>Cartão de Vacina</h1></div>
+                    <ul class="breadcrumb">
+                        <li><a href="#">index</a></li>
+                        <li><a href="#">atual</a></li>
+                        <li><a href="#">proxima</a></li>
+                    </ul>
+                    <div class="page-header"><h1>Cartão de Vacina</h1></div>      
                     <div class="col-sm-12">
-
-                        <div class="col-sm-12">
-                            <p:messages autoUpdate="true" />
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <p:outputLabel styleClass="col-sm-4" for="inpEnfermeiro" value="Enfermeiro:" />
-                                    <div class="col-sm-8">
-                                        <h:outputText id="inpEnfermeiro" value="Enfermeiro logado"></h:outputText>
+                        <div class="col-sm-6">
+                            <h:messages />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h:form   class="form-horizontal" pt:role="form"> 
+                            <div class="col-sm-10">
+                                <div class="page-header"><h4>Procurar Paciente</h4></div>
+                                <div class="form-group">  
+                                    <h:outputLabel class="control-label" value="CPF:  " />
+                                    <div class="input-group">                                        
+                                        <p:inputMask mask="999.999.999-99" value="#{vacinacaoControle.paciente.pacCpf}" 
+                                                     styleClass="form-control" id="inptCpf"
+                                                     pt:placeholder="CPF:"                                    
+                                                     required="true"  converterMessage="Por favor inserir somente numeros"
+                                                     requiredMessage="Digite o numero do cpf." >                                   
+                                        </p:inputMask>                            
+                                        <span class="input-group-btn">
+                                            <h:commandLink styleClass="btn btn-default "   
+                                                           actionListener="#{vacinacaoControle.pesquisarCartao}" >
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </h:commandLink> 
+                                        </span>
                                     </div>
+                                </div>                                 
+                            </div>                            
+                        </h:form> 
+                    </div>
+                     <div class="col-sm-6">
+                        <div class="col-sm-12">
+                            <div class="page-header"><h4>Informaçõs do paciente</h4></div>
+                                <div class="form-group ">
+                                    <h:outputLabel class="control-label" value="Nome:  " />
+                                    <h:outputText  value=" #{vacinacaoControle.paciente.pacNome}" />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <h:form   class="form-horizontal" pt:role="form"> 
-                                    <div class="form-group">                            
-                                        <h:outputLabel for="inptCpf" class="control-label col-sm-5" value="Cpf Do Paciente" />                            
-                                        <div class="col-sm-5">                            
-                                            <p:inputMask mask="999.999.999-99" value="#{vacinacaoControle.paciente.pacCpf}" 
-                                                         styleClass="form-control" id="inptCpf"
-                                                         pt:placeholder="Digite o numero do registro"                                    
-                                                         required="true"  converterMessage="Por favor inserir somente numeros"
-                                                         requiredMessage="Digite o numero do cpf.">                                   
-                                            </p:inputMask>                            
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <h:commandButton styleClass="btn btn-default " value="Pesquisar"   
-                                                             actionListener="#{vacinacaoControle.pesquisarCartao}" >
-                                            </h:commandButton> 
-                                        </div>
-                                    </div> 
-                                </h:form>
+                            <div class="col-sm-12">
+                                <div class="form-group ">
+                                    <h:outputLabel class="control-label" value="Idade:  " />
+                                    <h:outputText  value=" #{vacinacaoControle.idade} Anos" />
+                                </div>
                             </div>
-                        </div>  
-                        <div class="col-sm-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h2 class="panel-title">Dados do Paciente</h2>
-                                </div><!-- fim .panel-heading -->
-                                <div class="panel-body">
-
-                                    <dl>                                    
-                                        <dt>Paciente:</dt>
-                                        <dd>#{vacinacaoControle.paciente.pacNome}</dd>
-
-                                        <dt>Cpf:</dt>
-                                        <dd>#{vacinacaoControle.paciente.pacCpf}</dd>    
-                                    </dl> 
-
-                                </div><!-- fim .panel-body -->
-                            </div><!-- fim .panel -->
-                        </div>      
-                    </div>
+                    </div>                    
                     <div class="col-sm-12">
-                        <h:form id="formCadCarteira">
-                            <p:dataTable styleClass="table table-striped" value="#{vacinacaoControle.vacinacaos}" var="itens" emptyMessage="Nenhum registro encontrado..."
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
-                                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         widgetVar="ItensTable"  
-                                         rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
-                                         paginator="true" rows="10" rowsPerPageTemplate="10,15,20,30,40" 
-                                         sortBy="${itens.vacinacaoId}" >
-                                <f:facet name="header">
-                                    Calendario de vacina
-                                </f:facet>          
-
-                                <p:columnGroup type="header">
-                                    <p:row>
-                                        <p:column rowspan="3" headerText="Faixa Etaria" />
-                                        <p:column colspan="3" headerText="Vacinas" />     
-                                        <p:column rowspan="2" headerText="Opção" />
-                                    </p:row>            
-                                    <p:row>
-                                        <p:column headerText="Nome da vacina" />                                    
-                                        <p:column headerText="Dose" />
-                                        <p:column headerText="status" />
-                                    </p:row>
-                                </p:columnGroup>
-
-                                <p:column  groupRow="true">
-                                    <h:outputText value="#{itens.vacinacaoFaixaEteria}" />
-                                </p:column>  
+                        <h:form>
+                            <div class="page-header"><h4>Vacinas<small>&#160;Vacinas inseridas no cartão do paciente </small> </h4></div>
+                            <h:commandLink class="btn btn-info" value="Inserir Vacina no cartao">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </h:commandLink>
+                            <br/>
+                            <br/>
+                            <h:dataTable var="vac" class="table table-striped table-responsive
+                                         table-hover "
+                                         value="#{vacinacaoControle.vacinacaos}">
 
                                 <p:column  >
-                                    <h:outputText value="#{itens.vacina.vacinaNome}" />
+                                    <f:facet name="header">Vacina</f:facet>
+                                    <h:outputText value="#{vac.vacina.vacinaNome}" />
                                 </p:column>
-
-                                <p:column>
-
+                                <p:column  >
+                                    <f:facet name="header">Status</f:facet>
+                                    <h:outputText value="#{vac.vacinacaoStatus}" />
                                 </p:column>  
-                                <p:column>
-                                    <h:outputText value="#{vacinacaoControle.verificarStatus(itens.vacinacaoStatus,
-                                                           itens.vacinacaoFaixaEteria,itens.paciente.pacDtnasc)}" /> 
-                                </p:column>  
-                                <p:column>
-                                    <h:commandButton class="btn btn-info" rendered="#{vacinacaoControle.habilitarBotão(itens.vacinacaoStatus)}" value="Aplicar Vacina" action="#{vacinacaoControle.aplicar}">
-                                        <f:setPropertyActionListener value="#{itens}" target="#{vacinacaoControle.vacinacao}"/>
-                                        <span  style="color: orange; display: none" class="glyphicon glyphicon-alert"></span>
-                                    </h:commandButton>                                    
+                                <p:column  >
+                                    <f:facet name="header">data</f:facet>
+                                    <h:outputText value="#{vac.vacinacaoProxDt}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
                                 </p:column> 
+                                <p:column  >
+                                    <f:facet name="header">Faixa Etaria</f:facet>
+                                    <h:outputText value="#{vac.vacinacaoFaixaEteria}" />
+                                </p:column>
                                 
-                            </p:dataTable>
+                                 <p:column  >
+                                    <f:facet name="header">Opção</f:facet>
+                                    <h:commandButton class="btn btn-success" value="Aplicar"
+                                                     rendered="#{vacinacaoControle.habilitarBotão(vac.vacinacaoStatus)}" />
+                                </p:column> 
 
+                                <f:facet name="footer">                                
+                                    <div style="color:blue">                                   
+                                        <h:outputLabel value="Quantidade: " />
+                                        <h:outputText value=""/>
+                                    </div>                                                      
+                                </f:facet>      
+                            </h:dataTable>
                         </h:form>
-                        <p:tooltip for="" />
-
-
                     </div>
                 </div>               
             </div>

@@ -14,7 +14,7 @@ import br.com.sicva.model.Bairro;
 import br.com.sicva.model.Endereco;
 import br.com.sicva.model.Fone;
 import br.com.sicva.model.Paciente;
-import br.com.sicva.util.IdadeUtil;
+import br.com.sicva.util.DataUtil;
 import br.com.sicva.util.Mensagens;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,7 @@ public class PacienteControle {
     private FoneDao foneDao;
     private Endereco endereco;
     private EnderecoDao enderecoDao;
+    private String dataNascimento;
 
     public void pesquisar() {
         pacienteDao = new PacienteDao();
@@ -60,30 +61,19 @@ public class PacienteControle {
     public void salvar() {
         try {
             pacienteDao = new PacienteDao();
+            foneDao = new FoneDao();
             if (pacienteDao.PesquisarPaciente(paciente.getPacCpf()) == null) {
-                enderecoDao = new EnderecoDao();
-                foneDao = new FoneDao();
                 endereco.setEndCep(endereco.getEndCep().replace(".", "").replace("-", ""));
                 paciente.setEndereco(endereco);
                 fone.setPaciente(paciente);
-                if (enderecoDao.salvarEndereco(endereco)) {
-                    if (pacienteDao.salvarPaciente(paciente)) {
-                        if (foneDao.salvarFone(fone)) {
-                            IdadeUtil idade = new IdadeUtil();
-                            if (idade.calcularData(paciente.getPacDtnasc()) <= 4) {
-                                new VacinacaoDao().CallGerarCartão(paciente.getPacId());
-                                endereco = new Endereco();
-                                fone = new Fone();
-                                paciente = new Paciente();
-                                new Mensagens().MensagensSucesso("foi gerado um cartão", null);
-                            }
-                             new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
-                        }
-                        
-                    }
-                   
+
+                if (pacienteDao.salvarPaciente(paciente) && foneDao.salvarFone(fone)) {                    
+                    endereco = new Endereco();
+                    fone = new Fone();
+                    paciente = new Paciente();
+                    new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
                 } else {
-                    new Mensagens().MensagensAviso("Não foi possivel salvar os dados", null);
+                    new Mensagens().MensagensErro("Não foi possivel salvar os dados", null);
                 }
             } else {
                 new Mensagens().MensagensAviso("Este CPF informado já está em uso, caso queira alterar os dados vá "
@@ -97,23 +87,18 @@ public class PacienteControle {
 
     public void alterar() {
         try {
-            pacienteDao = new PacienteDao();
-            enderecoDao = new EnderecoDao();
+            pacienteDao = new PacienteDao();            
             foneDao = new FoneDao();
             endereco.setEndCep(endereco.getEndCep().replace(".", "").replace("-", ""));
             paciente.setEndereco(endereco);
             fone.setPaciente(paciente);
-            if (enderecoDao.alterarEndereco(endereco)) {
-                if (pacienteDao.alterarPaciente(paciente)) {
-                    if (foneDao.alterarFone(fone)) {
-                        endereco = new Endereco();
-                        fone = new Fone();
-                        paciente = new Paciente();
-                        new Mensagens().MensagensSucesso("Alterado com sucesso", null);
-                    }
-                }
+            if (pacienteDao.alterarPaciente(paciente) && foneDao.alterarFone(fone)) {                
+                endereco = new Endereco();
+                fone = new Fone();
+                paciente = new Paciente();
+                new Mensagens().MensagensSucesso("Dados alterados com sucesso", null);
             } else {
-                new Mensagens().MensagensAviso("Não foi possivel salvar os dados", null);
+                new Mensagens().MensagensErro("Não foi possivel alterar os dados", null);
             }
         } catch (Exception e) {
             System.out.println("" + e);
@@ -171,5 +156,15 @@ public class PacienteControle {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    public String getDataNacimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+    
+    
 
 }

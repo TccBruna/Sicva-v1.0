@@ -32,7 +32,7 @@ public class PacienteDao {
             session.close();            
             return true;
         } catch (Exception e) {
-            System.out.println("" + e.getMessage());
+            System.out.println("erro" + e.getMessage());
             tx.rollback(); 
             session.close();
             return false;

@@ -30,40 +30,32 @@
                             </div>
                         </div>
                     </div> 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <h:form   class="form-horizontal" pt:role="form"> 
-                            <div class="form-group">                            
-                                <h:outputLabel for="inptCpf" class="control-label col-sm-3" value="Cpf Do Paciente" />                            
-                                <div class="col-sm-5">                            
-                                    <p:inputMask mask="999.999.999-99" value="#{pacienteControle.pacientePesquisado}" 
-                                                 styleClass="form-control" id="inptCpf"
-                                                 pt:placeholder="Digite o numero do registro"                                    
-                                                 required="true"  converterMessage="Por favor inserir somente numeros"
-                                                 requiredMessage="Digite o numero do cpf.">                                   
-                                    </p:inputMask>                            
-                                </div>
-                                <div class="col-sm-2">
-                                    <h:commandButton styleClass="btn btn-default " value="Pesquisar"   
-                                                     actionListener="#{pacienteControle.pesquisar}" >
-                                    </h:commandButton> 
-                                </div>
-                            </div> 
+                            <div class="form-group">  
+                                    <h:outputLabel class="control-label col-sm-3" value="CPF:  " />
+                                    <div class="input-group">                                        
+                                        <p:inputMask mask="999.999.999-99" value="#{pacienteControle.pacientePesquisado}" 
+                                                     styleClass="form-control" id="inptCpf"
+                                                     pt:placeholder="CPF:"                                    
+                                                     required="true"  converterMessage="Por favor inserir somente numeros"
+                                                     requiredMessage="Digite o numero do cpf." >                                   
+                                        </p:inputMask>                            
+                                        <span class="input-group-btn">
+                                            <h:commandLink styleClass="btn btn-default "   
+                                                           actionListener="#{pacienteControle.pesquisar}" >
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </h:commandLink> 
+                                        </span>
+                                    </div>
+                                </div>   
                         </h:form>
                     </div>
                     
                 </div>
                 <h:form id="formCadPaciente"  class="form-horizontal" pt:role="form">                    
-                    <div class="col-md-6">
-                        
-                        <div class="form-group">
-                            <h:outputLabel class="control-label col-sm-3" value="CPF"/>
-                            <div class="col-sm-6">
-                                <p:inputMask mask="999.999.999-99" styleClass="form-control"  required="true"
-                                             value="#{pacienteControle.paciente.pacCpf}"                                             
-                                             requiredMessage="Preencha o campo do Cpf" readonly="true"/>
-                                             
-                            </div>
-                        </div>
+                    <div class="col-md-6">                        
+                       
                         <div class="form-group">
                             <h:outputLabel class="control-label col-sm-3" value="Nome"/>
                             <div class="col-sm-9">

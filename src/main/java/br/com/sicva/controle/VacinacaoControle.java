@@ -7,32 +7,37 @@ package br.com.sicva.controle;
 
 import br.com.sicva.dao.AplicaDao;
 import br.com.sicva.dao.PacienteDao;
+import br.com.sicva.dao.VacinaDao;
 import br.com.sicva.dao.VacinacaoDao;
 import br.com.sicva.model.Aplica;
 import br.com.sicva.model.Enfermeiro;
 import br.com.sicva.model.Paciente;
 import br.com.sicva.model.Usuario;
+import br.com.sicva.model.Vacina;
 import br.com.sicva.model.Vacinacao;
+import br.com.sicva.util.DataUtil;
 import br.com.sicva.util.Mensagens;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 /**
  *
  * @author Rodrigo
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class VacinacaoControle {
 
     private List<Vacinacao> vacinacaos;
-    private Vacinacao vacinacao;
+    private Vacinacao vacinacao = new Vacinacao();
     private VacinacaoDao vacinacaoDao;
     private Paciente paciente;
     private Aplica aplica;
+    private Vacina vacina;
     private AplicaDao aplicaDao;
 
     public void pesquisarCartao() {
@@ -78,31 +83,44 @@ public class VacinacaoControle {
 
     public boolean habilitarBotão(String status) {
         if (status.equals("PENDENTE")) {
-            return  true;
+            return true;
         } else {
             return false;
         }
     }
+
+    public int getIdade(){
+        if(paciente.getPacDtnasc() != null)  {         
+          return new DataUtil().calcularIdade(paciente.getPacDtnasc());
+        }        
+        return 0;
+    }
     
-    public String verificarStatus(String Status, String Faixa, Date DataNascimento){
-        Calendar hj= Calendar.getInstance();
-        Calendar dataNasci = Calendar.getInstance();
-        dataNasci.setTime(DataNascimento);
-        if(Status.equals("PENDENTE")){ 
-           int IdadeAno = hj.get(Calendar.YEAR) - dataNasci.get(Calendar.YEAR);
-           if(hj.get(Calendar.MONTH) < dataNasci.get(Calendar.MONDAY)){
-               System.out.println("Ainda não completou ano");
-           }
-           int IdadeDias =  hj.get(Calendar.DAY_OF_MONTH) - dataNasci.get(Calendar.DAY_OF_MONTH);
-            System.out.println(""+IdadeAno+IdadeDias);
-            return "PENDENTE";
+    public void test(){
+        if (vacinacaos == null) {
+           vacinacaos = new ArrayList<>();
+           
         }
-        return Status;
+        vacinacao.setVacina(vacina);
+        vacinacao.setVacinacaoStatus("Pendente");        
+        vacinacaos.add(vacinacao); 
+    }
+    
+    public List<SelectItem> getVacinas() {
+        VacinaDao funcaoDao = new VacinaDao();
+        List<Vacina> listaVacinas = funcaoDao.listarVacina();
+        final List<SelectItem> itens = new ArrayList<>(listaVacinas.size());
+        for (Vacina vacina : listaVacinas) {
+            itens.add(new SelectItem(vacina, vacina.getVacinaNome()));
+        }
+        return itens;
     }
 
     public String aplicar() {
         return "registro_aplicacao?faces-redirect=true";
     }
+    
+    
 
     public List<Vacinacao> getVacinacaos() {
         return vacinacaos;
@@ -112,7 +130,7 @@ public class VacinacaoControle {
         this.vacinacaos = vacinacaos;
     }
 
-    public Vacinacao getVacinacao() {
+    public Vacinacao getVacinacao() {        
         return vacinacao;
     }
 
@@ -141,5 +159,17 @@ public class VacinacaoControle {
     public void setAplica(Aplica aplica) {
         this.aplica = aplica;
     }
+
+    public Vacina getVacina() {
+        if(vacina == null){
+            vacina = new Vacina();
+        }
+        return vacina;
+    }
+
+    public void setVacina(Vacina vacina) {
+        this.vacina = vacina;
+    }   
+    
 
 }
