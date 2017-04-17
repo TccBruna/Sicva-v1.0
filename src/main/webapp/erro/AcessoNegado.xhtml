@@ -5,37 +5,15 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Index Admin</ui:define>
-
-    <ui:define name="menu">
-        <!--Menu da Aplicação  -->
-        <nav  class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navegacao">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Logomarca</a>
-                </div>
-                <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
-                    <ul class="nav navbar-nav navbar-right ">
-                        
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        </ui:define>
-        <!--// Menu da Aplicação  -->
-    
+    <ui:define name="titulo">Acesso Negado</ui:define>
+      
         <ui:define name="corpo">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
                         <h3>Voce não tem acesso a essa pagina</h3>
                         <form method="post" class="form"
-                                  action="../j_spring_security_logout">
+                                  action="#{request.contextPath}/j_spring_security_logout">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <button type="submit" class="btn btn-default">
                                     <span class="glyphicon glyphicon-log-out"></span> 

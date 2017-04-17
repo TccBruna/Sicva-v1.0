@@ -8,7 +8,7 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="titulo">Cartão Pacientes</ui:define>
-
+       
     <ui:define name="menu">
         <ui:include src="menu_enfermeiro.xhtml"/>
     </ui:define>
@@ -30,13 +30,13 @@
                             <div class="form-group">
                                 <p:outputLabel value="Paciente" styleClass="col-sm-3" />
                                 <div class="col-sm-6">
-                                    <h:inputText class="form-control" value="#{vacinacaoControle.vacinacao.paciente.pacNome}" disabled="true"/>
+                                    <h:inputText class="form-control" value="#{aplicaVacinaControle.vacinacao.paciente.pacNome}" disabled="true"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <p:outputLabel value="Dose" styleClass="col-sm-3"/>
                                 <div class="col-sm-6">
-                                    <h:selectOneMenu   class="form-control" required="true" value="#{vacinacaoControle.aplica.aplicaDosagem}"
+                                    <h:selectOneMenu   class="form-control" required="true" value="#{aplicaVacinaControle.aplica.aplicaDosagem}"
                                                        requiredMessage="Por Favor Selecione uma Dose">
                                         <f:selectItem itemLabel="Selecione uma dose"/>
                                         <f:selectItem itemLabel="1° Dose" itemValue="1"/>
@@ -50,14 +50,14 @@
                                 <p:outputLabel value="Lote" styleClass="col-sm-3"/>
                                 <div class="col-sm-6">
                                     <p:inputText  styleClass="form-control" required="true"
-                                                  value="#{vacinacaoControle.aplica.aplicaVacinaLote}"
+                                                  value="#{aplicaVacinaControle.aplica.aplicaVacinaLote}"
                                                   pt:placeholder="Informe o lote" 
                                                   requiredMessage="Por favor informe o lote"/>
                                 </div>
                             </div> 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6">
-                                    <h:commandButton class="btn btn-default btn-block " action="#{vacinacaoControle.realizarAplicacao}" value="Salvar"/>
+                                    <h:commandButton class="btn btn-default btn-block " action="#{aplicaVacinaControle.aplicacao}" value="Salvar"/>
                                 </div>
                             </div>
                         </h:form>

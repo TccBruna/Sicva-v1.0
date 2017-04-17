@@ -33,12 +33,10 @@ import javax.faces.model.SelectItem;
 public class VacinacaoControle {
 
     private List<Vacinacao> vacinacaos;
-    private Vacinacao vacinacao = new Vacinacao();
+    private Vacinacao vacinacao;
     private VacinacaoDao vacinacaoDao;
     private Paciente paciente;
-    private Aplica aplica;
-    private Vacina vacina;
-    private AplicaDao aplicaDao;
+   
 
     public void pesquisarCartao() {
         PacienteDao pacienteDao = new PacienteDao();
@@ -58,28 +56,8 @@ public class VacinacaoControle {
 
     }
 
-    public String realizarAplicacao() {
-        aplicaDao = new AplicaDao();
-        vacinacaoDao = new VacinacaoDao();
-        try {
-            aplica.setVacinacao(vacinacao);
-            aplica.setAplicaData(new Date());
-            aplica.setEnfermeiro(new Enfermeiro("123456", new Usuario()));
-            if (aplicaDao.salvarAplica(aplica)) {
-                vacinacao.setVacinacaoStatus("OK");
-                vacinacaoDao.alterarVacinacao(vacinacao);
-                new Mensagens().MensagensSucesso("Salvo com sucesso", null);
-                return "cartao_paciente?faces-redirect=true";
-            } else {
-                return "registro_aplicacao?faces-redirect=true";
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-            new Mensagens().MensagensErroFatal("Erro na transação", null);
-            return "registro_aplicacao?faces-redirect=true";
-        }
-    }
+    public void inserir(){}
+    
 
     public boolean habilitarBotão(String status) {
         if (status.equals("PENDENTE")) {
@@ -95,17 +73,7 @@ public class VacinacaoControle {
         }        
         return 0;
     }
-    
-    public void test(){
-        if (vacinacaos == null) {
-           vacinacaos = new ArrayList<>();
-           
-        }
-        vacinacao.setVacina(vacina);
-        vacinacao.setVacinacaoStatus("Pendente");        
-        vacinacaos.add(vacinacao); 
-    }
-    
+       
     public List<SelectItem> getVacinas() {
         VacinaDao funcaoDao = new VacinaDao();
         List<Vacina> listaVacinas = funcaoDao.listarVacina();
@@ -130,7 +98,10 @@ public class VacinacaoControle {
         this.vacinacaos = vacinacaos;
     }
 
-    public Vacinacao getVacinacao() {        
+    public Vacinacao getVacinacao() {  
+        if(vacinacao == null){
+            vacinacao = new Vacinacao();
+        }
         return vacinacao;
     }
 
@@ -147,29 +118,7 @@ public class VacinacaoControle {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
-    }
-
-    public Aplica getAplica() {
-        if (aplica == null) {
-            aplica = new Aplica();
-        }
-        return aplica;
-    }
-
-    public void setAplica(Aplica aplica) {
-        this.aplica = aplica;
-    }
-
-    public Vacina getVacina() {
-        if(vacina == null){
-            vacina = new Vacina();
-        }
-        return vacina;
-    }
-
-    public void setVacina(Vacina vacina) {
-        this.vacina = vacina;
-    }   
+    }    
     
 
 }
