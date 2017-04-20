@@ -18,21 +18,22 @@ import org.hibernate.Transaction;
  * @author Rodrigo
  */
 public class AplicaDao {
-     private Session session;
+
+    private Session session;
     private Transaction tx;
     List<Aplica> listarAplica = new ArrayList<>();
 
     public boolean salvarAplica(Aplica aplica) {
         try {
             session = new FabricaDeConexao().getSessionFactory().openSession();
-            tx = session.beginTransaction();            
-            session.save(aplica);            
+            tx = session.beginTransaction();
+            session.save(aplica);
             tx.commit();
-            session.close();            
+            session.close();
             return true;
         } catch (Exception e) {
             System.out.println("" + e.getMessage());
-            tx.rollback(); 
+            tx.rollback();
             session.close();
             return false;
         }
@@ -41,10 +42,10 @@ public class AplicaDao {
     public boolean alterarAplica(Aplica aplica) {
         try {
             session = new FabricaDeConexao().getSessionFactory().openSession();
-            tx = session.beginTransaction();            
-            session.update(aplica);           
+            tx = session.beginTransaction();
+            session.update(aplica);
             tx.commit();
-            session.close();            
+            session.close();
             return true;
         } catch (Exception e) {
             System.out.println("Erro no Banco não salvou o aplica!" + e.getMessage());
@@ -52,30 +53,22 @@ public class AplicaDao {
             return false;
         }
     }
-       
 
-    public List<Aplica> listarAplica() {
+    public List<Aplica>  buscarAplicacoes(String cpf) {
         session = new FabricaDeConexao().getSessionFactory().openSession();
-        listarAplica = session.createCriteria(Aplica.class).list();
+        Query query = session.createSQLQuery("select * from vacinacao inner join vacina "
+                + "on vacina_id = vacinacao_vacina_id\n"
+                + "inner join paciente on PAC_ID = VACINACAO_PAC_ID"
+                + " left join aplica on  VACINACAO_ID = APLICA_VACINACAO_ID"
+                + " where pac_cpf = :cpf").addEntity(Aplica.class);
+        query.setString("cpf", cpf);        
+        listarAplica = query.list();
         session.close();
-        return listarAplica;
-    }
-
-    public Aplica PesquisarAplica(Integer id) {
-        try {
-            session = new FabricaDeConexao().getSessionFactory().openSession();
-            Query query = session.createSQLQuery("select * from aplica where ").addEntity(Aplica.class);
-            query.setInteger("id", id);
-            listarAplica = query.list();
-            session.close();
-            if (listarAplica.isEmpty()) {
-                return null;
-            } else {
-                return listarAplica.get(0);
-            }
-        } catch (Exception e) {
-            System.out.println("" + e.getCause().getMessage());
+        if (listarAplica.isEmpty()) {
             return null;
+        } else {
+            return listarAplica;
         }
     }
+
 }

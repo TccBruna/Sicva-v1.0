@@ -12,13 +12,14 @@ import br.com.sicva.model.Enfermeiro;
 import br.com.sicva.model.Usuario;
 import br.com.sicva.model.Vacinacao;
 import br.com.sicva.util.Mensagens;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
  *
- * @author Mauricio
+ * @author Rodrigo
  */
 @ManagedBean
 @SessionScoped
@@ -27,17 +28,18 @@ public class AplicaVacinaControle {
     private AplicaDao aplicaDao;
     private Vacinacao vacinacao;
     private VacinacaoDao vacinacaoDao;
+   
     
-    public String Aplicacao() {
+    public String aplicacao() {
         aplicaDao = new AplicaDao();
         vacinacaoDao = new VacinacaoDao();
         try {
-            aplica.setVacinacao(vacinacao);
-            aplica.setAplicaData(new Date());
+            aplica.setVacinacao(vacinacao);            
             aplica.setEnfermeiro(new Enfermeiro("123456", new Usuario()));
             if (aplicaDao.salvarAplica(aplica)) {
                 vacinacao.setVacinacaoStatus("OK");
                 vacinacaoDao.alterarVacinacao(vacinacao);
+                aplica = new Aplica();
                 new Mensagens().MensagensSucesso("Salvo com sucesso", null);
                 return "cartao_paciente?faces-redirect=true";
             } else {
@@ -50,15 +52,13 @@ public class AplicaVacinaControle {
             return "registro_aplicacao?faces-redirect=true";
         }
     }
-    
-    public String onload(){
-        return "cartao_paciente?faces-redirect=true";
-    }
-    
+        
     public Aplica getAplica() {
         if (aplica == null) {
             aplica = new Aplica();
         }
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        aplica.setAplicaData(new Date());
         return aplica;
     }
 

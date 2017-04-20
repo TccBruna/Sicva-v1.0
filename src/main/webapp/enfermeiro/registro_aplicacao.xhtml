@@ -33,6 +33,14 @@
                                     <h:inputText class="form-control" value="#{aplicaVacinaControle.vacinacao.paciente.pacNome}" disabled="true"/>
                                 </div>
                             </div>
+                             <div class="form-group">
+                                <p:outputLabel value="Data Aplicação" styleClass="col-sm-3" />
+                                <div class="col-sm-6">
+                                    <h:inputText class="form-control" value="#{aplicaVacinaControle.aplica.aplicaData}" disabled="true">
+                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
+                                    </h:inputText>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <p:outputLabel value="Dose" styleClass="col-sm-3"/>
                                 <div class="col-sm-6">

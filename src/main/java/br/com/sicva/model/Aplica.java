@@ -55,7 +55,7 @@ public class Aplica  implements java.io.Serializable {
         this.aplicaId = aplicaId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne()
     @JoinColumn(name="APLICA_ENFERMEIRO_COREN", nullable=false)
     public Enfermeiro getEnfermeiro() {
         return this.enfermeiro;

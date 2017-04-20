@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-header"><h1>Alterar Vacina</h1></div>
-                    
+
                     <p:ajaxStatus onstart="$('#myModal').modal('show')" onsuccess="$('#myModal').modal('hide')" />
                     <div id="myModal" class="modal fade" style="padding-top: 100px;" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                         <div class="modal-dialog modal-sm" role="document">
@@ -29,51 +29,53 @@
                         </div>
                     </div> 
                     <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <p:messages id="messages"  autoUpdate="true" closable="true" />
-                        <h:form  class="form-horizontal" pt:role="form"> 
-                            <div class="form-group">                            
-                                <h:outputLabel for="inptVacina" class="control-label" value="Nome da Vacina" />                            
+                        <div class="col-sm-6">
+                            <p:messages id="messages"  autoUpdate="true" closable="true" />
+                            <h:form  class="form-horizontal" pt:role="form"> 
+                                <div class="form-group">                            
+                                    <h:outputLabel for="inptVacina" class="control-label col-sm-4" value="Nome da Vacina" />                            
 
-                                <div class="input-group">    
-                                    <h:inputText value="#{vacinaControle.vacinaPesquisada}" class="form-control" id="inptVacina"
-                                                 pt:placeholder="Digite o numero da vacina"                                  
-                                                 required="true"                                          
-                                                 requiredMessage="Digite o nome da vacina.">                                   
-                                    </h:inputText>                            
+                                    <div class="input-group">    
+                                        <h:inputText value="#{vacinaControle.vacinaPesquisada}" class="form-control" id="inptVacina"
+                                                     pt:placeholder="Digite o numero da vacina"                                  
+                                                     required="true"                                          
+                                                     requiredMessage="Digite o nome da vacina.">                                   
+                                        </h:inputText>                            
 
-                                    <span class="input-group-btn">
-                                        <h:commandLink styleClass="btn btn-default "   
-                                                       actionListener="#{vacinaControle.pesquisar}" >
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </h:commandLink> 
-                                    </span>
-                                </div>
-                            </div> 
-                        </h:form>
-                    </div>
+                                        <span class="input-group-btn">
+                                            <h:commandLink styleClass="btn btn-default "   
+                                                           actionListener="#{vacinaControle.pesquisar}" >
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </h:commandLink> 
+                                        </span>
+                                    </div>
+                                </div> 
+                            </h:form>
                         </div>
+                    </div>
                     <div class="col-sm-12">
-                    <div class="col-sm-6">                        
-                        <h:form id="formVacinas" class="form-horizontal" pt:role="form">
-                            <div class="form-group">
-                                <p:outputLabel for="inpVacinaNome" styleClass=" control-label"  value="Nome"/>
+                        <div class="col-sm-6">                        
+                            <h:form id="formVacinas" class="form-horizontal" pt:role="form">
+                                <div class="form-group">
+                                    <h:outputLabel for="inpVacinaNome" styleClass=" control-label col-sm-4"  value="Nome"/>
 
-                                <p:inputText value="#{vacinaControle.vacina.vacinaNome}" required="true" 
-                                             requiredMessage="por favor digite o nome da vacina"
-                                             styleClass="form-control" placeholder="Digite o nome da vacina"  id="inpVacinaNome"
-                                             validatorMessage="O Nome da vacina deve conter entre 10 e 30 caracteres.">
-                                    <f:validateLength  maximum="30" />
-                                </p:inputText>
+                                    <div class="col-sm-8">  
+                                        <h:inputText value="#{vacinaControle.vacina.vacinaNome}" required="true" 
+                                                     requiredMessage="por favor digite o nome da vacina"
+                                                     class="form-control " pt:placeholder="Digite o nome da vacina"  id="inpVacinaNome"
+                                                     validatorMessage="O Nome da vacina deve conter entre 10 e 30 caracteres.">
+                                            <f:validateLength  maximum="30" />
+                                        </h:inputText>
+                                    </div>
 
-                            </div>                            
-                            <div class="col-sm-offset-4 col-sm-8  text-right">
-                                <h:commandButton action="#{vacinaControle.alterar}" class="btn btn-success btn-block" value="Alterar"></h:commandButton>
-                            </div>
-                        </h:form>
-                    </div>
+                                </div>                            
+                                <div class="col-sm-offset-4 col-sm-8  text-right">
+                                    <h:commandButton action="#{vacinaControle.alterar}" class="btn btn-success btn-block" value="Alterar"></h:commandButton>
+                                </div>
+                            </h:form>
                         </div>
-                    
+                    </div>
+
                 </div>
             </div> 
         </div>

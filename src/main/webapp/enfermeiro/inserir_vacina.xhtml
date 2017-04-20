@@ -17,44 +17,56 @@
             <div class="row">  
                 <div class="col-sm-12">
                     <div class="page-header"><h1>Marcar proxima Vacina</h1></div>
-                    <fieldset>
-                        <legend>Inserir Vacina</legend>
-                        <h:form class="form-inline">
-                            <div class="form-group">
-                                <h:outputLabel class="control-label"  value="Vacina: "/>
-                                <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
-                                                 class="form-control" required="true" requiredMessage="Selecione uma vacina" >
-                                    <f:selectItems value="#{vacinacaoControle.vacinas}" />
-                                    <f:converter converterId="vacinaConverter" />
-                                </h:selectOneMenu>
-                            </div>
-                            <div class="form-group">
+                    <div class="col-sm-4">                        
+                        <p:messages closable="true" />
+                        <fieldset>                        
+                            <legend>Inserir Vacina</legend>
+                            <a class="btn btn-primary btn-sm" href="cartao_paciente.xhtml">Cartão de Vacina</a>
+                            <h:form class="form-horizontal">  
+                                
+                                <div class="form-group">
+                                    <h:outputLabel value="paciente" class="control-label" />
+                                    <h:inputText value="#{vacinacaoControle.paciente.pacNome}"
+                                                 readonly="true"
+                                                 required="true" requiredMessage="Informe a faixa etária"
+                                                 class="form-control" />                                    
 
-                                <h:outputLabel value="Data Prevista" class="control-label" />
-                                <p:inputMask mask="99/99/9999" value="#{vacinacaoControle.vacinacao.vacinacaoProxDt}"
-                                             required="true" requiredMessage="Informe a data prevista"
-                                             styleClass="form-control" >
-                                    <f:convertDateTime pattern="dd/MM/yyyy"  />
-                                </p:inputMask>
-                            </div>
-                            <div class="form-group">
-                                <h:outputLabel value="Faixa Etaria" class="control-label" />
-                                <h:inputText value="#{vacinacaoControle.vacinacao.vacinacaoFaixaEteria}"
-                                             required="true" requiredMessage="Informe a faixa etária"
-                                             class="form-control" />                                    
-
-                            </div>
-
-                            <div class="form-group">
-                                <div class="text-right">
-                                    <h:commandButton  value="Inserir Vacina"
-                                                      action="#{vacinacaoControle.inserir}"
-                                                      class="btn btn-default btn-group-justified">                                            
-                                    </h:commandButton>
+                                </div>                                
+                                <div class="form-group">
+                                    <h:outputLabel class="control-label"  value="Vacina: "/>
+                                    <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
+                                                     class="form-control" required="true" requiredMessage="Selecione uma vacina" >
+                                        <f:selectItems value="#{vacinacaoControle.vacinas}" />
+                                        <f:converter converterId="vacinaConverter" />
+                                    </h:selectOneMenu>
                                 </div>
-                            </div>
-                        </h:form>      
-                    </fieldset>
+                                <div class="form-group">
+                                    <h:outputLabel value="Data Prevista" class="control-label" />
+                                    <p:inputMask mask="99/99/9999" value="#{vacinacaoControle.vacinacao.vacinacaoProxDt}"
+                                                 required="true" requiredMessage="Informe a data prevista"
+                                                 styleClass="form-control" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy"  />
+                                    </p:inputMask>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Faixa Etaria" class="control-label" />
+                                    <h:inputText value="#{vacinacaoControle.vacinacao.vacinacaoFaixaEteria}"
+                                                 required="true" requiredMessage="Informe a faixa etária"
+                                                 class="form-control" />                                    
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="text-right">
+                                        <h:commandButton  value="Inserir Vacina"
+                                                          action="#{vacinacaoControle.inserir}"
+                                                          class="btn btn-default btn-group-justified">                                            
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                            </h:form>      
+                        </fieldset>
+                    </div>
                 </div>               
             </div>
         </div>      

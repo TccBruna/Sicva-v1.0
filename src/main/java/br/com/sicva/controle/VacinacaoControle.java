@@ -10,18 +10,18 @@ import br.com.sicva.dao.PacienteDao;
 import br.com.sicva.dao.VacinaDao;
 import br.com.sicva.dao.VacinacaoDao;
 import br.com.sicva.model.Aplica;
-import br.com.sicva.model.Enfermeiro;
 import br.com.sicva.model.Paciente;
-import br.com.sicva.model.Usuario;
 import br.com.sicva.model.Vacina;
 import br.com.sicva.model.Vacinacao;
 import br.com.sicva.util.DataUtil;
 import br.com.sicva.util.Mensagens;
+import br.com.sicva.util.PaginationHelper;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 /**
@@ -29,25 +29,30 @@ import javax.faces.model.SelectItem;
  * @author Rodrigo
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class VacinacaoControle {
 
-    private List<Vacinacao> vacinacaos;
     private Vacinacao vacinacao;
     private VacinacaoDao vacinacaoDao;
     private Paciente paciente;
-   
+    private AplicaDao aplicaDao;
+    private List<Aplica> aplicacoes;
+    private List<Vacinacao> vacinacoes;
+    private DataModel items = null;
+    private PaginationHelper pagination;
 
     public void pesquisarCartao() {
         PacienteDao pacienteDao = new PacienteDao();
         try {
-            paciente = pacienteDao.PesquisarPaciente(paciente.getPacCpf());
+            paciente = pacienteDao.PesquisarPaciente(paciente.getPacCpf());            
             if (paciente == null) {
                 new Mensagens().MensagensAviso("Paciente não encontrado: ", null);
+                aplicacoes = null;
             } else {
-                vacinacaoDao = new VacinacaoDao();
-                vacinacaos = vacinacaoDao.buscarVacinacao(paciente.getPacCpf());
+                aplicaDao = new AplicaDao();
                 new Mensagens().MensagensSucesso("Paciente encontrado", null);
+                aplicacoes = aplicaDao.buscarAplicacoes(paciente.getPacCpf());
+                recreatePagination();
             }
         } catch (Exception e) {
             System.out.println("" + e);
@@ -56,15 +61,26 @@ public class VacinacaoControle {
 
     }
 
-    public void inserir(){}
+    public void inserir(){
+        if(this.paciente.getPacCpf() == null){
+            new Mensagens().MensagensAviso("Por Favor selecione um cartão de Vacina"
+                    + " na página cartão de vacina ", null);           
+        } else {
+            try {
+                vacinacaoDao = new VacinacaoDao();
+                vacinacaoDao.salvarVacinacao(vacinacao);
+                recreatePagination();;
+                new Mensagens().MensagensSucesso("Vacina Inserida com sucesso", null);
+            } catch (Exception e) {
+                System.out.println("erro na classe vacinacaoControle:"+e);
+                new Mensagens().MensagensErroFatal("Aconteceu um erro", null);
+            }
+        }
+    }
     
 
     public boolean habilitarBotão(String status) {
-        if (status.equals("PENDENTE")) {
-            return true;
-        } else {
-            return false;
-        }
+        return status.equals("PENDENTE");
     }
 
     public int getIdade(){
@@ -82,30 +98,92 @@ public class VacinacaoControle {
             itens.add(new SelectItem(vacina, vacina.getVacinaNome()));
         }
         return itens;
-    }
+    }  
+   
 
     public String aplicar() {
         return "registro_aplicacao?faces-redirect=true";
     }
+    public String novo() {
+        if(paciente == null){
+            new Mensagens().MensagensAviso("Pesquise um paciente primerio", null);
+            return "/";
+        }
+        return "inserir_vacina?faces-redirect=true";
+    }  
     
     
+     public PaginationHelper getPagination() {
+        if (pagination == null) {
+            pagination = new PaginationHelper(5) {
 
-    public List<Vacinacao> getVacinacaos() {
-        return vacinacaos;
+                @Override
+                public int getItemsCount() {
+                    return vacinacoes.size();
+                }
+
+                @Override
+                public DataModel createPageDataModel() {
+                    return new ListDataModel(vacinacaoDao.buscarAlcance(paciente.getPacCpf(),
+                            new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                }
+            };
+        }
+        return pagination;
+    }
+    
+    public DataModel getItems() {
+        if (items == null) {
+            items = getPagination().createPageDataModel();
+        }
+        return items;
     }
 
-    public void setVacinacaos(List<Vacinacao> vacinacaos) {
-        this.vacinacaos = vacinacaos;
+    private void recreateModel() {
+        items = null;
     }
 
-    public Vacinacao getVacinacao() {  
+    private void recreatePagination() {
+        pagination = null;
+    }
+
+    public String next() {
+        getPagination().nextPage();
+        recreateModel();
+        return "cartao_paciente";
+    }
+
+    public String previous() {
+        getPagination().previousPage();
+        recreateModel();
+        return "cartao_paciente";
+    }
+  
+    public List<Aplica> getAplicacoes() {
+        return aplicacoes;
+    }
+
+    public void setAplicacoes(List<Aplica> aplicacoes) {
+        this.aplicacoes = aplicacoes;
+    }
+
+    public List<Vacinacao> getVacinacoes() {
+        return vacinacoes;
+    }
+
+    public void setVacinacoes(List<Vacinacao> vacinacoes) {
+        this.vacinacoes = vacinacoes;
+    }   
+    
+
+    public Vacinacao getVacinacao() { 
         if(vacinacao == null){
             vacinacao = new Vacinacao();
         }
         return vacinacao;
     }
 
-    public void setVacinacao(Vacinacao vacinacao) {
+    public void setVacinacao(Vacinacao vacinacao) {   
         this.vacinacao = vacinacao;
     }
 
