@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -21,8 +21,7 @@ public class Enfermeiro  implements java.io.Serializable {
 
 
      private String enfermeiroCoren;
-     private Usuario usuario;
-    
+     private Usuario usuario;     
 
     public Enfermeiro() {
     }
@@ -31,12 +30,9 @@ public class Enfermeiro  implements java.io.Serializable {
     public Enfermeiro(String enfermeiroCoren, Usuario usuario) {
         this.enfermeiroCoren = enfermeiroCoren;
         this.usuario = usuario;
-    }
-    
+    }   
    
-     @Id 
-
-    
+    @Id     
     @Column(name="ENFERMEIRO_COREN", unique=true, nullable=false, length=10)
     public String getEnfermeiroCoren() {
         return this.enfermeiroCoren;
@@ -55,8 +51,6 @@ public class Enfermeiro  implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-
 
 }
 

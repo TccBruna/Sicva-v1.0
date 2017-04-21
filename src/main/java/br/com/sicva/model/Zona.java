@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -20,18 +20,18 @@ public class Zona  implements java.io.Serializable {
 
 
      private Integer zonaId;
-     private String zonaNome;
+     private String zonaNome;    
 
     public Zona() {
     }
 
+	
     public Zona(String zonaNome) {
-       this.zonaNome = zonaNome;
+        this.zonaNome = zonaNome;
     }
-   
-     @Id @GeneratedValue(strategy=IDENTITY)
-
     
+   
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="ZONA_ID", unique=true, nullable=false)
     public Integer getZonaId() {
         return this.zonaId;
@@ -50,8 +50,6 @@ public class Zona  implements java.io.Serializable {
     public void setZonaNome(String zonaNome) {
         this.zonaNome = zonaNome;
     }
-
-
 
 
 }

@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import java.util.Objects;
@@ -20,17 +20,19 @@ import javax.persistence.Table;
 public class Vacina  implements java.io.Serializable {
 
 
-     private Integer vacinaId;     
+     private Integer vacinaId;
      private String vacinaNome;
-    
+     private int vacinaqdtedose;    
 
     public Vacina() {
     }
 
 	
-    public Vacina( String vacinaNome) {        
+    public Vacina(String vacinaNome, int vacinaqdtedose) {
         this.vacinaNome = vacinaNome;
-    }   
+        this.vacinaqdtedose = vacinaqdtedose;
+    }
+    
    
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="VACINA_ID", unique=true, nullable=false)
@@ -41,6 +43,7 @@ public class Vacina  implements java.io.Serializable {
     public void setVacinaId(Integer vacinaId) {
         this.vacinaId = vacinaId;
     }
+
     
     @Column(name="VACINA_NOME", nullable=false, length=50)
     public String getVacinaNome() {
@@ -51,11 +54,22 @@ public class Vacina  implements java.io.Serializable {
         this.vacinaNome = vacinaNome;
     }
 
+    
+    @Column(name="VACINAQDTEDOSE", nullable=false)
+    public int getVacinaqdtedose() {
+        return this.vacinaqdtedose;
+    }
+    
+    public void setVacinaqdtedose(int vacinaqdtedose) {
+        this.vacinaqdtedose = vacinaqdtedose;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.vacinaId);
-        hash = 43 * hash + Objects.hashCode(this.vacinaNome);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.vacinaId);
+        hash = 37 * hash + Objects.hashCode(this.vacinaNome);
+        hash = 37 * hash + this.vacinaqdtedose;
         return hash;
     }
 
@@ -71,6 +85,9 @@ public class Vacina  implements java.io.Serializable {
             return false;
         }
         final Vacina other = (Vacina) obj;
+        if (this.vacinaqdtedose != other.vacinaqdtedose) {
+            return false;
+        }
         if (!Objects.equals(this.vacinaNome, other.vacinaNome)) {
             return false;
         }
@@ -79,10 +96,8 @@ public class Vacina  implements java.io.Serializable {
         }
         return true;
     }
-
     
-
-
+    
 
 }
 

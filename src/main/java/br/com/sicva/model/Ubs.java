@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -26,24 +26,21 @@ public class Ubs  implements java.io.Serializable {
 
      private Integer ubsId;
      private Endereco endereco;
-     private String ubsNome;
      private String ubsFone;
-     
+     private String ubsNome;     
 
     public Ubs() {
     }
 
 	
-    public Ubs(Endereco endereco, String ubsNome, String ubsFone) {
+    public Ubs(Endereco endereco, String ubsFone, String ubsNome) {
         this.endereco = endereco;
-        this.ubsNome = ubsNome;
         this.ubsFone = ubsFone;
+        this.ubsNome = ubsNome;
     }
     
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="UBS_ID", unique=true, nullable=false)
     public Integer getUbsId() {
         return this.ubsId;
@@ -64,16 +61,6 @@ public class Ubs  implements java.io.Serializable {
     }
 
     
-    @Column(name="UBS_NOME", unique=true, nullable=false, length=80)
-    public String getUbsNome() {
-        return this.ubsNome;
-    }
-    
-    public void setUbsNome(String ubsNome) {
-        this.ubsNome = ubsNome;
-    }
-
-    
     @Column(name="UBS_FONE", unique=true, nullable=false, length=15)
     public String getUbsFone() {
         return this.ubsFone;
@@ -83,6 +70,15 @@ public class Ubs  implements java.io.Serializable {
         this.ubsFone = ubsFone;
     }
 
+    
+    @Column(name="UBS_NOME", unique=true, nullable=false, length=80)
+    public String getUbsNome() {
+        return this.ubsNome;
+    }
+    
+    public void setUbsNome(String ubsNome) {
+        this.ubsNome = ubsNome;
+    }
 
 }
 

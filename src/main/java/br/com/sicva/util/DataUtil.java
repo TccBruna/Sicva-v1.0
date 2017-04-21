@@ -7,7 +7,6 @@ package br.com.sicva.util;
 
 import java.util.Calendar;
 import java.util.Date;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -22,10 +21,8 @@ public class DataUtil {
         //cria um objeto calendar com a data de Nascimento
         dtNasc.setTime(dataNascimento);
         //calcula a idade basedo no ano
-        int idade = dtAtual.get(Calendar.YEAR) - dtNasc.get(Calendar.YEAR);
-        System.out.println(dtNasc.getTime());
-        dtNasc.add(Calendar.YEAR, idade);
-        System.out.println(dtNasc.getTime());
+        int idade = dtAtual.get(Calendar.YEAR) - dtNasc.get(Calendar.YEAR);        
+        dtNasc.add(Calendar.YEAR, idade);        
         if (dtAtual.before(dtNasc)) {
             idade--;
         }

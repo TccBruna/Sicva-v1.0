@@ -1,11 +1,12 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
@@ -30,26 +31,25 @@ public class Paciente  implements java.io.Serializable {
      private Integer pacId;
      private Endereco endereco;
      private String pacCpf;
-     private String pacNomeResp;
      private Date pacDtnasc;
      private String pacNome;
+     private String pacNomeResp;
      
 
     public Paciente() {
     }
 
 	
-    public Paciente(Endereco endereco, String pacCpf, String pacNomeResp, Date pacDtnasc, String pacNome) {
+    public Paciente(Endereco endereco, String pacCpf, Date pacDtnasc, String pacNome, String pacNomeResp) {
         this.endereco = endereco;
         this.pacCpf = pacCpf;
-        this.pacNomeResp = pacNomeResp;
         this.pacDtnasc = pacDtnasc;
         this.pacNome = pacNome;
-    }
-    
+        this.pacNomeResp = pacNomeResp;
+    }    
    
-    @Id @GeneratedValue(strategy=IDENTITY)
-     @Column(name="PAC_ID", unique=true, nullable=false)
+    @Id @GeneratedValue(strategy=IDENTITY)    
+    @Column(name="PAC_ID", unique=true, nullable=false)
     public Integer getPacId() {
         return this.pacId;
     }
@@ -58,7 +58,7 @@ public class Paciente  implements java.io.Serializable {
         this.pacId = pacId;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="PAC_ENDERECO_ID", nullable=false)
     public Endereco getEndereco() {
         return this.endereco;
@@ -76,16 +76,6 @@ public class Paciente  implements java.io.Serializable {
     
     public void setPacCpf(String pacCpf) {
         this.pacCpf = pacCpf;
-    }
-
-    
-    @Column(name="PAC_NOME_RESP", unique=true, nullable=false, length=80)
-    public String getPacNomeResp() {
-        return this.pacNomeResp;
-    }
-    
-    public void setPacNomeResp(String pacNomeResp) {
-        this.pacNomeResp = pacNomeResp;
     }
 
     @Temporal(TemporalType.DATE)
@@ -108,6 +98,15 @@ public class Paciente  implements java.io.Serializable {
         this.pacNome = pacNome;
     }
 
+    
+    @Column(name="PAC_NOME_RESP", unique=true, nullable=false, length=80)
+    public String getPacNomeResp() {
+        return this.pacNomeResp;
+    }
+    
+    public void setPacNomeResp(String pacNomeResp) {
+        this.pacNomeResp = pacNomeResp;
+    }
 
 }
 

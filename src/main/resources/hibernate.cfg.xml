@@ -11,7 +11,6 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="br.com.sicva.model.Ubs"/>
-    <mapping class="br.com.sicva.model.Aplica"/>
     <mapping class="br.com.sicva.model.Endereco"/>
     <mapping class="br.com.sicva.model.Paciente"/>
     <mapping class="br.com.sicva.model.Usuario"/>

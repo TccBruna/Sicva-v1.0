@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -16,25 +16,25 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="usuario"
     ,catalog="sicva"
-    , uniqueConstraints = {@UniqueConstraint(columnNames="USUARIO_CPF")} 
+    , uniqueConstraints = @UniqueConstraint(columnNames="USUARIO_CPF") 
 )
 public class Usuario  implements java.io.Serializable {
 
 
      private Integer usuarioId;
-     private String usuarioSenha;
-     private String usuarioNome;
      private String usuarioCpf;
+     private String usuarioNome;
+     private String usuarioSenha;
      
 
     public Usuario() {
     }
 
 	
-    public Usuario(String usuarioSenha, String usuarioNome, String usuarioCpf) {
-        this.usuarioSenha = usuarioSenha;
-        this.usuarioNome = usuarioNome;
+    public Usuario(String usuarioCpf, String usuarioNome, String usuarioSenha) {
         this.usuarioCpf = usuarioCpf;
+        this.usuarioNome = usuarioNome;
+        this.usuarioSenha = usuarioSenha;
     }
     
    
@@ -49,13 +49,13 @@ public class Usuario  implements java.io.Serializable {
     }
 
     
-    @Column(name="USUARIO_SENHA", nullable=false, length=60)
-    public String getUsuarioSenha() {
-        return this.usuarioSenha;
+    @Column(name="USUARIO_CPF", unique=true, nullable=false, length=14)
+    public String getUsuarioCpf() {
+        return this.usuarioCpf;
     }
     
-    public void setUsuarioSenha(String usuarioSenha) {
-        this.usuarioSenha = usuarioSenha;
+    public void setUsuarioCpf(String usuarioCpf) {
+        this.usuarioCpf = usuarioCpf;
     }
 
     
@@ -69,15 +69,14 @@ public class Usuario  implements java.io.Serializable {
     }
 
     
-    @Column(name="USUARIO_CPF", unique=true, nullable=false, length=14)
-    public String getUsuarioCpf() {
-        return this.usuarioCpf;
+    @Column(name="USUARIO_SENHA", nullable=false, length=60)
+    public String getUsuarioSenha() {
+        return this.usuarioSenha;
     }
     
-    public void setUsuarioCpf(String usuarioCpf) {
-        this.usuarioCpf = usuarioCpf;
+    public void setUsuarioSenha(String usuarioSenha) {
+        this.usuarioSenha = usuarioSenha;
     }
-
 
 }
 

@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 01/04/2017 10:00:24 by Hibernate Tools 4.3.1
+// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -24,29 +24,30 @@ public class Endereco  implements java.io.Serializable {
 
      private Integer endId;
      private Bairro bairro;
-     private String endRua;
      private String endCep;
+     private Integer endNumero;     
      private String endComplemento;
+     private String endRua;     
+     
 
     public Endereco() {
     }
 
 	
-    public Endereco(Bairro bairro, String endRua, String endCep) {
+    public Endereco(Bairro bairro, String endCep, String endRua) {
         this.bairro = bairro;
-        this.endRua = endRua;
         this.endCep = endCep;
+        this.endRua = endRua;
     }
-    public Endereco(Bairro bairro, String endRua, String endCep, String endComplemento) {
+    public Endereco(Bairro bairro, String endCep, String endComplemento, String endRua, Integer endNumero) {
        this.bairro = bairro;
-       this.endRua = endRua;
        this.endCep = endCep;
+       this.endNumero = endNumero;
        this.endComplemento = endComplemento;
+       this.endRua = endRua;       
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="END_ID", unique=true, nullable=false)
     public Integer getEndId() {
         return this.endId;
@@ -56,7 +57,7 @@ public class Endereco  implements java.io.Serializable {
         this.endId = endId;
     }
 
-@ManyToOne
+@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="END_BAIRRO_ID", nullable=false)
     public Bairro getBairro() {
         return this.bairro;
@@ -64,16 +65,6 @@ public class Endereco  implements java.io.Serializable {
     
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
-    }
-
-    
-    @Column(name="END_RUA", nullable=false, length=80)
-    public String getEndRua() {
-        return this.endRua;
-    }
-    
-    public void setEndRua(String endRua) {
-        this.endRua = endRua;
     }
 
     
@@ -86,7 +77,16 @@ public class Endereco  implements java.io.Serializable {
         this.endCep = endCep;
     }
 
+    @Column(name="END_NUMERO", length=50)
+    public Integer getEndNumero() {
+        return endNumero;
+    }
+
     
+    public void setEndNumero(Integer endNumero) {
+        this.endNumero = endNumero;
+    }
+        
     @Column(name="END_COMPLEMENTO", length=50)
     public String getEndComplemento() {
         return this.endComplemento;
@@ -96,8 +96,15 @@ public class Endereco  implements java.io.Serializable {
         this.endComplemento = endComplemento;
     }
 
-
-
+    
+    @Column(name="END_RUA", nullable=false, length=80)
+    public String getEndRua() {
+        return this.endRua;
+    }
+    
+    public void setEndRua(String endRua) {
+        this.endRua = endRua;
+    }
 
 }
 

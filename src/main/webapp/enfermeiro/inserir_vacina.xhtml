@@ -42,19 +42,13 @@
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel value="Data Prevista" class="control-label" />
-                                    <p:inputMask mask="99/99/9999" value="#{vacinacaoControle.vacinacao.vacinacaoProxDt}"
+                                    <p:inputMask mask="99/99/9999" value="#{vacinacaoControle.vacinacao.vacinacaoDtPrevista}"
                                                  required="true" requiredMessage="Informe a data prevista"
                                                  styleClass="form-control" >
                                         <f:convertDateTime pattern="dd/MM/yyyy"  />
                                     </p:inputMask>
                                 </div>
-                                <div class="form-group">
-                                    <h:outputLabel value="Faixa Etaria" class="control-label" />
-                                    <h:inputText value="#{vacinacaoControle.vacinacao.vacinacaoFaixaEteria}"
-                                                 required="true" requiredMessage="Informe a faixa etária"
-                                                 class="form-control" />                                    
-
-                                </div>
+                                
 
                                 <div class="form-group">
                                     <div class="text-right">

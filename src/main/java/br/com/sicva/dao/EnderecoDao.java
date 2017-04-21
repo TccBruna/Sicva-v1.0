@@ -10,6 +10,7 @@ import br.com.sicva.model.Endereco;
 import br.com.sicva.util.Mensagens;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -79,6 +80,9 @@ public class EnderecoDao {
                     + "where PAC_ID = :id").addEntity(Endereco.class);
             query.setInteger("id", id);
             listarEndereco = query.list();
+            for(Endereco e: listarEndereco){
+                Hibernate.initialize(e.getBairro());
+            }
             session.close();
             if (listarEndereco.isEmpty()) {
                 return null;

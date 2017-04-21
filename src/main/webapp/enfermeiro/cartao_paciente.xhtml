@@ -24,7 +24,7 @@
                             <p:messages  />
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="col-sm-12">
                             <h:form   class="form-horizontal" pt:role="form"> 
                                 <div class="col-sm-10">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>                    
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         <h:form>
                             <div class="page-header"><h4>Vacinas<small>&#160;Vacinas inseridas no cartão do paciente </small> </h4></div>
                             <h:commandButton class="btn btn-primary" value="Inserir Vacina no cartao"
@@ -78,41 +78,48 @@
                                                         
                             <p:dataTable var="itens"
                                          emptyMessage="Nenhum registro encontrado..."
-                                         value="#{vacinacaoControle.aplicacoes}"
+                                         value="#{vacinacaoControle.vacinacoes}"
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowKey="#{itens.aplicaId}" selectionMode="single"                               
+                                         rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
                                          paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
-
-                                <p:column  >
+                                <p:column>
                                     <f:facet name="header">Vacina</f:facet>
-                                    <h:outputText value="#{itens.vacinacao.vacina.vacinaNome}" />
-                                </p:column>
-                                <p:column  >
-                                    <f:facet name="header">Status</f:facet>
-                                    <h:outputText value="#{itens.vacinacao.vacinacaoStatus}" />
+                                    <h:outputText value="#{itens.vacina.vacinaNome}" />
                                 </p:column>  
-                                <p:column  >
-                                    <f:facet name="header">data</f:facet>
-                                    <h:outputText value="#{itens.vacinacao.vacinacaoProxDt}" >
+                                 <p:column>
+                                    <f:facet name="header">Enfermeiro</f:facet>
+                                    <h:outputText value="#{itens.enfermeiro.usuario.usuarioNome}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column> 
+                                <p:column>
+                                    <f:facet name="header">Data Marcada</f:facet>
+                                    <h:outputText value="#{itens.vacinacaoDtPrevista}" >
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
                                 </p:column> 
                                  <p:column  >
-                                    <f:facet name="header">dose</f:facet>
-                                    <h:outputText value="#{itens.aplicaDosagem}" >                                        
+                                    <f:facet name="header">Data Aplicacao</f:facet>
+                                    <h:outputText value="#{itens.vacinacaoDtAplic}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column> 
+                                 <p:column>
+                                    <f:facet name="header">Dosagem</f:facet>
+                                    <h:outputText value="#{itens.vacinacaoDosagem}" >                                        
                                     </h:outputText>
                                 </p:column> 
                                 <p:column  >
-                                    <f:facet name="header">Faixa Etaria</f:facet>
-                                    <h:outputText value="#{itens.vacinacao.vacinacaoFaixaEteria}" />
+                                    <f:facet name="header">Status</f:facet>
+                                    <h:outputText value="#{itens.vacinacaoStatus}" />
                                 </p:column>
 
                                 <p:column >
                                     <f:facet class="hidden-print" name="header">Opção</f:facet>
                                     <h:commandButton class="btn btn-success hidden-print" value="Aplicar" 
                                                      action="#{vacinacaoControle.aplicar}"
-                                                     rendered="#{vacinacaoControle.habilitarBotão(itens.vacinacao.vacinacaoStatus)}">
-                                        <f:setPropertyActionListener value="#{itens.vacinacao}" target="#{aplicaVacinaControle.vacinacao}" />
+                                                     rendered="#{vacinacaoControle.habilitarBotão(itens.vacinacaoStatus)}">
+                                        <f:setPropertyActionListener value="#{itens}" target="#{vacinacaoControle.vacinacao}" />
                                     </h:commandButton>
                                 </p:column> 
 
@@ -124,6 +131,7 @@
                                 </f:facet>      
                             </p:dataTable>                                
 
+ 
                         </h:form>
 
                     </div>
