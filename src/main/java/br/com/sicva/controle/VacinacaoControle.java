@@ -114,8 +114,7 @@ public class VacinacaoControle {
             dataSomada = util.addDia(dataSomada, dia);
             dataSomada = util.addMes(dataSomada, mes);
             dataSomada = util.addAno(dataSomada, ano);
-            novaVacinacao.setVacinacaoId(null);
-            novaVacinacao.setVacinacaoDtAplicacao(dataSomada);
+            novaVacinacao.setVacinacaoId(null);            
             novaVacinacao.setVacinacaoProxDt(dataSomada);
             novaVacinacao.setVacinacaoStatus("PENDENTE");            
             novaVacinacao.setPaciente(paciente);
