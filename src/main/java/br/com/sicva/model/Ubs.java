@@ -2,6 +2,7 @@ package br.com.sicva.model;
 // Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -79,6 +80,41 @@ public class Ubs  implements java.io.Serializable {
     public void setUbsNome(String ubsNome) {
         this.ubsNome = ubsNome;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.ubsId);
+        hash = 23 * hash + Objects.hashCode(this.ubsFone);
+        hash = 23 * hash + Objects.hashCode(this.ubsNome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ubs other = (Ubs) obj;
+        if (!Objects.equals(this.ubsFone, other.ubsFone)) {
+            return false;
+        }
+        if (!Objects.equals(this.ubsNome, other.ubsNome)) {
+            return false;
+        }
+        if (!Objects.equals(this.ubsId, other.ubsId)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }
 

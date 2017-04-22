@@ -2,6 +2,8 @@ package br.com.sicva.model;
 // Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
 
 
+import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,7 +44,7 @@ public class Enfermeiro  implements java.io.Serializable {
         this.enfermeiroCoren = enfermeiroCoren;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(cascade = CascadeType.ALL )
     @JoinColumn(name="ENFERMEIRO_USUARIO_ID", nullable=false)
     public Usuario getUsuario() {
         return this.usuario;
@@ -51,6 +53,33 @@ public class Enfermeiro  implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.enfermeiroCoren);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Enfermeiro other = (Enfermeiro) obj;
+        if (!Objects.equals(this.enfermeiroCoren, other.enfermeiroCoren)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }
 

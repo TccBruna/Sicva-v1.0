@@ -69,7 +69,7 @@
                         <h:form>
                             <div class="page-header"><h4>Vacinas<small>&#160;Vacinas inseridas no cartão do paciente </small> </h4></div>
                             <h:commandButton class="btn btn-primary" value="Inserir Vacina no cartao"
-                                             action="#{vacinacaoControle.novo}">                                
+                                             action="#{vacinacaoControle.aplicar}">                                
                             </h:commandButton>                           
                         </h:form>
 
@@ -81,7 +81,7 @@
                                          value="#{vacinacaoControle.vacinacoes}"
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
-                                         paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
+                                         paginator="true" rows="10" rowsPerPageTemplate="10,15,20">
                                 <p:column>
                                     <f:facet name="header">Vacina</f:facet>
                                     <h:outputText value="#{itens.vacina.vacinaNome}" />
@@ -93,14 +93,14 @@
                                     </h:outputText>
                                 </p:column> 
                                 <p:column>
-                                    <f:facet name="header">Data Marcada</f:facet>
-                                    <h:outputText value="#{itens.vacinacaoDtPrevista}" >
+                                        <f:facet name="header">Data Aplicacão</f:facet>
+                                    <h:outputText value="#{itens.vacinacaoDtAplicacao}" >
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
                                 </p:column> 
                                  <p:column  >
-                                    <f:facet name="header">Data Aplicacao</f:facet>
-                                    <h:outputText value="#{itens.vacinacaoDtAplic}" >
+                                    <f:facet name="header">Próxima Data</f:facet>
+                                    <h:outputText value="#{itens.vacinacaoProxDt}" >
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
                                 </p:column> 

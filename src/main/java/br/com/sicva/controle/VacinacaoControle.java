@@ -5,6 +5,7 @@
  */
 package br.com.sicva.controle;
 
+import br.com.sicva.dao.EnfermeiroDao;
 import br.com.sicva.dao.PacienteDao;
 import br.com.sicva.dao.VacinaDao;
 import br.com.sicva.dao.VacinacaoDao;
@@ -16,7 +17,9 @@ import br.com.sicva.model.Vacinacao;
 import br.com.sicva.util.DataUtil;
 import br.com.sicva.util.Mensagens;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
@@ -33,20 +36,21 @@ public class VacinacaoControle {
     private VacinacaoDao vacinacaoDao;
     private Paciente paciente;
     private List<Vacinacao> vacinacoes;
-   
-    
+    private int dia;
+    private int mes;
+    private int ano;
 
     public void pesquisarCartao() {
         PacienteDao pacienteDao = new PacienteDao();
         try {
-            paciente = pacienteDao.PesquisarPaciente(paciente.getPacCpf());  
+            paciente = pacienteDao.PesquisarPaciente(paciente.getPacCpf());
             vacinacoes = null;
             if (paciente == null) {
-                new Mensagens().MensagensAviso("Paciente não encontrado: ", null);                 
+                new Mensagens().MensagensAviso("Paciente não encontrado: ", null);
             } else {
                 vacinacaoDao = new VacinacaoDao();
                 vacinacoes = vacinacaoDao.buscarVacinacao(paciente.getPacCpf());
-                new Mensagens().MensagensSucesso("Paciente encontrado", null);                    
+                new Mensagens().MensagensSucesso("Paciente encontrado", null);
             }
         } catch (Exception e) {
             System.out.println("" + e);
@@ -55,39 +59,88 @@ public class VacinacaoControle {
 
     }
 
-    public void inserir(){
-        if(this.paciente.getPacCpf() == null){
+    public void inserir() {
+        if (this.paciente.getPacCpf() == null) {
             new Mensagens().MensagensAviso("Por Favor selecione um cartão de Vacina"
-                    + " na página cartão de vacina ", null);           
+                    + " na página cartão de vacina ", null);
         } else {
             try {
-                vacinacaoDao = new VacinacaoDao(); 
-                vacinacao.setVacinacaoStatus("PENDENTE");  
-                vacinacao.setPaciente(paciente);
-                if(vacinacaoDao.salvarVacinacao(vacinacao)){               
-                new Mensagens().MensagensSucesso("Vacina Inserida com sucesso", null);
-                }else{
-                    new Mensagens().MensagensAviso("Vacina não pode ser Inserida", null);
-                } 
+                int qtdDose = TotalDose(vacinacao.getVacina().getVacinaId());
+                vacinacaoDao = new VacinacaoDao();
+                if (vacinacao.getVacinacaoId() == null || vacinacao.getVacinacaoId() == 0) {
+                    vacinacao.setVacinacaoStatus("IMUNIZADO");
+                    vacinacao.setPaciente(paciente);
+                    vacinacao.setVacinacaoDtAplicacao(new Date());
+                    vacinacao.setVacinacaoDosagem("Dose "+qtdDose);
+                    if (vacinacaoDao.salvarVacinacao(vacinacao)) {
+                        System.out.println(vacinacao.getVacina().getVacinaqdtedose());
+                        System.out.println(""+qtdDose);
+                        if (qtdDose < vacinacao.getVacina().getVacinaqdtedose()) {
+                        gerarPróxima(vacinacao, qtdDose);
+                        }
+                        vacinacao = new Vacinacao();
+                        new Mensagens().MensagensSucesso("Vacina Inserida com sucesso", null);
+                    } else {
+                        new Mensagens().MensagensAviso("Vacina não pode ser Inserida", null);
+                    }
+                } else {
+                    vacinacao.setVacinacaoStatus("IMUNIZADO");
+                    vacinacao.setVacinacaoDtAplicacao(new Date());
+                    if (vacinacaoDao.alterarVacinacao(vacinacao)) {
+                        System.out.println(vacinacao.getVacina().getVacinaqdtedose());
+                        System.out.println(""+qtdDose);
+                        if (qtdDose < vacinacao.getVacina().getVacinaqdtedose()) {
+                        gerarPróxima(vacinacao, qtdDose);
+                        }
+                        vacinacao = new Vacinacao();
+                        new Mensagens().MensagensSucesso("Vacina Atualizada com sucesso", null);
+                    } else {
+                        new Mensagens().MensagensAviso("Vacina não pode ser Atualizada", null);
+                    }
+                }
             } catch (Exception e) {
-                System.out.println("erro na classe vacinacaoControle:"+e);
+                System.out.println("erro na classe vacinacaoControle:" + e);
                 new Mensagens().MensagensErroFatal("Aconteceu um erro", null);
             }
         }
+        pesquisarCartao();
     }
-    
+
+    public void gerarPróxima(Vacinacao vacinacao, int dose) {       
+        Vacinacao novaVacinacao = new Vacinacao();
+        try {
+            DataUtil util = new DataUtil();
+            Date dataSomada = new Date();
+            dataSomada = util.addDia(dataSomada, dia);
+            dataSomada = util.addMes(dataSomada, mes);
+            dataSomada = util.addAno(dataSomada, ano);
+            novaVacinacao.setVacinacaoId(null);
+            novaVacinacao.setVacinacaoDtAplicacao(dataSomada);
+            novaVacinacao.setVacinacaoProxDt(dataSomada);
+            novaVacinacao.setVacinacaoStatus("PENDENTE");            
+            novaVacinacao.setPaciente(paciente);
+            novaVacinacao.setVacina(vacinacao.getVacina());
+            novaVacinacao.setVacinacaoDosagem("Dose "+(dose+1));
+            vacinacaoDao.salvarVacinacao(novaVacinacao);  
+            System.out.println("estamos aqui no gerar");        
+        } catch (Exception e) {
+            System.err.println("erro ao gerar o cartão: "+e);
+        }
+       
+
+    }
 
     public boolean habilitarBotão(String status) {
         return status.equals("PENDENTE");
     }
 
-    public int getIdade(){
-        if(paciente.getPacDtnasc() != null)  {         
-          return new DataUtil().calcularIdade(paciente.getPacDtnasc());
-        }        
+    public int getIdade() {
+        if (paciente.getPacDtnasc() != null) {
+            return new DataUtil().calcularIdade(paciente.getPacDtnasc());
+        }
         return 0;
     }
-       
+
     public List<SelectItem> getVacinas() {
         VacinaDao funcaoDao = new VacinaDao();
         List<Vacina> listaVacinas = funcaoDao.listarVacina();
@@ -96,63 +149,47 @@ public class VacinacaoControle {
             itens.add(new SelectItem(vacina, vacina.getVacinaNome()));
         }
         return itens;
-    }  
-   
-    public String aplicacao() {
-        
-        vacinacaoDao = new VacinacaoDao();
-        try {
-           
-            if (vacinacaoDao.alterarVacinacao(vacinacao)) {
-                vacinacao.setVacinacaoStatus("OK");               
-                
-                new Mensagens().MensagensSucesso("Salvo com sucesso", null);
-                return "cartao_paciente?faces-redirect=true";
-            } else {
-                return "registro_aplicacao?faces-redirect=true";
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-            new Mensagens().MensagensErroFatal("Erro na transação", null);
-            return "registro_aplicacao?faces-redirect=true";
-        }
     }
-        
+
+    public List<SelectItem> getEnfermeiros() {
+        EnfermeiroDao enfermeiroDao = new EnfermeiroDao();
+        List<Enfermeiro> listaEnfermeiro = enfermeiroDao.listarEnfermeiro();
+        final List<SelectItem> itens = new ArrayList<>(listaEnfermeiro.size());
+        for (Enfermeiro e : listaEnfermeiro) {
+            itens.add(new SelectItem(e, e.getUsuario().getUsuarioNome()));
+        }
+        return itens;
+    }
 
     public String aplicar() {
-        return "registro_aplicacao?faces-redirect=true";
-    }
-    public String novo() {
-        if(paciente.getPacCpf() == null){
+        if (paciente.getPacCpf() == null) {
             new Mensagens().MensagensAviso("Pesquise um paciente primerio", null);
             return "/";
-        }else{
-            return "inserir_vacina?faces-redirect=true";
+        } else {
+            return "aplicar_vacina?faces-redirect=true";
         }
     }
-    
-    public Integer TotalDose(Integer id){
-       return vacinacaoDao.QtdVacinacao(id);
+
+    public Integer TotalDose(Integer id) {
+        return vacinacaoDao.QtdVacinacao(id);
     }
-    
+
     public List<Vacinacao> getVacinacoes() {
         return vacinacoes;
     }
 
     public void setVacinacoes(List<Vacinacao> vacinacoes) {
         this.vacinacoes = vacinacoes;
-    }   
-    
+    }
 
-    public Vacinacao getVacinacao() { 
-        if(vacinacao == null){
+    public Vacinacao getVacinacao() {
+        if (vacinacao == null) {
             vacinacao = new Vacinacao();
         }
         return vacinacao;
     }
 
-    public void setVacinacao(Vacinacao vacinacao) {   
+    public void setVacinacao(Vacinacao vacinacao) {
         this.vacinacao = vacinacao;
     }
 
@@ -165,7 +202,42 @@ public class VacinacaoControle {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
-    }    
-    
+    }
+
+    public Map<String, Object> getDias() {
+        return DataUtil.getDias();
+    }
+
+    public Map<String, Object> getMeses() {
+        return DataUtil.getMeses();
+    }
+
+    public Map<String, Object> getAnos() {
+        return DataUtil.getAnos();
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
 
 }

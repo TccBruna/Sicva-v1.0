@@ -7,8 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <ui:define name="titulo">Cartão Pacientes</ui:define>
-       
+    <ui:define name="titulo">Aplicar Vacina</ui:define>    
     <ui:define name="menu">
         <ui:include src="menu_enfermeiro.xhtml"/>
     </ui:define>
@@ -17,59 +16,107 @@
         <div class="container">
             <div class="row">  
                 <div class="col-sm-12">
-                    <div class="page-header"><h1>Registrar Aplicação de  Vacina</h1></div>
-                    <div class="col-sm-6">
-                        <p:messages autoUpdate="true" />
-                        <h:form class="form form-horizontal" pt:role="form" >
-                            <div class="form-group">
-                                <p:outputLabel value="Enfermeiro" styleClass="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <h:inputText class="form-control" disabled="true" value="Enfermeiro Logado"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <p:outputLabel value="Paciente" styleClass="col-sm-3" />
-                                <div class="col-sm-6">
-                                    <h:inputText class="form-control" value="#{aplicaVacinaControle.vacinacao.paciente.pacNome}" disabled="true"/>
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <p:outputLabel value="Data Aplicação" styleClass="col-sm-3" />
-                                <div class="col-sm-6">
-                                    <h:inputText class="form-control" value="#{aplicaVacinaControle.aplica.aplicaData}" disabled="true">
-                                        <f:convertDateTime pattern="dd/MM/YYYY"/>
-                                    </h:inputText>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <p:outputLabel value="Dose" styleClass="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <h:selectOneMenu   class="form-control" required="true" value="#{aplicaVacinaControle.aplica.aplicaDosagem}"
-                                                       requiredMessage="Por Favor Selecione uma Dose">
-                                        <f:selectItem itemLabel="Selecione uma dose"/>
-                                        <f:selectItem itemLabel="1° Dose" itemValue="1"/>
-                                        <f:selectItem itemLabel="2° Dose" itemValue="2"/>
-                                        <f:selectItem itemLabel="3° Dose" itemValue="3"/>
-                                        <f:selectItem itemLabel="Reforço" itemValue="4"/>
+                    <div class="page-header"><h1>Aplicar Vacina</h1></div>
+                    <p:messages closable="true" />                       
+                        <a class="btn btn-primary btn-sm" href="cartao_paciente.xhtml">Cartão de Vacina</a>
+                        <h:form id="form" class="form-horizontal" pt:role="form">  
+                            <div class="col-sm-6"> 
+                                <div class="form-group">
+                                    <div class="col-xs-10">
+                                    <h:outputLabel value="paciente" class="control-label" />
+                                    <h:inputText value="#{vacinacaoControle.paciente.pacNome}"
+                                                 readonly="true"
+                                                 required="true" requiredMessage="Informe a faixa etária"
+                                                 class="form-control" /> 
+                                    </div>
+                                </div>                                
+                                                             
+                                <div class="form-group">
+                                    <div class="col-xs-8">
+                                    <h:outputLabel class="control-label"  value="Enfermeiro: "/>
+                                    <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.enfermeiro}"
+                                                     class="form-control" required="true" requiredMessage="Selecione uma vacina" >
+                                        <f:selectItems value="#{vacinacaoControle.enfermeiros}" />
+                                        <f:converter converterId="enfermeiroConverter" />
                                     </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-8">
+                                    <h:outputLabel class="control-label"  value="Ubs: "/>
+                                    <h:selectOneMenu   value="#{vacinacaoControle.vacinacao.ubs}"
+                                                     class="form-control" required="true" requiredMessage="Selecione uma ubs" >
+                                        <f:selectItem itemLabel="Selecione uma ubs" itemValue="#{null}"/>
+                                        <f:selectItems value="#{ubsControle.ubs}" />
+                                        <f:converter converterId="ubsConverter" />
+                                    </h:selectOneMenu>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="col-sm-6" >
+                                 <div class="form-group">
+                                    <div class="col-xs-8">
+                                    <h:outputLabel class="control-label"  value="Vacina: "/>
+                                    <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
+                                                     class="form-control" required="true" requiredMessage="Selecione uma vacina" >
+                                        <f:selectItems value="#{vacinacaoControle.vacinas}" />
+                                        <f:converter converterId="vacinaConverter" />
+                                    </h:selectOneMenu>
+                                    </div>
+                                </div>  
+                                  <div class="form-group">
+                                    <h:outputLabel class="control-label"  value="Período: "/>                                   
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <h:outputLabel value="dia" style="padding-right:6px;"
+                                                           styleClass="control-label" />
+                                            <h:selectOneMenu class="form-control" value="#{vacinacaoControle.dia}"  id="day" >                                                       
+                                                <f:selectItem itemValue="#{0}" itemLabel="dia" />
+                                                <f:selectItems value="#{vacinacaoControle.dias}" />                                            
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h:outputLabel value="mês"
+                                                           style="padding-right:6px; padding-left:6px;"
+                                                           styleClass="control-label" />
+                                            <h:selectOneMenu class="form-control" value="#{vacinacaoControle.mes}" id="month" >                                                     
+                                                <f:selectItem itemValue="#{0}" itemLabel="mês" />
+                                                <f:selectItems value="#{vacinacaoControle.meses}" />                                            
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h:outputLabel value="ano"
+                                                           style="padding-right:6px; padding-left:6px;"
+                                                           styleClass="control-label" />
+                                            <h:selectOneMenu class="form-control" value="#{vacinacaoControle.ano}"  id="year" >                                                       
+                                                <f:selectItem itemValue="#{0}" itemLabel="ano" />
+                                                <f:selectItems value="#{vacinacaoControle.anos}" />                                            
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                    <h:outputLabel value="Lote" class="control-label" />
+                                    <h:inputText  value="#{vacinacaoControle.vacinacao.vacinacaoLoteVaci}"                                                  
+                                                  styleClass="form-control"  required="true"
+                                                  requiredMessage="Informe o lote"
+                                                  pt:placeholder="Informe o lote da Vacina" >                                       
+                                    </h:inputText>
+                                    </div>
+                                </div>                                 
+
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <h:commandButton  value="Inserir Vacina"
+                                                          action="#{vacinacaoControle.inserir}"
+                                                          class="btn btn-success btn-block">                                            
+                                        </h:commandButton>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <p:outputLabel value="Lote" styleClass="col-sm-3"/>
-                                <div class="col-sm-6">
-                                    <p:inputText  styleClass="form-control" required="true"
-                                                  value="#{aplicaVacinaControle.aplica.aplicaVacinaLote}"
-                                                  pt:placeholder="Informe o lote" 
-                                                  requiredMessage="Por favor informe o lote"/>
-                                </div>
-                            </div> 
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-6">
-                                    <h:commandButton class="btn btn-default btn-block " action="#{aplicaVacinaControle.aplicacao}" value="Salvar"/>
-                                </div>
-                            </div>
-                        </h:form>
-                    </div>   
+                        </h:form>                                
                 </div>               
             </div>
         </div>      

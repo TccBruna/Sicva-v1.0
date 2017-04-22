@@ -34,19 +34,19 @@ public class Vacinacao  implements java.io.Serializable {
      private String vacinacaoStatus;
      private String vacinacaoLoteVaci;
      private String vacinacaoDosagem;
-     private Date vacinacaoDtPrevista;
+     private Date vacinacaoDtAplicacao;
 
     public Vacinacao() {
     }
 
 	
-    public Vacinacao(Paciente paciente, Vacina vacina, String vacinacaoStatus, Date vacinacaoDtPrevista) {
+    public Vacinacao(Paciente paciente, Vacina vacina, String vacinacaoStatus, Date vacinacaoDtAplicacao) {
         this.paciente = paciente;
         this.vacina = vacina;
         this.vacinacaoStatus = vacinacaoStatus;
-        this.vacinacaoDtPrevista = vacinacaoDtPrevista;
+        this.vacinacaoDtAplicacao = vacinacaoDtAplicacao;
     }
-    public Vacinacao(Enfermeiro enfermeiro, Paciente paciente, Ubs ubs, Vacina vacina, Date vacinacaoProxDt, String vacinacaoStatus, String vacinacaoLoteVaci, String vacinacaoDosagem, Date vacinacaoDtPrevista) {
+    public Vacinacao(Enfermeiro enfermeiro, Paciente paciente, Ubs ubs, Vacina vacina, Date vacinacaoProxDt, String vacinacaoStatus, String vacinacaoLoteVaci, String vacinacaoDosagem, Date vacinacaoDtAplicacao) {
        this.enfermeiro = enfermeiro;
        this.paciente = paciente;
        this.ubs = ubs;
@@ -55,7 +55,7 @@ public class Vacinacao  implements java.io.Serializable {
        this.vacinacaoStatus = vacinacaoStatus;
        this.vacinacaoLoteVaci = vacinacaoLoteVaci;
        this.vacinacaoDosagem = vacinacaoDosagem;
-       this.vacinacaoDtPrevista = vacinacaoDtPrevista;
+       this.vacinacaoDtAplicacao = vacinacaoDtAplicacao;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -111,12 +111,12 @@ public class Vacinacao  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="VACINACAO_DT_APLIC", length=10)
-    public Date getVacinacaoDtAplic() {
+    @Column(name="VACINACAO_PROX_DT", length=10)
+    public Date getVacinacaoProxDt() {
         return this.vacinacaoProxDt;
     }
     
-    public void setVacinacaoDtAplic(Date vacinacaoProxDt) {
+    public void setVacinacaoProxDt(Date vacinacaoProxDt) {
         this.vacinacaoProxDt = vacinacaoProxDt;
     }
 
@@ -151,13 +151,13 @@ public class Vacinacao  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="VACINACAO_DT_PREVISTA", nullable=false, length=10)
-    public Date getVacinacaoDtPrevista() {
-        return this.vacinacaoDtPrevista;
+    @Column(name="VACINACAO_DT_APLICACAO", length=10)
+    public Date getVacinacaoDtAplicacao() {
+        return this.vacinacaoDtAplicacao;
     }
     
-    public void setVacinacaoDtPrevista(Date vacinacaoDtPrevista) {
-        this.vacinacaoDtPrevista = vacinacaoDtPrevista;
+    public void setVacinacaoDtAplicacao(Date vacinacaoDtAplicacao) {
+        this.vacinacaoDtAplicacao = vacinacaoDtAplicacao;
     }
 
 

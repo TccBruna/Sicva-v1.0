@@ -10,8 +10,11 @@ import br.com.sicva.dao.UsuarioDao;
 import br.com.sicva.model.Enfermeiro;
 import br.com.sicva.model.Usuario;
 import br.com.sicva.util.Mensagens;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -128,5 +131,7 @@ public class EnfermeiroControle {
     public void setCorenPesquisado(String CorenPesquisado) {
         this.CorenPesquisado = CorenPesquisado;
     }
+    
+     
 
 }

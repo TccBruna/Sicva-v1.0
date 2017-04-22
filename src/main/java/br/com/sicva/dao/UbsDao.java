@@ -6,7 +6,7 @@
 package br.com.sicva.dao;
 
 import br.com.sicva.conexao.FabricaDeConexao;
-import br.com.sicva.model.Bairro;
+import br.com.sicva.model.Ubs;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -17,35 +17,34 @@ import org.hibernate.Transaction;
  *
  * @author Rodrigo
  */
-public class BairroDao {
+public class UbsDao {
     private Session session;
     private Transaction tx;
-    List<Bairro> listaBairro = new ArrayList<>();
+    List<Ubs> listaUbs = new ArrayList<>();
     
-    public List<Bairro> listarBairro() {
+    public List<Ubs> listarUbs() {
         session = new FabricaDeConexao().getSessionFactory().openSession();
-        listaBairro = session.createCriteria(Bairro.class).list();
+        listaUbs = session.createCriteria(Ubs.class).list();
         session.close();
-        return listaBairro;
+        return listaUbs;
     }
-    
-    public Bairro PesquisarPorNome(String nome) {
-        try {
+
+    public Ubs pesquisarPorId(Integer value) {
+         try {
             session = new FabricaDeConexao().getSessionFactory().openSession();
-            Query query = session.createSQLQuery("select * from bairro where BAIRRO_NOME = :nome")
-                    .addEntity(Bairro.class);
-            query.setString("nome", nome);
-            listaBairro = query.list();
+            Query query = session.createSQLQuery("select * from ubs where UBS_ID = :id")
+                    .addEntity(Ubs.class);
+            query.setInteger("id", value);
+            listaUbs = query.list();
             session.close();
-            if (listaBairro.isEmpty()) {
+            if (listaUbs.isEmpty()) {
                 return null;
             } else {
-                return listaBairro.get(0);
+                return listaUbs.get(0);
             }
         } catch (Exception e) {
             System.out.println("" + e.getCause().getMessage());
             return null;
         }
     }
-    
 }

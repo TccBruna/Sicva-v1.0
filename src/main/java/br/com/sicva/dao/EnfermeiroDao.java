@@ -9,6 +9,7 @@ import br.com.sicva.conexao.FabricaDeConexao;
 import br.com.sicva.model.Enfermeiro;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -56,7 +57,7 @@ public class EnfermeiroDao {
 
     public List<Enfermeiro> listarEnfermeiro() {
         session = new FabricaDeConexao().getSessionFactory().openSession();
-        listarEnfermeiro = session.createCriteria(Enfermeiro.class).list();
+        listarEnfermeiro = session.createCriteria(Enfermeiro.class).list();        
         session.close();
         return listarEnfermeiro;
     }
