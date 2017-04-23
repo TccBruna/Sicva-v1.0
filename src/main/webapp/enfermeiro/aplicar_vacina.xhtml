@@ -60,7 +60,7 @@
                                     <h:outputLabel class="control-label"  value="Vacina: "/>
                                     <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
                                                      class="form-control" required="true" requiredMessage="Selecione uma vacina" >
-                                        <f:selectItems value="#{vacinacaoControle.vacinas}" />
+                                        <f:selectItems value="#{vacinacaoControle.vacinas}"  />
                                         <f:converter converterId="vacinaConverter" />
                                     </h:selectOneMenu>
                                     </div>
@@ -72,7 +72,6 @@
                                             <h:outputLabel value="dia" style="padding-right:6px;"
                                                            styleClass="control-label" />
                                             <h:selectOneMenu class="form-control" value="#{vacinacaoControle.dia}"  id="day" >                                                       
-                                                <f:selectItem itemValue="#{0}" itemLabel="dia" />
                                                 <f:selectItems value="#{vacinacaoControle.dias}" />                                            
                                             </h:selectOneMenu>
                                         </div>
@@ -81,7 +80,6 @@
                                                            style="padding-right:6px; padding-left:6px;"
                                                            styleClass="control-label" />
                                             <h:selectOneMenu class="form-control" value="#{vacinacaoControle.mes}" id="month" >                                                     
-                                                <f:selectItem itemValue="#{0}" itemLabel="mês" />
                                                 <f:selectItems value="#{vacinacaoControle.meses}" />                                            
                                             </h:selectOneMenu>
                                         </div>
@@ -90,7 +88,6 @@
                                                            style="padding-right:6px; padding-left:6px;"
                                                            styleClass="control-label" />
                                             <h:selectOneMenu class="form-control" value="#{vacinacaoControle.ano}"  id="year" >                                                       
-                                                <f:selectItem itemValue="#{0}" itemLabel="ano" />
                                                 <f:selectItems value="#{vacinacaoControle.anos}" />                                            
                                             </h:selectOneMenu>
                                         </div>

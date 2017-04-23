@@ -7,7 +7,6 @@ package br.com.sicva.dao;
 
 import br.com.sicva.conexao.FabricaDeConexao;
 import br.com.sicva.model.Vacinacao;
-import br.com.sicva.util.Mensagens;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +31,7 @@ public class VacinacaoDao {
             tx = session.beginTransaction();
             session.save(vacinacao);
             tx.commit();
-            session.close();
-            new Mensagens().MensagensSucesso("Vacinacao salva com sucesso", null);
+            session.close();            
             return true;
         } catch (Exception e) {
             System.out.println("Erro no Banco!" + e.getMessage());
@@ -48,8 +46,7 @@ public class VacinacaoDao {
             tx = session.beginTransaction();
             session.update(vacinacao);
             tx.commit();
-            session.close();
-            new Mensagens().MensagensSucesso("Vacinacao alterada com sucesso", null);
+            session.close();            
             return true;
         } catch (Exception e) {
             System.out.println("Erro no Banco!" + e.getMessage());
@@ -80,11 +77,12 @@ public class VacinacaoDao {
             return listaVacinacao;
         }
     }     
-      public Integer QtdVacinacao(Integer id) {
+      public Integer QtdVacinacao(Integer vac_id,Integer pac_id) {
         session = new FabricaDeConexao().getSessionFactory().openSession();
         Query query = session.createSQLQuery("select count(*) from vacinacao where vacinacao_vacina_id"
-                + " = :id");
-        query.setInteger("id", id);
+                + " = :vac_id and VACINACAO_PAC_ID = :pac_id");
+        query.setInteger("vac_id", vac_id);
+        query.setInteger("pac_id", pac_id);
         Integer total  = ((BigInteger) query.uniqueResult()).intValue();
         session.close();        
         return total;        

@@ -65,32 +65,28 @@ public class VacinacaoControle {
                     + " na página cartão de vacina ", null);
         } else {
             try {
-                int qtdDose = TotalDose(vacinacao.getVacina().getVacinaId());
+                int qtdDose = TotalDose(vacinacao.getVacina().getVacinaId(), paciente.getPacId());
                 vacinacaoDao = new VacinacaoDao();
                 if (vacinacao.getVacinacaoId() == null || vacinacao.getVacinacaoId() == 0) {
                     vacinacao.setVacinacaoStatus("IMUNIZADO");
                     vacinacao.setPaciente(paciente);
                     vacinacao.setVacinacaoDtAplicacao(new Date());
-                    vacinacao.setVacinacaoDosagem("Dose "+qtdDose);
+                    vacinacao.setVacinacaoDosagem("Dose " + qtdDose);
                     if (vacinacaoDao.salvarVacinacao(vacinacao)) {
-                        System.out.println(vacinacao.getVacina().getVacinaqdtedose());
-                        System.out.println(""+qtdDose);
                         if (qtdDose < vacinacao.getVacina().getVacinaqdtedose()) {
-                        gerarPróxima(vacinacao, qtdDose);
+                            gerarPróxima(vacinacao, qtdDose);
                         }
                         vacinacao = new Vacinacao();
-                        new Mensagens().MensagensSucesso("Vacina Inserida com sucesso", null);
+                        new Mensagens().MensagensSucesso("Vacina aplicada com sucesso", null);
                     } else {
-                        new Mensagens().MensagensAviso("Vacina não pode ser Inserida", null);
+                        new Mensagens().MensagensAviso("Vacina não pode ser aplicada", null);
                     }
                 } else {
                     vacinacao.setVacinacaoStatus("IMUNIZADO");
                     vacinacao.setVacinacaoDtAplicacao(new Date());
                     if (vacinacaoDao.alterarVacinacao(vacinacao)) {
-                        System.out.println(vacinacao.getVacina().getVacinaqdtedose());
-                        System.out.println(""+qtdDose);
                         if (qtdDose < vacinacao.getVacina().getVacinaqdtedose()) {
-                        gerarPróxima(vacinacao, qtdDose);
+                            gerarPróxima(vacinacao, qtdDose);
                         }
                         vacinacao = new Vacinacao();
                         new Mensagens().MensagensSucesso("Vacina Atualizada com sucesso", null);
@@ -103,10 +99,10 @@ public class VacinacaoControle {
                 new Mensagens().MensagensErroFatal("Aconteceu um erro", null);
             }
         }
-        pesquisarCartao();
+        vacinacoes = vacinacaoDao.buscarVacinacao(paciente.getPacCpf());
     }
 
-    public void gerarPróxima(Vacinacao vacinacao, int dose) {       
+    public void gerarPróxima(Vacinacao vacinacao, int dose) {
         Vacinacao novaVacinacao = new Vacinacao();
         try {
             DataUtil util = new DataUtil();
@@ -114,23 +110,31 @@ public class VacinacaoControle {
             dataSomada = util.addDia(dataSomada, dia);
             dataSomada = util.addMes(dataSomada, mes);
             dataSomada = util.addAno(dataSomada, ano);
-            novaVacinacao.setVacinacaoId(null);            
+            novaVacinacao.setVacinacaoId(null);
             novaVacinacao.setVacinacaoProxDt(dataSomada);
-            novaVacinacao.setVacinacaoStatus("PENDENTE");            
+            novaVacinacao.setVacinacaoStatus("PENDENTE");
             novaVacinacao.setPaciente(paciente);
             novaVacinacao.setVacina(vacinacao.getVacina());
-            novaVacinacao.setVacinacaoDosagem("Dose "+(dose+1));
-            vacinacaoDao.salvarVacinacao(novaVacinacao);  
-            System.out.println("estamos aqui no gerar");        
+            novaVacinacao.setVacinacaoDosagem("Dose " + (dose + 1));
+            vacinacaoDao.salvarVacinacao(novaVacinacao);
+            System.out.println("estamos aqui no gerar");
         } catch (Exception e) {
-            System.err.println("erro ao gerar o cartão: "+e);
+            System.err.println("erro ao gerar o cartão: " + e);
         }
-       
 
     }
 
     public boolean habilitarBotão(String status) {
         return status.equals("PENDENTE");
+    }
+
+    public boolean habilitarItem(Vacina vacina) {
+        if (paciente.getPacId() != null) {
+            int total = TotalDose(vacina.getVacinaId(), paciente.getPacId());
+            return total >= vacina.getVacinaqdtedose();
+        } else {
+            return false;
+        }
     }
 
     public int getIdade() {
@@ -145,7 +149,7 @@ public class VacinacaoControle {
         List<Vacina> listaVacinas = funcaoDao.listarVacina();
         final List<SelectItem> itens = new ArrayList<>(listaVacinas.size());
         for (Vacina vacina : listaVacinas) {
-            itens.add(new SelectItem(vacina, vacina.getVacinaNome()));
+            itens.add(new SelectItem(vacina, vacina.getVacinaNome(), null, habilitarItem(vacina)));
         }
         return itens;
     }
@@ -169,8 +173,8 @@ public class VacinacaoControle {
         }
     }
 
-    public Integer TotalDose(Integer id) {
-        return vacinacaoDao.QtdVacinacao(id);
+    public Integer TotalDose(Integer vac_id, Integer pac_id) {
+        return vacinacaoDao.QtdVacinacao(vac_id, pac_id);
     }
 
     public List<Vacinacao> getVacinacoes() {
