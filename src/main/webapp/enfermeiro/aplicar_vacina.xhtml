@@ -52,7 +52,7 @@
                                         <f:selectItem itemLabel="Selecione uma ubs" itemValue="#{null}"/>
                                         <f:selectItems value="#{ubsControle.ubs}" />
                                         <f:converter converterId="ubsConverter" />
-                                    </h:selectOneMenu>
+                                    </h:selectOneMenu>                                     
                                 </div>
                             </div>
 
@@ -61,11 +61,17 @@
                             <div class="form-group">
                                 <div class="col-xs-8">
                                     <h:outputLabel class="control-label"  value="Vacina: "/>
+                                    <h:link outcome="#" pt:data-toggle="tooltip" 
+                                            pt:data-placement="right"
+                                            title="as vacinas que atingirem a quantidade necessária seram desabilitadas."                                        
+                                            style="color: orange;" > Info
+                                        <span class="glyphicon glyphicon-info-sign" ></span>
+                                    </h:link> 
                                     <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
                                                      class="form-control" required="true" requiredMessage="Selecione uma vacina" >
                                         <f:selectItems value="#{vacinacaoControle.vacinas}"  />
-                                        <f:converter converterId="vacinaConverter" />
-                                    </h:selectOneMenu>
+                                        <f:converter converterId="vacinaConverter" />                                    
+                                    </h:selectOneMenu>                                    
                                 </div>
                             </div>  
                             <div class="form-group">
@@ -81,7 +87,7 @@
                             </div>
                             <div class="form-group" >
                                 <h:outputLabel class="control-label"  value="Período até a próxima vacina: "
-                                                />
+                                               />
                                 <h:link outcome="#" pt:data-toggle="tooltip" 
                                         pt:data-placement="right"
                                         title="Informe o quanto é o período até que seja
@@ -95,7 +101,7 @@
                                                        styleClass="control-label" />
                                         <h:selectOneMenu class="form-control" value="#{vacinacaoControle.dia}"  id="day"
                                                          pt:data-toggle="tooltip" pt:data-placement="bottom"
-                                        title="dias até próxima vacina.">                                                       
+                                                         title="dias até próxima vacina.">                                                       
                                             <f:selectItems value="#{vacinacaoControle.dias}" />                                            
                                         </h:selectOneMenu>
                                     </div>
@@ -105,7 +111,7 @@
                                                        styleClass="control-label" />
                                         <h:selectOneMenu class="form-control" value="#{vacinacaoControle.mes}" id="month" 
                                                          pt:data-toggle="tooltip" pt:data-placement="bottom"
-                                        title="Meses até próxima vacina.">                                                     
+                                                         title="Meses até próxima vacina.">                                                     
                                             <f:selectItems value="#{vacinacaoControle.meses}" />                                            
                                         </h:selectOneMenu>
                                     </div>
@@ -115,13 +121,13 @@
                                                        styleClass="control-label" />
                                         <h:selectOneMenu class="form-control" value="#{vacinacaoControle.ano}"  id="year" 
                                                          pt:data-toggle="tooltip" pt:data-placement="bottom"
-                                        title="Anos até próxima vacina.">                                                       
+                                                         title="Anos até próxima vacina.">                                                       
                                             <f:selectItems value="#{vacinacaoControle.anos}" />                                            
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
                             </div>
-                                                             
+
 
                             <div class="form-group">
                                 <div class="col-sm-6">
