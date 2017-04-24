@@ -18,102 +18,121 @@
                 <div class="col-sm-12">
                     <div class="page-header"><h1>Aplicar Vacina</h1></div>
                     <p:messages closable="true" />                       
-                        <a class="btn btn-primary btn-sm" href="cartao_paciente.xhtml">Cartão de Vacina</a>
-                        <h:form id="form" class="form-horizontal" pt:role="form">  
-                            <div class="col-sm-6"> 
-                                <div class="form-group">
-                                    <div class="col-xs-10">
+                    <a class="btn btn-primary btn-sm" href="cartao_paciente.xhtml">Cartão de Vacina</a>
+
+
+                    <h:form id="form" class="form-horizontal" pt:role="form">  
+                        <div class="col-sm-6"> 
+                            <div class="form-group">
+                                <div class="col-xs-10">
                                     <h:outputLabel value="paciente" class="control-label" />
                                     <h:inputText value="#{vacinacaoControle.paciente.pacNome}"
                                                  readonly="true"
                                                  required="true" requiredMessage="Informe a faixa etária"
+                                                 pt:data-toggle="tooltip" pt:data-placement="top" title="Nome do Paciente."                                                   
                                                  class="form-control" /> 
-                                    </div>
-                                </div>                                
-                                                             
-                                <div class="form-group">
-                                    <div class="col-xs-8">
+                                </div>
+                            </div>                                
+
+                            <div class="form-group">
+                                <div class="col-xs-8">
                                     <h:outputLabel class="control-label"  value="Enfermeiro: "/>
                                     <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.enfermeiro}"
                                                      class="form-control" required="true" requiredMessage="Selecione uma vacina" >
                                         <f:selectItems value="#{vacinacaoControle.enfermeiros}" />
                                         <f:converter converterId="enfermeiroConverter" />
                                     </h:selectOneMenu>
-                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-xs-8">
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-8">
                                     <h:outputLabel class="control-label"  value="Ubs: "/>
-                                    <h:selectOneMenu   value="#{vacinacaoControle.vacinacao.ubs}"
-                                                     class="form-control" required="true" requiredMessage="Selecione uma ubs" >
+                                    <h:selectOneMenu    value="#{vacinacaoControle.vacinacao.ubs}"
+                                                        class="form-control" required="true" requiredMessage="Selecione uma ubs" >
                                         <f:selectItem itemLabel="Selecione uma ubs" itemValue="#{null}"/>
                                         <f:selectItems value="#{ubsControle.ubs}" />
                                         <f:converter converterId="ubsConverter" />
                                     </h:selectOneMenu>
-                                    </div>
                                 </div>
-                              
                             </div>
-                            <div class="col-sm-6" >
-                                 <div class="form-group">
-                                    <div class="col-xs-8">
+
+                        </div>
+                        <div class="col-sm-6" >
+                            <div class="form-group">
+                                <div class="col-xs-8">
                                     <h:outputLabel class="control-label"  value="Vacina: "/>
                                     <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
                                                      class="form-control" required="true" requiredMessage="Selecione uma vacina" >
                                         <f:selectItems value="#{vacinacaoControle.vacinas}"  />
                                         <f:converter converterId="vacinaConverter" />
                                     </h:selectOneMenu>
-                                    </div>
-                                </div>  
-                                  <div class="form-group">
-                                    <h:outputLabel class="control-label"  value="Período: "/>                                   
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-4">
-                                            <h:outputLabel value="dia" style="padding-right:6px;"
-                                                           styleClass="control-label" />
-                                            <h:selectOneMenu class="form-control" value="#{vacinacaoControle.dia}"  id="day" >                                                       
-                                                <f:selectItems value="#{vacinacaoControle.dias}" />                                            
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <h:outputLabel value="mês"
-                                                           style="padding-right:6px; padding-left:6px;"
-                                                           styleClass="control-label" />
-                                            <h:selectOneMenu class="form-control" value="#{vacinacaoControle.mes}" id="month" >                                                     
-                                                <f:selectItems value="#{vacinacaoControle.meses}" />                                            
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <h:outputLabel value="ano"
-                                                           style="padding-right:6px; padding-left:6px;"
-                                                           styleClass="control-label" />
-                                            <h:selectOneMenu class="form-control" value="#{vacinacaoControle.ano}"  id="year" >                                                       
-                                                <f:selectItems value="#{vacinacaoControle.anos}" />                                            
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-xs-6">
+                            </div>  
+                            <div class="form-group">
+                                <div class="col-xs-6">
                                     <h:outputLabel value="Lote" class="control-label" />
-                                    <h:inputText  value="#{vacinacaoControle.vacinacao.vacinacaoLoteVaci}"                                                  
-                                                  styleClass="form-control"  required="true"
-                                                  requiredMessage="Informe o lote"
-                                                  pt:placeholder="Informe o lote da Vacina" >                                       
+                                    <h:inputText   value="#{vacinacaoControle.vacinacao.vacinacaoLoteVaci}"                                                  
+                                                   styleClass="form-control"  required="true"
+                                                   requiredMessage="Informe o lote"
+                                                   pt:data-toggle="tooltip" pt:data-placement="top" title="Lote da Vacina."
+                                                   pt:placeholder="Informe o lote da Vacina" >                                       
                                     </h:inputText>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <h:outputLabel class="control-label"  value="Período até a próxima vacina: "
+                                                />
+                                <h:link outcome="#" pt:data-toggle="tooltip" 
+                                        pt:data-placement="right"
+                                        title="Informe o quanto é o período até que seja
+                                        tomada a próxima vacina que está sendo aplicada agora."                                        
+                                        style="color: orange;" > Info
+                                    <span class="glyphicon glyphicon-info-sign" ></span>
+                                </h:link>                                               
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        <h:outputLabel value="dia" style="padding-right:6px;"
+                                                       styleClass="control-label" />
+                                        <h:selectOneMenu class="form-control" value="#{vacinacaoControle.dia}"  id="day"
+                                                         pt:data-toggle="tooltip" pt:data-placement="bottom"
+                                        title="dias até próxima vacina.">                                                       
+                                            <f:selectItems value="#{vacinacaoControle.dias}" />                                            
+                                        </h:selectOneMenu>
                                     </div>
-                                </div>                                 
-
-                                <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <h:commandButton  value="Inserir Vacina"
-                                                          action="#{vacinacaoControle.inserir}"
-                                                          class="btn btn-success btn-block">                                            
-                                        </h:commandButton>
+                                    <div class="col-sm-4">
+                                        <h:outputLabel value="mês"
+                                                       style="padding-right:6px; padding-left:6px;"
+                                                       styleClass="control-label" />
+                                        <h:selectOneMenu class="form-control" value="#{vacinacaoControle.mes}" id="month" 
+                                                         pt:data-toggle="tooltip" pt:data-placement="bottom"
+                                        title="Meses até próxima vacina.">                                                     
+                                            <f:selectItems value="#{vacinacaoControle.meses}" />                                            
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h:outputLabel value="ano"
+                                                       style="padding-right:6px; padding-left:6px;"
+                                                       styleClass="control-label" />
+                                        <h:selectOneMenu class="form-control" value="#{vacinacaoControle.ano}"  id="year" 
+                                                         pt:data-toggle="tooltip" pt:data-placement="bottom"
+                                        title="Anos até próxima vacina.">                                                       
+                                            <f:selectItems value="#{vacinacaoControle.anos}" />                                            
+                                        </h:selectOneMenu>
                                     </div>
                                 </div>
                             </div>
-                        </h:form>                                
+                                                             
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <h:commandButton  value="Inserir Vacina"
+                                                      action="#{vacinacaoControle.inserir}"
+                                                      class="btn btn-success btn-block">                                            
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>                                
                 </div>               
             </div>
         </div>      
