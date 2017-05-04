@@ -2,9 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="QtdVacinasUbs" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="e9a5ce82-9ec1-4ebe-8ef8-f640a81dd6b3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="35"/>
+	<property name="ireport.y" value="34"/>
 	<parameter name="DataInicial" class="java.util.Date"/>
 	<parameter name="DataFinal" class="java.util.Date"/>
+	<parameter name="logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      bairro.`BAIRRO_NOME` AS bairro_BAIRRO_NOME,
@@ -100,7 +101,7 @@ GROUP BY Vacina_Id;]]>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006666" uuid="45a2b178-d7f4-4cdc-808c-3fa51e2c69ea"/>
 				<image>
 					<reportElement x="36" y="20" width="161" height="54" uuid="ba6f058f-09e0-41ea-beb4-f5a902a66dc4"/>
-					<imageExpression><![CDATA["C:\\Users\\Mauricio\\Documents\\NetBeansProjects\\Sicva-v1.0\\src\\main\\webapp\\relatorios\\logo_original.png"]]></imageExpression>
+					<imageExpression><![CDATA[$P{logo}+"logo_original.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement x="207" y="31" width="346" height="33" forecolor="#FFFFFF" uuid="bd86a799-128a-4790-a541-99f01e27a8f4"/>

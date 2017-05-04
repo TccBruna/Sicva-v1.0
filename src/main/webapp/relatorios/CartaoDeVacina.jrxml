@@ -16,6 +16,7 @@
 	<parameter name="cpf" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select VACINA_NOME ,VACINACAO_STATUS ,
          VACINACAO_DT_APLICACAO , VACINACAO_PROX_DT ,
@@ -56,7 +57,7 @@
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006666" uuid="45a2b178-d7f4-4cdc-808c-3fa51e2c69ea"/>
 				<image>
 					<reportElement x="36" y="20" width="161" height="54" uuid="ba6f058f-09e0-41ea-beb4-f5a902a66dc4"/>
-					<imageExpression><![CDATA["C:\\Users\\Mauricio\\Documents\\NetBeansProjects\\Sicva-v1.0\\src\\main\\webapp\\relatorios\\logo_original.png"]]></imageExpression>
+					<imageExpression><![CDATA[$P{logo}+"logo_original.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement x="207" y="31" width="346" height="33" forecolor="#FFFFFF" uuid="bd86a799-128a-4790-a541-99f01e27a8f4"/>

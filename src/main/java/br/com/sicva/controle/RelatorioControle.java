@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import net.sf.jasperreports.engine.JRException;
 
 /**
@@ -34,9 +35,12 @@ public class RelatorioControle {
 
     public void gerarCartaoPdf() throws IOException, JRException {
         criadorDeRelatorios = new CriadorDeRelatorios();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         parametros = new HashMap<>();
         parametros.put("cpf", cpfPaciente);
+        parametros.put("logo", facesContext.getExternalContext().getRealPath("")+"relatorios/");
         String Caminho = "/relatorios/CartaoDeVacina.jasper";        
+        
         PacienteDao pacienteDao = new PacienteDao();
         Paciente paciente = pacienteDao.PesquisarPaciente(cpfPaciente);
         if (paciente == null) {
@@ -51,9 +55,11 @@ public class RelatorioControle {
     
     public void qtdVacinasUbs(){
         criadorDeRelatorios = new CriadorDeRelatorios();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         parametros = new HashMap<>();
         parametros.put("DataInicial", DataIninial);
         parametros.put("DataFinal", DataFinal);
+        parametros.put("logo", facesContext.getExternalContext().getRealPath("")+"relatorios/");
         String Caminho = "/relatorios/QtdVacinasUbs.jasper";       
         try {
             criadorDeRelatorios.CriarRelatorio(ConexaoMySql.getConexaoMySQL(), parametros, Caminho);

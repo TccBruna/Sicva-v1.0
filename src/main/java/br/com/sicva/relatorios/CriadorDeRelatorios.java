@@ -28,7 +28,7 @@ public class CriadorDeRelatorios {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         InputStream reportStream = facesContext.getExternalContext().getResourceAsStream(Caminho);
-        response.setContentType("application/pdf");
+        response.setContentType("application/pdf");        
         response.setHeader("Content-disposition", "inline;filename=relatorio.pdf");
 
         try (ServletOutputStream servletOutputStream = response.getOutputStream()) {
