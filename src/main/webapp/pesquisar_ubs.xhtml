@@ -1,0 +1,60 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titulo">Pesquisar Ubs</ui:define>    
+    <ui:define name="css">
+        
+    </ui:define>
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header"><h1>Encontrar Ubs</h1></div>
+                    <div class="col-sm-6 ">                        
+                        <img src="resources/imgs/bairros_manaus.png" class="img-responsive" alt="" usemap="#Map" />
+                        <map name="Map" id="Map">
+                            <area alt="Zona Leste" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Zona Leste" href="#Leste"  shape="poly" coords="409,99,391,104,371,98,367,103,364,107,263,121,267,130,267,144,259,160,252,169,243,174,229,192,215,200,215,207,210,220,200,225,195,228,199,233,203,243,208,250,228,239,236,245,242,236,246,238,250,247,253,256,257,267,249,268,245,267,245,271,247,275,246,281,255,285,260,289,258,283,263,277,261,271,271,276,273,272,271,260,270,256,275,257,279,270,296,268,313,261,323,236,339,232,338,227,322,215,358,225,386,211,413,175,418,164" />
+                            <area alt="Zona Sul" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Zona Sul" href="#Sul" shape="poly" coords="196,233,206,251,228,243,233,245,245,241,250,249,254,262,251,267,243,266,244,272,245,279,245,285,256,288,256,294,248,302,238,307,226,310,215,312,207,316,210,323,197,321,188,316,177,313,165,304,158,298,162,291,153,295,141,290,137,279,136,260,150,262,162,262,165,251,174,243,184,242" />
+                            <area alt="Zona Centro  Sul"  data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Zona Centro Sul" href="#CentroSul" shape="poly" coords="213,202,214,211,210,217,202,223,196,225,193,234,186,241,179,243,174,242,169,245,164,251,162,259,155,262,147,261,140,260,136,258,136,256,142,248,141,241,133,239,131,234,131,225,138,223,137,214,143,201,148,196,147,167,161,165,165,162,186,163,194,162,200,164,203,164,203,179,201,186,196,190,196,201,198,206" />
+                            <area alt="Zona Norte" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Zona Norte" href="#Norte" shape="poly" coords="205,3,223,120,232,119,235,125,261,123,266,133,265,144,262,151,253,166,246,171,238,177,230,189,221,196,210,201,202,206,198,203,197,193,203,183,203,173,201,161,193,160,189,162,180,161,173,162,167,162,158,164,151,165,147,165,146,159,153,150,155,146,151,141,149,139,147,134,142,130,138,122,136,111,137,103,146,89,156,82,159,72,157,64,152,61,145,56,138,53,135,49,133,8,160,11,162,17,183,4" />
+                            <area alt="Zona Centro Oeste" data-toggle="tooltip" data-trigger="hover" data-placement="right" title="Zona Centro Oeste" href="#CentroOeste" shape="poly" coords="146,167,146,183,147,191,145,197,140,204,137,221,130,226,130,233,130,236,124,235,115,231,108,223,104,213,100,206,92,204,89,196,92,185,94,177,111,177,119,172,127,168" />
+                            <area alt="Zona Oeste" data-toggle="tooltip" data-trigger="hover" data-placement="right"  title="Zona Oeste" href="#Oeste" shape="poly" coords="132,10,133,50,153,64,157,75,155,84,139,98,136,111,136,126,145,136,152,144,136,168,124,170,113,175,106,178,97,176,91,189,104,217,113,230,119,234,136,241,141,244,140,252,137,267,136,275,132,280,128,283,118,268,109,266,95,256,87,254,80,240,73,228,62,217,59,207,51,200,40,189,31,189,25,171,29,170,35,172,31,163,36,162,42,154,46,153,46,144,45,137,48,132,56,135,62,132,54,127,53,121,52,118,52,111,67,116,69,113,65,108,61,107,58,106,53,108,48,108,45,105,41,99,38,90,39,85,39,74,39,61,41,51,49,47,57,47,63,45,70,45,78,43,87,35,105,28,115,17,124,11,130,10" />
+                        </map>                        
+                    </div>
+                    <div class="col-sm-6">
+
+                        <a href="#Norte" style="font-family: Arial" lang="PT">Zona Norte (<strong><span style="color: yellow">Amarelo</span></strong>)<br />
+                        </a>
+                        <a  href="#Leste" style="font-family: Arial" lang="PT">Zona Leste (<strong><span style="color: blue">Azul-escuro</span></strong>)<br />
+                        </a>
+                        <a href="#Sul" style="font-family: Arial" lang="PT">Zona Sul (<strong><span style="color: red">Vermelho</span></strong>)<br />
+                        </a>
+                        <a href="#CentroSul" style="font-family: Arial" lang="PT">Zona Centro-Sul (<strong><span style="color: #ff9900">Cor-de-laranja</span></strong>)<br />
+                        </a>
+                        <a href="#Oeste" style="font-family: Arial" lang="PT">Zona Oeste (<strong><span style="color: #99ccff"><font color="#0099ff">Azul-claro</font></span></strong>)<br />
+                        </a>
+                        <a href="#CentroOeste" style="font-family: Arial" lang="PT">Zona Centro-Oeste (<strong><span style="color: lime">Verde</span></strong>)
+                        </a>
+
+                    </div>
+                </div>               
+            </div>
+        </div>
+       
+
+    </ui:define>
+     <ui:define name="script">
+        <script type="text/javascript">
+            $(document).mousemove(function (e) {
+                var mouseX = e.pageX - $('#Map').offset().left + 30;
+                var mouseY = e.pageY - $('#Map').offset().top + 325;
+                $('.tooltip').css({'top': mouseY, 'left': mouseX}).fadeIn('slow');
+            });
+        </script>
+    </ui:define>
+</ui:composition>

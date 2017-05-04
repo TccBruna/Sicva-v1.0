@@ -44,8 +44,18 @@
 
                             <p:column headerText="Cpf" filterBy="#{user.usuarioCpf}" filterStyle="display: none">
                                 <h:outputText value="#{user.usuarioCpf}" />
-                            </p:column>                      
+                            </p:column> 
+                            
+                            <p:column headerText="Status" filterBy="#{user.usuarioStatus}" filterStyle="display: none">
+                                <h:outputText value="#{user.usuarioStatus}" />
+                            </p:column> 
 
+                            <p:column headerText="Habilitar">
+                                <h:commandButton value="#{usuarioControle.valueButton(user.usuarioStatus)}"
+                                                 action="#{usuarioControle.habilitar(user)}"
+                                                 class="btn btn-primary" >
+                                </h:commandButton>
+                            </p:column>
                             <f:facet name="footer">
                                 <div style="text-align: left; float: left">
                                     <p:ajaxStatus id="ajaxStatusPanel"> 

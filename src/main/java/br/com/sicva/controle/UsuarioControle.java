@@ -32,7 +32,7 @@ public class UsuarioControle {
             if (usuarioDao.salvarUsuario(usuario)) {
                 usuario = new Usuario();
                 new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
-            }else{
+            } else {
                 new Mensagens().MensagensErro("Não foi possivel salvar os dados", null);
             }
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class UsuarioControle {
             if (usuarioDao.alterarUsuario(usuario)) {
                 usuario = new Usuario();
                 new Mensagens().MensagensSucesso("Dados alterados com sucesso", null);
-            }else{
+            } else {
                 new Mensagens().MensagensErro("Não foi possivel alterar os dados", null);
             }
         } catch (Exception e) {
@@ -65,6 +65,34 @@ public class UsuarioControle {
                 new Mensagens().MensagensAviso("Usuário não encontrado", null);
             } else {
                 new Mensagens().MensagensSucesso("Usuario Encontrado", null);
+            }
+        } catch (Exception e) {
+            new Mensagens().MensagensErroFatal("erro na transação", "" + e);
+        }
+    }
+
+    public String valueButton(String Status) {
+        if (Status.equals("DESATIVADO")) {
+            return "ATIVAR";
+        }
+        return "DESATIVAR";
+    }
+
+    public void habilitar(Usuario user) {
+        showMsgErros = true;
+        try {
+            usuarioDao = new UsuarioDao();
+            usuario = user;
+            if (user.getUsuarioStatus().equals("ATIVADO")) {
+                usuario.setUsuarioStatus("DESATIVADO");
+            } else {
+                usuario.setUsuarioStatus("ATIVADO");
+            }
+            if (usuarioDao.alterarUsuario(usuario)) {
+                usuario = new Usuario();
+                new Mensagens().MensagensSucesso("Dados alterados com sucesso", null);
+            } else {
+                new Mensagens().MensagensErro("Não foi possivel alterar os dados", null);
             }
         } catch (Exception e) {
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);

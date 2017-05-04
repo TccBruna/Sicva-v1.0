@@ -15,7 +15,7 @@
         <!-- Bootstrap -->
         <link href="#{request.contextPath}/resources/css/spacelab.min.css" rel="stylesheet"></link>
         <link href="#{request.contextPath}/resources/css/estilo.css" rel="stylesheet"></link>
-
+        <ui:insert name="css" ></ui:insert>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -41,11 +41,13 @@
                 </div>
                 <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
                     <ul class="nav navbar-nav navbar-right ">
-                        <li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/index.xhtml">Início</a></li>                         
+                        <li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/index.xhtml">Início</a></li>
+                        <li><a class="hvr-bounce-to-bottom" href="#feature" >Imprimir Cartão</a></li>
+                        <li><a class="hvr-bounce-to-bottom" href="#work-shop" >Procurar Ubs</a></li> 
                         <li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/admin/home.xhtml">Página do admin</a></li>     
                         <li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/atendente/home.xhtml">Página do atendente</a></li>     
                         <li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/enfermeiro/home.xhtml">Página do enfermeiro</a></li>
-                        <li><a class="hvr-bounce-to-bottom" href="#{request.contextPath}/login.xhtml">Login</a></li> 
+                        <li><a class="hvr-bounce-to-bottom" href="#" data-target="#login" data-toggle="modal" >Login</a></li> 
                     </ul>
                 </div>
             </div>
@@ -55,21 +57,30 @@
         
          <ui:insert name="corpo"/>   
 
-
-        <footer >
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-10">Informações gerais sobre a empresa, endereço e-mail e etc:</div>
-                    <div class="col-sm-2 text-right">
-                        <small>Desenvolvido por:</small><br/>
-                        <strong>Maria , Bruna e Rodrigo </strong>
-                    </div>
-                </div> 
-            </div>     
-        </footer>
+         <br/>
+         <br/>
+        <!--Footer-->
+    <footer id="footer" class="footer">
+      <div class="container text-center">
+    
+      <h3>Sistema de controle de Vacina!</h3>
+    
+    
+      <ul class="social-links">
+        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-dribbble fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-linkedin fa-fw"></i></a></li>
+      </ul>
+        ©Tcc 2017.        
+      </div>
+    </footer>
+    <!--/ Footer-->
         <script src="#{request.contextPath}/resources/js/jquery.min.js"></script>   
         <script src="#{request.contextPath}/resources/js/bootstrap.min.js"></script>
-        <script src="#{request.contextPath}/resources/js/main.js"></script>  
+        <script src="#{request.contextPath}/resources/js/main.js"></script> 
+        <ui:insert name="script" ></ui:insert>
     </h:body>
 </html>
 

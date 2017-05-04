@@ -25,7 +25,7 @@ public class Usuario  implements java.io.Serializable {
      private String usuarioCpf;
      private String usuarioNome;
      private String usuarioSenha;
-     
+     private String usuarioStatus;
 
     public Usuario() {
     }
@@ -77,6 +77,16 @@ public class Usuario  implements java.io.Serializable {
     public void setUsuarioSenha(String usuarioSenha) {
         this.usuarioSenha = usuarioSenha;
     }
+
+    @Column(name="USUARIO_STATUS", nullable=false, length=10)
+    public String getUsuarioStatus() {
+        return usuarioStatus;
+    }
+
+    public void setUsuarioStatus(String usuarioStatus) {
+        this.usuarioStatus = usuarioStatus;
+    }    
+    
 
 }
 

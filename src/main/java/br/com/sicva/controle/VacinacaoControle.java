@@ -116,8 +116,7 @@ public class VacinacaoControle {
             novaVacinacao.setPaciente(paciente);
             novaVacinacao.setVacina(vacinacao.getVacina());
             novaVacinacao.setVacinacaoDosagem("Dose " + (dose + 1));
-            vacinacaoDao.salvarVacinacao(novaVacinacao);
-            System.out.println("estamos aqui no gerar");
+            vacinacaoDao.salvarVacinacao(novaVacinacao);            
         } catch (Exception e) {
             System.err.println("erro ao gerar o cartão: " + e);
         }

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="QtdVacinasUbs" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="e9a5ce82-9ec1-4ebe-8ef8-f640a81dd6b3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="35"/>
+	<parameter name="DataInicial" class="java.util.Date"/>
+	<parameter name="DataFinal" class="java.util.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     bairro.`BAIRRO_NOME` AS bairro_BAIRRO_NOME,
+     ubs.`UBS_NOME` AS ubs_UBS_NOME,
+     vacina.`VACINA_NOME` AS vacina_VACINA_NOME,
+     COUNT(`VACINA_ID`) AS total,
+     zona.`ZONA_NOME` AS zona_ZONA_NOME
+FROM
+     `bairro` bairro INNER JOIN `endereco` endereco ON bairro.`BAIRRO_ID` = endereco.`END_BAIRRO_ID`
+     INNER JOIN `ubs` ubs ON endereco.`END_ID` = ubs.`UBS_ENDERECO_ID`
+     INNER JOIN `vacinacao` vacinacao ON ubs.`UBS_ID` = vacinacao.`VACINACAO_UBS_ID`
+     INNER JOIN `vacina` vacina ON vacinacao.`VACINACAO_VACINA_ID` = vacina.`VACINA_ID`
+     INNER JOIN `zona` zona ON bairro.`BAIRRO_ZONA_ID` = zona.`ZONA_ID`
+WHERE VACINACAO_DT_APLICACAO BETWEEN $P{DataInicial} AND $P{DataFinal}
+GROUP BY Vacina_Id;]]>
+	</queryString>
+	<field name="bairro_BAIRRO_NOME" class="java.lang.String"/>
+	<field name="ubs_UBS_NOME" class="java.lang.String"/>
+	<field name="vacina_VACINA_NOME" class="java.lang.String"/>
+	<field name="zona_ZONA_NOME" class="java.lang.String"/>
+	<field name="total" class="java.lang.Integer"/>
+	<group name="zona_ZONA_NOME">
+		<groupExpression><![CDATA[$F{zona_ZONA_NOME}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="54" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="4ee151b7-371a-4006-8d36-351a4791a941"/>
+					<textElement>
+						<font fontName="Arial Black" size="16"/>
+					</textElement>
+					<text><![CDATA[Zona:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="54" y="1" width="241" height="31" forecolor="#006666" backcolor="#E6E6E6" uuid="9e8dddd6-25ae-4753-95a1-aa32caad8a94"/>
+					<textElement>
+						<font fontName="Arial Black" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{zona_ZONA_NOME}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="-20" y="32" width="595" height="1" forecolor="#666666" uuid="ad1d37e2-e334-42f5-aa9f-206484cb11cd"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="ubs_UBS_NOME">
+		<groupExpression><![CDATA[$F{ubs_UBS_NOME}]]></groupExpression>
+		<groupHeader>
+			<band height="61">
+				<staticText>
+					<reportElement x="0" y="0" width="54" height="20" forecolor="#666666" uuid="495eea7d-d977-4cfd-8dc8-2f2c52f1825b"/>
+					<textElement>
+						<font fontName="Arial Black" size="14"/>
+					</textElement>
+					<text><![CDATA[Ubs:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="54" y="0" width="433" height="20" forecolor="#006666" uuid="69f5b50f-7f16-47c8-ae3b-156fd0fe3c50"/>
+					<textElement>
+						<font fontName="Arial Black" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ubs_UBS_NOME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="20" width="54" height="20" forecolor="#666666" uuid="23f0fb2f-549e-4f35-8003-d5572a65709c"/>
+					<textElement>
+						<font fontName="Arial Black" size="14"/>
+					</textElement>
+					<text><![CDATA[Bairro:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="54" y="20" width="277" height="20" forecolor="#006666" uuid="9eaf3772-9962-42ed-b8ec-9b5497368949"/>
+					<textElement>
+						<font fontName="Arial Black" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bairro_BAIRRO_NOME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006666" uuid="45a2b178-d7f4-4cdc-808c-3fa51e2c69ea"/>
+				<image>
+					<reportElement x="36" y="20" width="161" height="54" uuid="ba6f058f-09e0-41ea-beb4-f5a902a66dc4"/>
+					<imageExpression><![CDATA["C:\\Users\\Mauricio\\Documents\\NetBeansProjects\\Sicva-v1.0\\src\\main\\webapp\\relatorios\\logo_original.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="207" y="31" width="346" height="33" forecolor="#FFFFFF" uuid="bd86a799-128a-4790-a541-99f01e27a8f4"/>
+					<textElement textAlignment="Left">
+						<font size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sistema de Controle de Vacina]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49">
+			<staticText>
+				<reportElement x="0" y="0" width="315" height="24" forecolor="#006666" uuid="b89d21d4-c1ad-4f33-9f9d-41dee6d21166"/>
+				<textElement>
+					<font fontName="Arial Black" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidades de vacinas por ubs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="24" width="81" height="23" uuid="95497fdb-06a3-4141-b744-851c221935df"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Período entre:]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="81" y="24" width="85" height="23" uuid="976aed17-1551-4eb2-ab7c-935d8e923137"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DataInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="166" y="24" width="21" height="23" uuid="cf571386-a2d9-4888-8e47-6475cdf70b08"/>
+				<text><![CDATA[A ]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="187" y="24" width="85" height="23" uuid="277c87ae-7a18-4ef1-a3e3-c18ce1dc9e67"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DataFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="75382539-df85-488f-89f3-6975c78cce41"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5a9594a4-b69b-4821-b12e-3ff71b918cb9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome da Vacina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="277" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="eabdc6cd-0b86-41d0-8b5f-98283906d846"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade Aplicada]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="c50a86e8-abed-4f2c-8a14-75a19802c5e4"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="277" height="20" uuid="66022662-7225-4b76-8373-de9332da152c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vacina_VACINA_NOME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="277" y="0" width="277" height="20" uuid="8793c003-f556-430d-8055-1960e586bd76"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="c86a48aa-6889-472a-9d1b-774cc9b0b9bc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="f320ffb1-244f-4de1-b188-5bdb6d8cd059"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="36c22922-4993-4910-a1f4-31dcb364944c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -68,7 +68,8 @@ public class VacinacaoDao {
         for(Vacinacao vaci: listaVacinacao) {
             Hibernate.initialize(vaci.getEnfermeiro());
             Hibernate.initialize(vaci.getVacina());       
-            Hibernate.initialize(vaci.getUbs());       
+            Hibernate.initialize(vaci.getUbs());
+            Hibernate.initialize(vaci.getPaciente());  
         }
         session.close();
         if (listaVacinacao.isEmpty()) {

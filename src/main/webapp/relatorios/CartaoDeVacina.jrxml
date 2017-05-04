@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartaoDeVacina" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36bd5f2a-63c5-4f0a-9945-950f9e4292a4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="row">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{VACINACAO_STATUS}.equals("PENDENTE")]]></conditionExpression>
+			<style forecolor="#FF9900" backcolor="#00FF00" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{VACINACAO_STATUS}.equals("IMUNIZADO")]]></conditionExpression>
+			<style forecolor="#009999" backcolor="#3399FF" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="cpf" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select VACINA_NOME ,VACINACAO_STATUS ,
+         VACINACAO_DT_APLICACAO , VACINACAO_PROX_DT ,
+         USUARIO_NOME , PAC_NOME , PAC_CPF
+         from vacinacao inner join vacina on vacina_id = vacinacao_vacina_id
+         inner join paciente on PAC_ID = VACINACAO_PAC_ID
+         left join enfermeiro on VACINACAO_ENFERM_COREN = ENFERMEIRO_COREN
+         left join usuario on USUARIO_ID = ENFERMEIRO_USUARIO_ID
+         where PAC_CPF = $P{cpf} ;]]>
+	</queryString>
+	<field name="VACINA_NOME" class="java.lang.String">
+		<fieldDescription><![CDATA[vacina.vacinaNome]]></fieldDescription>
+	</field>
+	<field name="VACINACAO_STATUS" class="java.lang.String">
+		<fieldDescription><![CDATA[vacinacaoStatus]]></fieldDescription>
+	</field>
+	<field name="VACINACAO_DT_APLICACAO" class="java.sql.Date">
+		<fieldDescription><![CDATA[vacinacaoDtAplicacao]]></fieldDescription>
+	</field>
+	<field name="VACINACAO_PROX_DT" class="java.sql.Date">
+		<fieldDescription><![CDATA[vacinacaoProxDt]]></fieldDescription>
+	</field>
+	<field name="USUARIO_NOME" class="java.lang.String">
+		<fieldDescription><![CDATA[enfermeiro.usuario.usuarioNome]]></fieldDescription>
+	</field>
+	<field name="PAC_NOME" class="java.lang.String">
+		<fieldDescription><![CDATA[paciente.pacNome]]></fieldDescription>
+	</field>
+	<field name="PAC_CPF" class="java.lang.String">
+		<fieldDescription><![CDATA[paciente.pacCpf]]></fieldDescription>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006666" uuid="45a2b178-d7f4-4cdc-808c-3fa51e2c69ea"/>
+				<image>
+					<reportElement x="36" y="20" width="161" height="54" uuid="ba6f058f-09e0-41ea-beb4-f5a902a66dc4"/>
+					<imageExpression><![CDATA["C:\\Users\\Mauricio\\Documents\\NetBeansProjects\\Sicva-v1.0\\src\\main\\webapp\\relatorios\\logo_original.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="207" y="31" width="346" height="33" forecolor="#FFFFFF" uuid="bd86a799-128a-4790-a541-99f01e27a8f4"/>
+					<textElement textAlignment="Left">
+						<font size="18" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sistema de Controle de Vacina]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="91">
+			<staticText>
+				<reportElement x="0" y="0" width="216" height="30" forecolor="#006666" uuid="98a31440-8094-4b4b-9698-2afffbb6d9e2"/>
+				<textElement>
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cartão de Vacina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="69" height="20" uuid="50fc7851-7510-4303-9868-a637e7c38fc4"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial Black" size="12" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="33" height="20" uuid="58019a55-999f-4474-aa2d-69bb714feeaf"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial Black" size="12"/>
+				</textElement>
+				<text><![CDATA[Cpf:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="30" width="207" height="20" uuid="80eac18c-fcc9-4cb6-91c3-d254ec505670"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAC_NOME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="50" width="132" height="20" uuid="58aee713-0ab1-4ac2-aaab-5de6c4d24419"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAC_CPF}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="271e7617-b6b2-4072-bd82-05cad22617ee"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="164" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e261be52-8530-4560-87b2-c31fa829c124"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vacina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="164" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="824fc6be-2b6f-4e0c-909c-ea2c5fa04a93"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="264" y="0" width="95" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="974e1ef0-79ba-4087-8222-4d4b06bf5173"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data  Aplica.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="463" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b3dd312-627d-45b7-8fb3-2f62c4e2d9d1"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="359" y="0" width="104" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a6412421-b01f-4009-b870-9391bc86af62"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data  Proxima]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="9ce7f50b-64d0-4ec1-a286-92ed6bb321d2"/>
+			</line>
+			<frame>
+				<reportElement style="row" mode="Transparent" x="0" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#66CC00" uuid="7dfe8772-d086-450f-b3ed-1a25a03cde36"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="0" width="164" height="20" uuid="bf983b33-30e5-42e3-a588-07ff21e87a40"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VACINA_NOME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="row" x="165" y="0" width="99" height="20" uuid="9480737c-9aac-44ad-9dc4-77fd036437be"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VACINACAO_STATUS}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="264" y="0" width="95" height="20" uuid="2a5a0327-1dd4-4ab1-8ad8-106a2d803c6c"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VACINACAO_DT_APLICACAO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="359" y="0" width="104" height="20" uuid="e9a5f6a9-eb24-441b-b5be-e4010a241c54"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VACINACAO_PROX_DT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="463" y="0" width="92" height="20" uuid="3888c6a3-3166-4a8e-98df-dc66f45b2226"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{USUARIO_NOME}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="65c09b2c-8e6e-4a94-ad7f-6c95162f544c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="1c85823d-e2cd-43b0-851c-f87ef8d24253"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="d51bca8b-ce5e-450d-bf54-5e775ccdf4d4"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

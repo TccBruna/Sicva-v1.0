@@ -1,2 +1,3 @@
-
-    $('#idtooltip').tooltip({'trigger':'focus', 'title': 'Password tooltip'});
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+}); 

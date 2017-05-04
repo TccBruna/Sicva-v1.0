@@ -37,9 +37,10 @@
                                                          pt:placeholder="CPF:"                                    
                                                          required="true"  converterMessage="Por favor inserir somente numeros"
                                                          requiredMessage="Digite o numero do cpf." >                                   
-                                            </p:inputMask>                            
+                                            </p:inputMask> 
+                                            <p:remoteCommand name="rc" action="#{vacinacaoControle.pesquisarCartao()}"/>
                                             <span class="input-group-btn">
-                                                <h:commandLink styleClass="btn btn-default"   
+                                                <h:commandLink styleClass="btn btn-default" onkeypress="rc()"  
                                                                actionListener="#{vacinacaoControle.pesquisarCartao}" >
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </h:commandLink> 
@@ -76,12 +77,14 @@
                     
                         <h:form>
                                                         
-                            <p:dataTable var="itens"
+                            <p:dataTable var="itens" value="#{vacinacaoControle.vacinacoes}"
                                          emptyMessage="Nenhum registro encontrado..."
-                                         value="#{vacinacaoControle.vacinacoes}"
-                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                         rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
-                                         paginator="true" rows="10" rowsPerPageTemplate="10,15,20">
+                                       widgetVar="UsuariosTable"  
+                                       styleClass="table table-striped" 
+                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                       rowKey="#{itens.vacinacaoId}" selectionMode="single"                               
+                                       paginator="true" rows="10" rowsPerPageTemplate="5,10,15" >
+                                
                                 <p:column>
                                     <f:facet name="header">Vacina</f:facet>
                                     <h:outputText value="#{itens.vacina.vacinaNome}" />
@@ -129,7 +132,7 @@
                                         <h:outputText value=""/>
                                     </div>                                                      
                                 </f:facet>      
-                            </p:dataTable>                                
+                            </p:dataTable>                               
 
  
                         </h:form>
