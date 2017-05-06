@@ -1,8 +1,7 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +24,8 @@ public class Bairro  implements java.io.Serializable {
 
      private Integer bairroId;
      private Zona zona;
-     private String bairroNome;     
+     private String bairroNome;
+    
 
     public Bairro() {
     }
@@ -34,7 +34,8 @@ public class Bairro  implements java.io.Serializable {
     public Bairro(Zona zona, String bairroNome) {
         this.zona = zona;
         this.bairroNome = bairroNome;
-    }   
+    }
+    
    
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="BAIRRO_ID", unique=true, nullable=false)
@@ -65,37 +66,6 @@ public class Bairro  implements java.io.Serializable {
     public void setBairroNome(String bairroNome) {
         this.bairroNome = bairroNome;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.bairroId);
-        hash = 89 * hash + Objects.hashCode(this.bairroNome);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Bairro other = (Bairro) obj;
-        if (!Objects.equals(this.bairroNome, other.bairroNome)) {
-            return false;
-        }
-        if (!Objects.equals(this.bairroId, other.bairroId)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 
 }
 

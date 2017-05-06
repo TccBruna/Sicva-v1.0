@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -38,9 +38,7 @@ public class Fone  implements java.io.Serializable {
        this.foneNumero2 = foneNumero2;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="FONE_ID", unique=true, nullable=false)
     public Integer getFoneId() {
         return this.foneId;
@@ -50,7 +48,7 @@ public class Fone  implements java.io.Serializable {
         this.foneId = foneId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="FONE_PAC_ID", nullable=false)
     public Paciente getPaciente() {
         return this.paciente;

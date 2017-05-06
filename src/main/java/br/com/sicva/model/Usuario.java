@@ -1,12 +1,15 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -22,6 +25,8 @@ public class Usuario  implements java.io.Serializable {
 
 
      private Integer usuarioId;
+     private Atendente atendente;
+     private Enfermeiro enfermeiro;
      private String usuarioCpf;
      private String usuarioNome;
      private String usuarioSenha;
@@ -31,12 +36,20 @@ public class Usuario  implements java.io.Serializable {
     }
 
 	
-    public Usuario(String usuarioCpf, String usuarioNome, String usuarioSenha) {
+    public Usuario(String usuarioCpf, String usuarioNome, String usuarioSenha, String usuarioStatus) {
         this.usuarioCpf = usuarioCpf;
         this.usuarioNome = usuarioNome;
         this.usuarioSenha = usuarioSenha;
+        this.usuarioStatus = usuarioStatus;
     }
-    
+    public Usuario(Atendente atendente, Enfermeiro enfermeiro, String usuarioCpf, String usuarioNome, String usuarioSenha, String usuarioStatus) {
+       this.atendente = atendente;
+       this.enfermeiro = enfermeiro;
+       this.usuarioCpf = usuarioCpf;
+       this.usuarioNome = usuarioNome;
+       this.usuarioSenha = usuarioSenha;
+       this.usuarioStatus = usuarioStatus;
+    }
    
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="USUARIO_ID", unique=true, nullable=false)
@@ -46,6 +59,26 @@ public class Usuario  implements java.io.Serializable {
     
     public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
+    }
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="USUARIO_ATENDENTE")
+    public Atendente getAtendente() {
+        return this.atendente;
+    }
+    
+    public void setAtendente(Atendente atendente) {
+        this.atendente = atendente;
+    }
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="USUARIO_ENFERMEIRO")
+    public Enfermeiro getEnfermeiro() {
+        return this.enfermeiro;
+    }
+    
+    public void setEnfermeiro(Enfermeiro enfermeiro) {
+        this.enfermeiro = enfermeiro;
     }
 
     
@@ -78,15 +111,18 @@ public class Usuario  implements java.io.Serializable {
         this.usuarioSenha = usuarioSenha;
     }
 
+    
     @Column(name="USUARIO_STATUS", nullable=false, length=10)
     public String getUsuarioStatus() {
-        return usuarioStatus;
+        return this.usuarioStatus;
     }
-
+    
     public void setUsuarioStatus(String usuarioStatus) {
         this.usuarioStatus = usuarioStatus;
-    }    
-    
+    }
+
+
+
 
 }
 

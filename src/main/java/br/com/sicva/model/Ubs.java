@@ -1,8 +1,9 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -28,7 +30,8 @@ public class Ubs  implements java.io.Serializable {
      private Integer ubsId;
      private Endereco endereco;
      private String ubsFone;
-     private String ubsNome;     
+     private String ubsNome;
+    
 
     public Ubs() {
     }
@@ -40,7 +43,6 @@ public class Ubs  implements java.io.Serializable {
         this.ubsNome = ubsNome;
     }
     
-   
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="UBS_ID", unique=true, nullable=false)
     public Integer getUbsId() {
@@ -51,7 +53,7 @@ public class Ubs  implements java.io.Serializable {
         this.ubsId = ubsId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="UBS_ENDERECO_ID", nullable=false)
     public Endereco getEndereco() {
         return this.endereco;
@@ -81,40 +83,6 @@ public class Ubs  implements java.io.Serializable {
         this.ubsNome = ubsNome;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.ubsId);
-        hash = 23 * hash + Objects.hashCode(this.ubsFone);
-        hash = 23 * hash + Objects.hashCode(this.ubsNome);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ubs other = (Ubs) obj;
-        if (!Objects.equals(this.ubsFone, other.ubsFone)) {
-            return false;
-        }
-        if (!Objects.equals(this.ubsNome, other.ubsNome)) {
-            return false;
-        }
-        if (!Objects.equals(this.ubsId, other.ubsId)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 
 }
 

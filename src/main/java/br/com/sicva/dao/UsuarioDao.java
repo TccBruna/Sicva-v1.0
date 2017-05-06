@@ -105,7 +105,7 @@ public class UsuarioDao {
         try {
             session = new FabricaDeConexao().getSessionFactory().openSession();
             Query query = session.createSQLQuery("select * from usuario inner join enfermeiro\n"
-                    + "on USUARIO_ID = ENFERMEIRO_USUARIO_ID "
+                    + "on USUARIO_ENFERMEIRO = ENFERMEIRO_COREN "
                     + "where ENFERMEIRO_COREN = :coren").addEntity(Usuario.class);
             query.setString("coren", coren);
             listarUsuario = query.list();

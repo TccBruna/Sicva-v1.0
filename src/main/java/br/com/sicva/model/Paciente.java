@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -45,7 +45,8 @@ public class Paciente  implements java.io.Serializable {
         this.pacDtnasc = pacDtnasc;
         this.pacNome = pacNome;
         this.pacNomeResp = pacNomeResp;
-    }    
+    }
+    
    
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="PAC_ID", unique=true, nullable=false)
@@ -57,7 +58,7 @@ public class Paciente  implements java.io.Serializable {
         this.pacId = pacId;
     }
 
-@ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="PAC_ENDERECO_ID", nullable=false)
     public Endereco getEndereco() {
         return this.endereco;
@@ -106,6 +107,7 @@ public class Paciente  implements java.io.Serializable {
     public void setPacNomeResp(String pacNomeResp) {
         this.pacNomeResp = pacNomeResp;
     }
+
 
 }
 

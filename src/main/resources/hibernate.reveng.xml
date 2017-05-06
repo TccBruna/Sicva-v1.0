@@ -2,14 +2,15 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="sicva"/>
-  <table-filter match-name="zona"/>
-  <table-filter match-name="fone"/>
-  <table-filter match-name="usuario"/>
-  <table-filter match-name="enfermeiro"/>
-  <table-filter match-name="ubs"/>
   <table-filter match-name="vacinacao"/>
+  <table-filter match-name="enfermeiro"/>
+  <table-filter match-name="paciente"/>
   <table-filter match-name="endereco"/>
   <table-filter match-name="bairro"/>
-  <table-filter match-name="paciente"/>
+  <table-filter match-name="fone"/>
+  <table-filter match-name="ubs"/>
   <table-filter match-name="vacina"/>
+  <table-filter match-name="zona"/>
+  <table-filter match-name="atendente"/>
+  <table-filter match-name="usuario"/>
 </hibernate-reverse-engineering>

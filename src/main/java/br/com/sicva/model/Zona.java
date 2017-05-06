@@ -1,12 +1,16 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +24,8 @@ public class Zona  implements java.io.Serializable {
 
 
      private Integer zonaId;
-     private String zonaNome;    
+     private String zonaNome;
+     
 
     public Zona() {
     }
@@ -29,7 +34,6 @@ public class Zona  implements java.io.Serializable {
     public Zona(String zonaNome) {
         this.zonaNome = zonaNome;
     }
-    
    
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="ZONA_ID", unique=true, nullable=false)

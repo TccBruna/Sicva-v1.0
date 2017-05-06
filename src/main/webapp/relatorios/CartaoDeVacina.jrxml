@@ -24,7 +24,7 @@
          from vacinacao inner join vacina on vacina_id = vacinacao_vacina_id
          inner join paciente on PAC_ID = VACINACAO_PAC_ID
          left join enfermeiro on VACINACAO_ENFERM_COREN = ENFERMEIRO_COREN
-         left join usuario on USUARIO_ID = ENFERMEIRO_USUARIO_ID
+         left join usuario on USUARIO_ENFERMEIRO = ENFERMEIRO_COREN
          where PAC_CPF = $P{cpf} ;]]>
 	</queryString>
 	<field name="VACINA_NOME" class="java.lang.String">
@@ -40,7 +40,7 @@
 		<fieldDescription><![CDATA[vacinacaoProxDt]]></fieldDescription>
 	</field>
 	<field name="USUARIO_NOME" class="java.lang.String">
-		<fieldDescription><![CDATA[enfermeiro.usuario.usuarioNome]]></fieldDescription>
+		<fieldDescription><![CDATA[enfermeiro.enfermeiroCoren]]></fieldDescription>
 	</field>
 	<field name="PAC_NOME" class="java.lang.String">
 		<fieldDescription><![CDATA[paciente.pacNome]]></fieldDescription>
@@ -114,35 +114,35 @@
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="271e7617-b6b2-4072-bd82-05cad22617ee"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="164" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e261be52-8530-4560-87b2-c31fa829c124"/>
+				<reportElement mode="Opaque" x="0" y="0" width="150" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e261be52-8530-4560-87b2-c31fa829c124"/>
 				<textElement textAlignment="Left">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Vacina]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="164" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="824fc6be-2b6f-4e0c-909c-ea2c5fa04a93"/>
+				<reportElement mode="Opaque" x="150" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="824fc6be-2b6f-4e0c-909c-ea2c5fa04a93"/>
 				<textElement textAlignment="Left">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Status]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="264" y="0" width="95" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="974e1ef0-79ba-4087-8222-4d4b06bf5173"/>
+				<reportElement mode="Opaque" x="250" y="0" width="95" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="974e1ef0-79ba-4087-8222-4d4b06bf5173"/>
 				<textElement textAlignment="Left">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data  Aplica.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="463" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b3dd312-627d-45b7-8fb3-2f62c4e2d9d1"/>
+				<reportElement mode="Opaque" x="449" y="0" width="106" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b3dd312-627d-45b7-8fb3-2f62c4e2d9d1"/>
 				<textElement textAlignment="Left">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Usuário]]></text>
+				<text><![CDATA[Coren Enferm.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="359" y="0" width="104" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a6412421-b01f-4009-b870-9391bc86af62"/>
+				<reportElement mode="Opaque" x="345" y="0" width="104" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a6412421-b01f-4009-b870-9391bc86af62"/>
 				<textElement textAlignment="Left">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -158,39 +158,39 @@
 			<frame>
 				<reportElement style="row" mode="Transparent" x="0" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#66CC00" uuid="7dfe8772-d086-450f-b3ed-1a25a03cde36"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement x="0" y="0" width="164" height="20" uuid="bf983b33-30e5-42e3-a588-07ff21e87a40"/>
+					<reportElement x="0" y="0" width="150" height="20" uuid="bf983b33-30e5-42e3-a588-07ff21e87a40"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{VACINA_NOME}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="row" x="165" y="0" width="99" height="20" uuid="9480737c-9aac-44ad-9dc4-77fd036437be"/>
-					<textElement>
-						<font size="14"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{VACINACAO_STATUS}]]></textFieldExpression>
-				</textField>
 				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="264" y="0" width="95" height="20" uuid="2a5a0327-1dd4-4ab1-8ad8-106a2d803c6c"/>
+					<reportElement x="250" y="0" width="95" height="20" uuid="2a5a0327-1dd4-4ab1-8ad8-106a2d803c6c"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{VACINACAO_DT_APLICACAO}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="359" y="0" width="104" height="20" uuid="e9a5f6a9-eb24-441b-b5be-e4010a241c54"/>
+					<reportElement x="345" y="0" width="104" height="20" uuid="e9a5f6a9-eb24-441b-b5be-e4010a241c54"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{VACINACAO_PROX_DT}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="463" y="0" width="92" height="20" uuid="3888c6a3-3166-4a8e-98df-dc66f45b2226"/>
+					<reportElement x="449" y="0" width="92" height="20" uuid="3888c6a3-3166-4a8e-98df-dc66f45b2226"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{USUARIO_NOME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="row" x="150" y="0" width="99" height="20" uuid="9480737c-9aac-44ad-9dc4-77fd036437be"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VACINACAO_STATUS}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

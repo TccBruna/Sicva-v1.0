@@ -13,6 +13,7 @@
     <mapping class="br.com.sicva.model.Ubs"/>
     <mapping class="br.com.sicva.model.Endereco"/>
     <mapping class="br.com.sicva.model.Paciente"/>
+    <mapping class="br.com.sicva.model.Atendente"/>
     <mapping class="br.com.sicva.model.Usuario"/>
     <mapping class="br.com.sicva.model.Enfermeiro"/>
     <mapping class="br.com.sicva.model.Vacina"/>

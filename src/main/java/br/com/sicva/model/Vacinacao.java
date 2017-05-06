@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -30,37 +30,34 @@ public class Vacinacao  implements java.io.Serializable {
      private Paciente paciente;
      private Ubs ubs;
      private Vacina vacina;
-     private Date vacinacaoProxDt;
      private String vacinacaoStatus;
      private String vacinacaoLoteVaci;
      private String vacinacaoDosagem;
      private Date vacinacaoDtAplicacao;
+     private Date vacinacaoProxDt;
 
     public Vacinacao() {
     }
 
 	
-    public Vacinacao(Paciente paciente, Vacina vacina, String vacinacaoStatus, Date vacinacaoDtAplicacao) {
+    public Vacinacao(Paciente paciente, Vacina vacina, String vacinacaoStatus) {
         this.paciente = paciente;
         this.vacina = vacina;
         this.vacinacaoStatus = vacinacaoStatus;
-        this.vacinacaoDtAplicacao = vacinacaoDtAplicacao;
     }
-    public Vacinacao(Enfermeiro enfermeiro, Paciente paciente, Ubs ubs, Vacina vacina, Date vacinacaoProxDt, String vacinacaoStatus, String vacinacaoLoteVaci, String vacinacaoDosagem, Date vacinacaoDtAplicacao) {
+    public Vacinacao(Enfermeiro enfermeiro, Paciente paciente, Ubs ubs, Vacina vacina, String vacinacaoStatus, String vacinacaoLoteVaci, String vacinacaoDosagem, Date vacinacaoDtAplicacao, Date vacinacaoProxDt) {
        this.enfermeiro = enfermeiro;
        this.paciente = paciente;
        this.ubs = ubs;
        this.vacina = vacina;
-       this.vacinacaoProxDt = vacinacaoProxDt;
        this.vacinacaoStatus = vacinacaoStatus;
        this.vacinacaoLoteVaci = vacinacaoLoteVaci;
        this.vacinacaoDosagem = vacinacaoDosagem;
        this.vacinacaoDtAplicacao = vacinacaoDtAplicacao;
+       this.vacinacaoProxDt = vacinacaoProxDt;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+    @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="VACINACAO_ID", unique=true, nullable=false)
     public Integer getVacinacaoId() {
         return this.vacinacaoId;
@@ -70,7 +67,7 @@ public class Vacinacao  implements java.io.Serializable {
         this.vacinacaoId = vacinacaoId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="VACINACAO_ENFERM_COREN")
     public Enfermeiro getEnfermeiro() {
         return this.enfermeiro;
@@ -80,7 +77,7 @@ public class Vacinacao  implements java.io.Serializable {
         this.enfermeiro = enfermeiro;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="VACINACAO_PAC_ID", nullable=false)
     public Paciente getPaciente() {
         return this.paciente;
@@ -90,7 +87,7 @@ public class Vacinacao  implements java.io.Serializable {
         this.paciente = paciente;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="VACINACAO_UBS_ID")
     public Ubs getUbs() {
         return this.ubs;
@@ -100,7 +97,7 @@ public class Vacinacao  implements java.io.Serializable {
         this.ubs = ubs;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="VACINACAO_VACINA_ID", nullable=false)
     public Vacina getVacina() {
         return this.vacina;
@@ -108,16 +105,6 @@ public class Vacinacao  implements java.io.Serializable {
     
     public void setVacina(Vacina vacina) {
         this.vacina = vacina;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name="VACINACAO_PROX_DT", length=10)
-    public Date getVacinacaoProxDt() {
-        return this.vacinacaoProxDt;
-    }
-    
-    public void setVacinacaoProxDt(Date vacinacaoProxDt) {
-        this.vacinacaoProxDt = vacinacaoProxDt;
     }
 
     
@@ -158,6 +145,16 @@ public class Vacinacao  implements java.io.Serializable {
     
     public void setVacinacaoDtAplicacao(Date vacinacaoDtAplicacao) {
         this.vacinacaoDtAplicacao = vacinacaoDtAplicacao;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name="VACINACAO_PROX_DT", length=10)
+    public Date getVacinacaoProxDt() {
+        return this.vacinacaoProxDt;
+    }
+    
+    public void setVacinacaoProxDt(Date vacinacaoProxDt) {
+        this.vacinacaoProxDt = vacinacaoProxDt;
     }
 
 

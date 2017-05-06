@@ -157,8 +157,8 @@ public class VacinacaoControle {
         EnfermeiroDao enfermeiroDao = new EnfermeiroDao();
         List<Enfermeiro> listaEnfermeiro = enfermeiroDao.listarEnfermeiro();
         final List<SelectItem> itens = new ArrayList<>(listaEnfermeiro.size());
-        for (Enfermeiro e : listaEnfermeiro) {
-            itens.add(new SelectItem(e, e.getUsuario().getUsuarioNome()));
+        for (Enfermeiro e : listaEnfermeiro) {            
+            itens.add(new SelectItem(e, e.getEnfermeiroCoren()));
         }
         return itens;
     }

@@ -1,5 +1,5 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -25,10 +25,9 @@ public class Endereco  implements java.io.Serializable {
      private Integer endId;
      private Bairro bairro;
      private String endCep;
-     private Integer endNumero;     
      private String endComplemento;
-     private String endRua;     
-     
+     private String endRua;
+     private Integer endNumero;    
 
     public Endereco() {
     }
@@ -42,9 +41,9 @@ public class Endereco  implements java.io.Serializable {
     public Endereco(Bairro bairro, String endCep, String endComplemento, String endRua, Integer endNumero) {
        this.bairro = bairro;
        this.endCep = endCep;
-       this.endNumero = endNumero;
        this.endComplemento = endComplemento;
-       this.endRua = endRua;       
+       this.endRua = endRua;
+       this.endNumero = endNumero;       
     }
    
     @Id @GeneratedValue(strategy=IDENTITY)    
@@ -57,7 +56,7 @@ public class Endereco  implements java.io.Serializable {
         this.endId = endId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="END_BAIRRO_ID", nullable=false)
     public Bairro getBairro() {
         return this.bairro;
@@ -77,16 +76,7 @@ public class Endereco  implements java.io.Serializable {
         this.endCep = endCep;
     }
 
-    @Column(name="END_NUMERO", length=50)
-    public Integer getEndNumero() {
-        return endNumero;
-    }
-
     
-    public void setEndNumero(Integer endNumero) {
-        this.endNumero = endNumero;
-    }
-        
     @Column(name="END_COMPLEMENTO", length=50)
     public String getEndComplemento() {
         return this.endComplemento;
@@ -105,6 +95,17 @@ public class Endereco  implements java.io.Serializable {
     public void setEndRua(String endRua) {
         this.endRua = endRua;
     }
+
+    
+    @Column(name="END_NUMERO")
+    public Integer getEndNumero() {
+        return this.endNumero;
+    }
+    
+    public void setEndNumero(Integer endNumero) {
+        this.endNumero = endNumero;
+    }
+
 
 }
 

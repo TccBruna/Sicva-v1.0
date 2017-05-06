@@ -10,11 +10,8 @@ import br.com.sicva.dao.UsuarioDao;
 import br.com.sicva.model.Enfermeiro;
 import br.com.sicva.model.Usuario;
 import br.com.sicva.util.Mensagens;
-import java.util.ArrayList;
-import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
 
 /**
  *
@@ -36,12 +33,11 @@ public class EnfermeiroControle {
             enfermeiroDao = new EnfermeiroDao();
             if (enfermeiroDao.PesquisarEnfermeiro(enfermeiro.getEnfermeiroCoren()) == null) {
                 usuarioDao = new UsuarioDao();
-                if (usuarioDao.salvarUsuario(usuario)) {
-                    enfermeiro.setUsuario(usuario);
-                    enfermeiroDao.salvarEnfermeiro(enfermeiro);
+                usuario.setEnfermeiro(enfermeiro);
+                if (enfermeiroDao.salvarEnfermeiro(enfermeiro)) {
+                    usuarioDao.salvarUsuario(usuario);                    
                     new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
-                } else {
-                    usuarioDao.deletarUsuario(usuario);
+                } else {                   
                     new Mensagens().MensagensErro("Não foi possivel salvar os dados", null);
                 }
             } else {
@@ -59,13 +55,10 @@ public class EnfermeiroControle {
         try {
             enfermeiroDao = new EnfermeiroDao();
             usuarioDao = new UsuarioDao();
-            if (usuarioDao.alterarUsuario(usuario)) {
-                enfermeiro.setUsuario(usuario);
-                enfermeiroDao.alterarEnfermeiro(enfermeiro);
+            if (usuarioDao.alterarUsuario(usuario)) {                
                 new Mensagens().MensagensSucesso("Dados alterados com sucesso", null);
-            } else {
-                usuarioDao.deletarUsuario(usuario);
-                new Mensagens().MensagensErro("Não foi possivel salvar os dados", null);
+            } else {                
+                new Mensagens().MensagensErro("Não foi possivel alterar os dados", null);
             }
         } catch (Exception e) {
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);

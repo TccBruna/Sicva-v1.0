@@ -1,8 +1,7 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +21,8 @@ public class Vacina  implements java.io.Serializable {
 
      private Integer vacinaId;
      private String vacinaNome;
-     private int vacinaqdtedose;    
+     private int vacinaqdtedose;
+     
 
     public Vacina() {
     }
@@ -32,7 +32,7 @@ public class Vacina  implements java.io.Serializable {
         this.vacinaNome = vacinaNome;
         this.vacinaqdtedose = vacinaqdtedose;
     }
-    
+   
    
     @Id @GeneratedValue(strategy=IDENTITY)    
     @Column(name="VACINA_ID", unique=true, nullable=false)
@@ -64,40 +64,6 @@ public class Vacina  implements java.io.Serializable {
         this.vacinaqdtedose = vacinaqdtedose;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.vacinaId);
-        hash = 37 * hash + Objects.hashCode(this.vacinaNome);
-        hash = 37 * hash + this.vacinaqdtedose;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Vacina other = (Vacina) obj;
-        if (this.vacinaqdtedose != other.vacinaqdtedose) {
-            return false;
-        }
-        if (!Objects.equals(this.vacinaNome, other.vacinaNome)) {
-            return false;
-        }
-        if (!Objects.equals(this.vacinaId, other.vacinaId)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 
 }
 

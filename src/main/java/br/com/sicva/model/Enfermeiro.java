@@ -1,14 +1,10 @@
 package br.com.sicva.model;
-// Generated 20/04/2017 18:08:46 by Hibernate Tools 4.3.1
+// Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
-import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,19 +17,18 @@ import javax.persistence.Table;
 public class Enfermeiro  implements java.io.Serializable {
 
 
-     private String enfermeiroCoren;
-     private Usuario usuario;     
+    private String enfermeiroCoren;     
 
     public Enfermeiro() {
     }
 
 	
-    public Enfermeiro(String enfermeiroCoren, Usuario usuario) {
+    public Enfermeiro(String enfermeiroCoren) {
         this.enfermeiroCoren = enfermeiroCoren;
-        this.usuario = usuario;
-    }   
+    }
+    
    
-    @Id     
+    @Id    
     @Column(name="ENFERMEIRO_COREN", unique=true, nullable=false, length=10)
     public String getEnfermeiroCoren() {
         return this.enfermeiroCoren;
@@ -43,42 +38,6 @@ public class Enfermeiro  implements java.io.Serializable {
         this.enfermeiroCoren = enfermeiroCoren;
     }
 
-@ManyToOne(cascade = CascadeType.ALL )
-    @JoinColumn(name="ENFERMEIRO_USUARIO_ID", nullable=false)
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-    
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 11 * hash + Objects.hashCode(this.enfermeiroCoren);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Enfermeiro other = (Enfermeiro) obj;
-        if (!Objects.equals(this.enfermeiroCoren, other.enfermeiroCoren)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 
 }
 
