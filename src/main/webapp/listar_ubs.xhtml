@@ -1,0 +1,38 @@
+<ui:composition template="/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"                
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"                
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titulo">Listar Ubs</ui:define>    
+    <ui:define name="css">
+
+    </ui:define>
+    <ui:define name="corpo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-header"><h1>Encontrar Ubs</h1></div>
+                    <p:dataTable value="#{ubsControle.ListarUbs(param.zona)}" var="ubs">
+                        <p:column headerText="Nome" filterBy="#{ubs.ubsNome}" filterStyle="display: none">
+                            <h:outputText value="#{ubs.ubsNome}" />
+                        </p:column>
+                        <p:column headerText="Bairro" filterBy="#{ubs.endereco.bairro.bairroNome}" filterStyle="display: none">
+                            <h:outputText value="#{ubs.endereco.bairro.bairroNome}" />
+                        </p:column>
+                        <p:column headerText="Rua" filterBy="#{ubs.endereco.endRua}" filterStyle="display: none">
+                            <h:outputText value="#{ubs.endereco.endRua}" />
+                        </p:column>
+                    </p:dataTable>
+
+
+                </div>               
+            </div>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>

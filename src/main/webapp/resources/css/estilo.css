@@ -235,58 +235,15 @@ h2{
 	font-size: 24px;
 	padding-bottom: 15px;
 }
-.bottom-line{
-	width: 25px;
-	height: 3px;
-	background-color: rgb(99, 122, 145);
-}
-.fea{
-	margin-top: 25px;
-}
-.fea-img {
-  width: 20%;
-}
-.heading {
-    width: 80%;
-}
-.fea i {
-    font-size: 39px;
-    color: #5FCF80;
-    margin-top: 7px;
-}
-.heading h4 {
-    font-size: 17px;
-    line-height: 1.25;
-    font-weight: 700;
-    color: #000;
-    margin: 10px 0px;
-    text-align: left;
-}
-.heading p {
-  text-align: left;
-}
+
 /***********************************
  
 Work Shop
 ************************************/
-#work-shop {
+#pesquisar_ubs {
     background-color: rgb(247, 247, 247);
 }
-.service-box{
-    background: #fff;
-    padding: 60px 30px 80px;
-    box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
-}
-.icon-box i {
-    color: #5FCF80;
-    font-size: 65px;
-}
-.ser-text {
-    font-size: 24px;
-}
-.icon-box, .icon-text {
-    padding: 20px 0px 0px;
-}
+
 /***********************************
 
 Contact Us

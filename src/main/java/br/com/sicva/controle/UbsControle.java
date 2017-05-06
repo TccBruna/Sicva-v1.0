@@ -20,6 +20,17 @@ import javax.faces.view.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class UbsControle {
+    private Ubs ubsSelecionado;
+    private List<Ubs> allUbs;
+    
+    public List<Ubs> ListarUbs(String zona){
+        if(!zona.equals("")){
+           UbsDao ubsDao = new UbsDao();
+           allUbs = ubsDao.ListarPorZona(Integer.valueOf(zona));
+        }
+        return  allUbs;
+    }
+    
     public List<SelectItem> getUbs() {
         UbsDao ubsDao = new UbsDao();
         List<Ubs> listaUbs = ubsDao.listarUbs();
@@ -29,4 +40,25 @@ public class UbsControle {
         }
         return itens;
     }
+
+    public Ubs getUbsSelecionado() {
+        if(ubsSelecionado == null){
+            ubsSelecionado = new Ubs();
+        }
+        return ubsSelecionado;
+    }
+
+    public void setUbsSelecionado(Ubs ubsSelecionado) {
+        this.ubsSelecionado = ubsSelecionado;
+    }
+
+    public List<Ubs> getAllUbs() {
+        return allUbs;
+    }
+
+    public void setAllUbs(List<Ubs> allUbs) {
+        this.allUbs = allUbs;
+    }
+    
+    
 }
