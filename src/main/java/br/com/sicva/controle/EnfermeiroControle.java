@@ -32,9 +32,10 @@ public class EnfermeiroControle {
         try {
             enfermeiroDao = new EnfermeiroDao();
             if (enfermeiroDao.PesquisarEnfermeiro(enfermeiro.getEnfermeiroCoren()) == null) {
-                usuarioDao = new UsuarioDao();
-                usuario.setEnfermeiro(enfermeiro);
+                usuarioDao = new UsuarioDao();                
                 if (enfermeiroDao.salvarEnfermeiro(enfermeiro)) {
+                    usuario.setEnfermeiro(enfermeiro);
+                    usuario.setUsuarioStatus("ATIVADO");
                     usuarioDao.salvarUsuario(usuario);                    
                     new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);
                 } else {                   

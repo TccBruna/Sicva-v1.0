@@ -24,6 +24,13 @@ public class UsuarioControle {
     private UsuarioDao usuarioDao;
     private boolean showMsgErros;
     private String CpfPesquisado;
+    private List<Usuario> usuarios;
+    
+    public UsuarioControle(){
+        if(usuarios == null){
+            usuarios = new UsuarioDao().listarUsuario();
+        }
+    }
 
     public void salvar() {
         showMsgErros = true;
@@ -98,10 +105,10 @@ public class UsuarioControle {
         } catch (Exception e) {
             new Mensagens().MensagensErroFatal("erro na transação", "" + e);
         }
-    }
-
-    public List<Usuario> getListarTodos() {
-        return new UsuarioDao().listarUsuario();
+    }   
+      
+    public Integer getTotal(){
+        return usuarios.size();
     }
 
     public Usuario getUsuario() {
@@ -114,6 +121,15 @@ public class UsuarioControle {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+        
 
     public boolean isShowMsgErros() {
         return showMsgErros;
