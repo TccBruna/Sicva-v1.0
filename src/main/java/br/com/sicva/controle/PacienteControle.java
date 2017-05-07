@@ -9,13 +9,12 @@ import br.com.sicva.dao.BairroDao;
 import br.com.sicva.dao.EnderecoDao;
 import br.com.sicva.dao.FoneDao;
 import br.com.sicva.dao.PacienteDao;
-import br.com.sicva.dao.VacinacaoDao;
 import br.com.sicva.model.Bairro;
 import br.com.sicva.model.Endereco;
 import br.com.sicva.model.Fone;
 import br.com.sicva.model.Paciente;
-import br.com.sicva.util.DataUtil;
 import br.com.sicva.util.Mensagens;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -28,7 +27,7 @@ import javax.faces.model.SelectItem;
  */
 @ManagedBean
 @ViewScoped
-public class PacienteControle {
+public class PacienteControle implements Serializable{
 
     private Paciente paciente;
     private PacienteDao pacienteDao;
