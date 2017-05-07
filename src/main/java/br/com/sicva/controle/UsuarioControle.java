@@ -29,6 +29,7 @@ public class UsuarioControle {
         showMsgErros = true;
         try {
             usuarioDao = new UsuarioDao();
+            usuario.setUsuarioStatus("ATIVADO");
             if (usuarioDao.salvarUsuario(usuario)) {
                 usuario = new Usuario();
                 new Mensagens().MensagensSucesso("Dados salvos com sucesso", null);

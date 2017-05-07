@@ -2,8 +2,7 @@ package br.com.sicva.model;
 // Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +11,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -82,6 +80,41 @@ public class Ubs  implements java.io.Serializable {
     public void setUbsNome(String ubsNome) {
         this.ubsNome = ubsNome;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.ubsId);
+        hash = 79 * hash + Objects.hashCode(this.ubsFone);
+        hash = 79 * hash + Objects.hashCode(this.ubsNome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ubs other = (Ubs) obj;
+        if (!Objects.equals(this.ubsFone, other.ubsFone)) {
+            return false;
+        }
+        if (!Objects.equals(this.ubsNome, other.ubsNome)) {
+            return false;
+        }
+        if (!Objects.equals(this.ubsId, other.ubsId)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 
 }

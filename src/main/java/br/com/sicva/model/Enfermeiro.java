@@ -2,6 +2,7 @@ package br.com.sicva.model;
 // Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,6 +39,32 @@ public class Enfermeiro  implements java.io.Serializable {
         this.enfermeiroCoren = enfermeiroCoren;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.enfermeiroCoren);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Enfermeiro other = (Enfermeiro) obj;
+        if (!Objects.equals(this.enfermeiroCoren, other.enfermeiroCoren)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 }
 

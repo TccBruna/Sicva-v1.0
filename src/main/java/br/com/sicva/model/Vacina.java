@@ -2,6 +2,7 @@ package br.com.sicva.model;
 // Generated 05/05/2017 18:52:05 by Hibernate Tools 4.3.1
 
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,6 +65,40 @@ public class Vacina  implements java.io.Serializable {
         this.vacinaqdtedose = vacinaqdtedose;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.vacinaId);
+        hash = 79 * hash + Objects.hashCode(this.vacinaNome);
+        hash = 79 * hash + this.vacinaqdtedose;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vacina other = (Vacina) obj;
+        if (this.vacinaqdtedose != other.vacinaqdtedose) {
+            return false;
+        }
+        if (!Objects.equals(this.vacinaNome, other.vacinaNome)) {
+            return false;
+        }
+        if (!Objects.equals(this.vacinaId, other.vacinaId)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 }
 
