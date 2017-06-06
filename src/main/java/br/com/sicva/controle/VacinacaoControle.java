@@ -71,7 +71,7 @@ public class VacinacaoControle {
                     vacinacao.setVacinacaoStatus("IMUNIZADO");
                     vacinacao.setPaciente(paciente);
                     vacinacao.setVacinacaoDtAplicacao(new Date());
-                    vacinacao.setVacinacaoDosagem("Dose " + qtdDose);
+                    vacinacao.setVacinacaoDosagem("Dose  " + qtdDose);
                     if (vacinacaoDao.salvarVacinacao(vacinacao)) {
                         if (qtdDose < vacinacao.getVacina().getVacinaqdtedose()) {
                             gerarPróxima(vacinacao, qtdDose);
