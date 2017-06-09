@@ -68,6 +68,7 @@
                                         <span class="glyphicon glyphicon-info-sign" ></span>
                                     </h:link> 
                                     <h:selectOneMenu pt:placeholder="Nome da Vacina"  value="#{vacinacaoControle.vacinacao.vacina}"
+                                                     disabled="#{vacinacaoControle.habilitarBotão()}"
                                                      class="form-control" required="true" requiredMessage="Selecione uma vacina" >
                                         <f:selectItems value="#{vacinacaoControle.vacinas}"  />
                                         <f:converter converterId="vacinaConverter" />                                    

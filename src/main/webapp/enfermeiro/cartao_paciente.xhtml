@@ -70,7 +70,8 @@
                         <h:form>
                             <div class="page-header"><h4>Vacinas<small>&#160;Vacinas inseridas no cartão do paciente </small> </h4></div>
                             <h:commandButton class="btn btn-primary" value="Aplicar uma Vacina"
-                                             action="#{vacinacaoControle.aplicar}">                                
+                                             action="#{vacinacaoControle.aplicar}">
+                               <f:setPropertyActionListener value="#{null}" target="#{vacinacaoControle.vacinacao}" />                                
                             </h:commandButton>                           
                         </h:form>
 

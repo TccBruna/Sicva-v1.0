@@ -11,7 +11,6 @@ import br.com.sicva.dao.VacinaDao;
 import br.com.sicva.dao.VacinacaoDao;
 import br.com.sicva.model.Enfermeiro;
 import br.com.sicva.model.Paciente;
-import br.com.sicva.model.Usuario;
 import br.com.sicva.model.Vacina;
 import br.com.sicva.model.Vacinacao;
 import br.com.sicva.util.DataUtil;
@@ -71,6 +70,9 @@ public class VacinacaoControle {
                     vacinacao.setVacinacaoStatus("IMUNIZADO");
                     vacinacao.setPaciente(paciente);
                     vacinacao.setVacinacaoDtAplicacao(new Date());
+                    if (qtdDose <= 0) {
+                        qtdDose = 1;
+                    }
                     vacinacao.setVacinacaoDosagem("Dose  " + qtdDose);
                     if (vacinacaoDao.salvarVacinacao(vacinacao)) {
                         if (qtdDose < vacinacao.getVacina().getVacinaqdtedose()) {
@@ -123,8 +125,14 @@ public class VacinacaoControle {
 
     }
 
-    public boolean habilitarBotão(String status) {
+    public boolean habilitarBotão(String status) {        
         return status.equals("PENDENTE");
+    }
+    public boolean habilitarBotão() {
+        if(vacinacao.getVacinacaoId() == null || vacinacao.getVacinacaoId() == 0){
+            vacinacao.setVacinacaoStatus("");
+        }
+        return vacinacao.getVacinacaoStatus().equals("PENDENTE");
     }
 
     public boolean habilitarItem(Vacina vacina) {
